@@ -1,0 +1,10 @@
+# Ignore executable files
+*~
+*.[oa]
+*.out
+*.app
+*.dSYM
+*.so
+*.dylib
+*.dll
+*.exe
