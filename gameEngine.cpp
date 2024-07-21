@@ -2,6 +2,7 @@
 #include <string>
 #include <thread>
 #include <cstdio>
+#define UNICODE
 #include <chrono> // Include the chrono header
 
 using namespace std;
@@ -16,7 +17,7 @@ public:
         //system(command.c_str());
         system("cls");
         // Print text here
-        cout << txt1;
+        //cout << txt1;
         //cout.flush();
         std::this_thread::sleep_for(chrono::milliseconds(10));
     }
@@ -29,7 +30,13 @@ public:
         system(command.c_str());
     }
 
+    void generateLine () {
+        cout << "█";
+        cout.flush();
+    }
+
 private:
+    string fullBox = "█";
     int screenWidth = 120;
     int screenHeight = 40;
     string txt1 = "Dragons have always been a central figure in mythology, legends, and fantasy literature. Among the various species of dr\n";
@@ -58,6 +65,10 @@ private:
 int main() {
     Screen screen;
     Timer timer;
+
+    // Set the encoding to utf-8
+    system("chcp 65001");
+    system("echo off");
     
     // Start the timer
     timer.startTimer();
@@ -69,7 +80,10 @@ int main() {
     
     // Stop the timer
     timer.stopTimer();
-    timer.returnDuration();
+    //timer.returnDuration();
+
+    screen.generateLine();
+
     
     system("Pause");
 }
