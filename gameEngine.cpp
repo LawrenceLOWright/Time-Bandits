@@ -19,7 +19,14 @@ public:
         cout << txt1;
         //cout.flush();
         std::this_thread::sleep_for(chrono::milliseconds(10));
-        
+    }
+
+    void changeScreenSize (int width, int height) {
+        screenWidth = width;
+        screenHeight = height;
+
+        std::string command = "mode con: cols=" + std::to_string(screenWidth) + " lines=" + std::to_string(screenHeight);
+        system(command.c_str());
     }
 
 private:
@@ -55,8 +62,10 @@ int main() {
     // Start the timer
     timer.startTimer();
     
+    screen.changeScreenSize(120,10);
+
     // Call refreshScreen multiple times
-    screen.refreshScreen();
+    //screen.refreshScreen();
     
     // Stop the timer
     timer.stopTimer();
