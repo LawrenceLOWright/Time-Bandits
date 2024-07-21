@@ -2,6 +2,5 @@
 using namespace std;
 
 int main() {
-    system("title Time Bandits");
-    return 0;
+    std::cout << "Welcome to Command Prompt!\n";
 }
