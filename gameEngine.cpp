@@ -62,28 +62,57 @@ private:
     time_point<high_resolution_clock> stop;
 };
 
+class Sprite {
+    public:
+    int x = 0;
+    int y = 0;
+};
+
+class Character {
+    public:
+    string character;
+    string color = "White";
+    string background = "White";
+    
+    Character (char cha, string col, string back) {
+        character = cha;
+        color = col;
+        background = back;
+    }
+
+    Character (char cha, string col) {
+        character = cha;
+        color = col;
+        background = col;
+    }
+
+    void printChar () {
+        std::string command = "powershell -command Write-Host '" + character + "' -ForegroundColor " + color + " -BackgroundColor " + background + " -NoNewline";
+        system(command.c_str());
+    }
+};
+
+class Game {
+    public:
+    void LoadGame () {
+        Screen screen;
+
+        // Set the encoding to utf-8 for cmd
+        system("chcp 65001");
+
+        // Set screen size to 120 x by 40 y
+        screen.changeScreenSize(120,40);
+    }
+};
+
 int main() {
-    Screen screen;
     Timer timer;
+    Game game;
 
-    // Set the encoding to utf-8
-    system("chcp 65001");
-    system("echo off");
-    
-    // Start the timer
-    timer.startTimer();
-    
-    screen.changeScreenSize(120,10);
+    game.LoadGame();
 
-    // Call refreshScreen multiple times
-    //screen.refreshScreen();
-    
-    // Stop the timer
-    timer.stopTimer();
-    //timer.returnDuration();
-
-    screen.generateLine();
-
+    Character c = Character('e',"Red");
+    c.printChar();
     
     system("Pause");
 }
