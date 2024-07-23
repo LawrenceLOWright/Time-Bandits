@@ -11,30 +11,47 @@ using namespace std;
 using namespace std::chrono; // To avoid typing std::chrono:: every time
 
 
+// =================================================
+// Used for timing frames and functions.
+
+
+// =================================================
 
 class Timer {
-public:
-    Timer() : start(high_resolution_clock::now()), stop(high_resolution_clock::now()) {}
+    public:
+        Timer() : start(high_resolution_clock::now()), stop(high_resolution_clock::now()) {}
 
-    void startTimer() {start = high_resolution_clock::now();}
+        void startTimer() {start = high_resolution_clock::now();}
 
-    void stopTimer() {stop = high_resolution_clock::now();}
+        void stopTimer() {stop = high_resolution_clock::now();}
 
-    void returnDuration() {
-        auto duration = duration_cast<milliseconds>(stop - start);
-        cout << "Time taken: " << duration.count() << " milliseconds" << endl;
-    }
+        void returnDuration() {
+            auto duration = duration_cast<milliseconds>(stop - start);
+            cout << "Time taken: " << duration.count() << " milliseconds" << endl;
+        }
 
-private:
-    time_point<high_resolution_clock> start;
-    time_point<high_resolution_clock> stop;
+    private:
+        time_point<high_resolution_clock> start;
+        time_point<high_resolution_clock> stop;
 };
 
+
+// =================================================
+// Deals with the sprite characters
+
+
+// =================================================
 class Sprite {
     public:
     int x = 0;
     int y = 0;
 };
+
+// =================================================
+// Deals with individual characters.
+
+
+// =================================================
 
 class Character {
     public:
@@ -60,6 +77,35 @@ class Character {
     }
 };
 
+
+// =================================================
+// Sets the current background color and text color for any printed text.
+
+
+// =================================================
+class ColorLine {
+    public:
+    void setCurrentColor (int txt, int bg) {
+        textColor = txt;
+        bgColor = bg;
+
+        SetConsoleTextAttribute(hConsole, (bgColor << 4) | textColor);
+    }
+
+    void setDefault () {SetConsoleTextAttribute(hConsole, 7);}
+
+    private:
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+    int textColor = 1;
+    int bgColor = 1;
+};
+
+// =================================================
+// Deals with code relating to the screen
+
+
+// =================================================
+
 class Screen {
 public:
     // Refresh the screen to a new frame.
@@ -83,36 +129,20 @@ public:
 
     }
 
-    void generateLine () {
-        cout << "█";
-        cout.flush();
-    }
-
     void loadScreen () {
-        
+        ColorLine c;
+        c.setCurrentColor(1,1);
+
         // Load current screen testing
-        HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
         string s = "";
         for (int y = 0; y <= screenHeight; y++) {
             for (int x = 0; x <= screenWidth; x++) {
-
-                
-
-                // Print the character
                 s = s + "1";
-
-                // Reset the text color to default
-                //SetConsoleTextAttribute(hConsole, 7);
             }
-            
         }
-
-        // Set the text color
-        int textColor = 1;
-        int bgColor = 1;
-        SetConsoleTextAttribute(hConsole, (bgColor << 4) | textColor);
+        
         cout << s;
-        SetConsoleTextAttribute(hConsole, 7);
+        c.setDefault();
         
     }
 
@@ -125,6 +155,12 @@ private:
     string txt2 = "and hybrids such as the Solarus dragon stand out for their unique characteristics and lore.Celestial dragons are often d";
 };
 
+
+// =================================================
+// Deals with the game script
+
+
+// =================================================
 class Game {
     public:
     void LoadGame () {
@@ -148,6 +184,10 @@ class Game {
         // t.returnDuration();
     }
 };
+
+// ===============================================================
+// MAIN CODE
+// ===============================================================
 
 int main() {
     Timer timer;
