@@ -56,24 +56,13 @@ class Sprite {
 class Character {
     public:
     string character;
-    string color = "White";
-    string background = "White";
+    int txtColor = 1;
+    int backgroundColor = 1;
 
-    Character (string cha, string col, string back) {
+    Character (string cha, int col, int back) {
         character = cha;
-        color = col;
-        background = back;
-    }
-
-    Character (string cha, string col) {
-        character = cha;
-        color = col;
-        background = col;
-    }
-
-    void printChar () {
-        std::string command = "powershell -command Write-Host '" + character + "' -ForegroundColor " + color + " -BackgroundColor " + background + " -NoNewline";
-        system(command.c_str());
+        txtColor = col;
+        backgroundColor = back;
     }
 };
 
