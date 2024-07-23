@@ -45,6 +45,13 @@ class Sprite {
     public:
     int x = 0;
     int y = 0;
+    string test = "XXXX\n" \
+    "cccc";
+
+    // To-do using character class
+    void strToCharArray () {
+        
+    }
 };
 
 // =================================================
@@ -168,6 +175,11 @@ class Game {
         screen.loadScreen();
         screen.refreshScreen();
         screen.loadScreen();
+        screen.refreshScreen();
+
+        Sprite s;
+        cout << s.test;
+
 
         // t.stopTimer();
         // t.returnDuration();
@@ -185,6 +197,8 @@ int main() {
     game.LoadGame();
 
     system("@echo off");
+
+
 
     //Character c = Character('e',"Red");
     //c.printChar();
