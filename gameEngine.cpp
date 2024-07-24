@@ -18,16 +18,14 @@ using namespace std::chrono; // To avoid typing std::chrono:: every time
 
 // =================================================
 
+//TODO Change to read blank lines as \0
 class txtToString {
     public:
         string content; 
 
         txtToString(const string& filePath) {
             ifstream file(filePath);
-            if (!file.is_open()) {
-                cerr << "Failed to open file." << endl;
-                return;
-            }
+            if (!file.is_open()) {return;}
 
             string line;
             while (getline(file, line)) {
