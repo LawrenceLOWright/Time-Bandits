@@ -18,6 +18,29 @@ using namespace std::chrono; // To avoid typing std::chrono:: every time
 
 // =================================================
 
+class txtToString {
+    public:
+        string content; 
+
+        txtToString(const string& filePath) {
+            ifstream file(filePath);
+            if (!file.is_open()) {
+                cerr << "Failed to open file." << endl;
+                return;
+            }
+
+            string line;
+            while (getline(file, line)) {
+                content += line + "\n"; 
+            }
+            file.close();
+        }
+
+        string getContent() const {
+            return content;
+        }
+};
+
 class Timer {
     public:
         Timer() : start(high_resolution_clock::now()), stop(high_resolution_clock::now()) {}
