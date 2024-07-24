@@ -3,6 +3,7 @@
 #include <thread>
 #include <cstdio>
 #include <windows.h>
+#include <fstream>
 #include <chrono> // Include the chrono header
 
 #define UNICODE
