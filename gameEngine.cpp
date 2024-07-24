@@ -18,6 +18,7 @@ using namespace std::chrono; // To avoid typing std::chrono:: every time
 
 // =================================================
 
+//STILL NEEDS TESTING
 class txtToString {
     public:
         string content; 
