@@ -18,7 +18,6 @@ using namespace std::chrono; // To avoid typing std::chrono:: every time
 
 // =================================================
 
-//TODO Change to read blank lines as \0
 class txtToString {
     public:
         string content; 
@@ -29,7 +28,7 @@ class txtToString {
 
             string line;
             while (getline(file, line)) {
-                content += line + "\n"; 
+                content += line + "\0"; 
             }
             file.close();
         }
