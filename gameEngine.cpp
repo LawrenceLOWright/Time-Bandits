@@ -24,12 +24,13 @@ class txtToString {
         string content; 
 
         txtToString(const string& filePath) {
-            ifstream file(filePath);
+            fstream file;
+            file.open(filePath,ios::in);
             if (!file.is_open()) {return;}
 
-            string line;
-            while (getline(file, line)) {
-                content += line + "\0"; 
+            string tp = "";
+            while(getline(file, tp)){ //read data from file object and put it into string.
+                cout << tp << "\n"; //print the data of the string
             }
             file.close();
         }
