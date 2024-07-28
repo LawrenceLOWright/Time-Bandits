@@ -20,13 +20,42 @@ using namespace std::chrono;
 
 class _char {
     public:
-    string character;
-    int txtColor = 1;
-    int backgroundColor = 1;
+        _char (string c) {setChar(c);}
 
-    _char (string cha, int col, int back) {
-        character = cha;
-        txtColor = col;
-        backgroundColor = back;
-    }
+        setColor (int color) {
+            txtColor = color;
+            backgroundColor = color;
+        }
+
+        setColor (int txt, int background) {
+            txtColor = txt;
+            backgroundColor = background;
+        }
+
+        getBackgroundColor () {return backgroundColor;}
+        getTextColor () {return txtColor;}
+
+        getX () {return x;}
+        getY () {return y;}
+        getZ () {return z;}
+
+        setXYZ (int X, int Y, int Z) {
+            x = X;
+            y = Y;
+            z = Z;
+        }
+
+        setChar (string c) {character = c;}
+        setChar (boolean toNull) {isNull = toNull;}
+        getChar () {return character;}
+
+    private:
+    int x = -1;
+    int y = -1;
+    int z = -1;
+
+    string character = "";
+    boolean isNull = false;
+    int txtColor = 1;
+    int backgroundColor = 15;
 };
