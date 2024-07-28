@@ -22,32 +22,32 @@ class _char {
     public:
         _char (string c) {setChar(c);}
 
-        setColor (int color) {
+        void setColor (int color) {
             txtColor = color;
             backgroundColor = color;
         }
 
-        setColor (int txt, int background) {
+        void setColor (int txt, int background) {
             txtColor = txt;
             backgroundColor = background;
         }
 
-        getBackgroundColor () {return backgroundColor;}
-        getTextColor () {return txtColor;}
+        int getBackgroundColor () {return backgroundColor;}
+        int getTextColor () {return txtColor;}
 
-        getX () {return x;}
-        getY () {return y;}
-        getZ () {return z;}
+        int getX () {return x;}
+        int getY () {return y;}
+        int getZ () {return z;}
 
-        setXYZ (int X, int Y, int Z) {
+        void setXYZ (int X, int Y, int Z) {
             x = X;
             y = Y;
             z = Z;
         }
 
-        setChar (string c) {character = c;}
-        setChar (boolean toNull) {isNull = toNull;}
-        getChar () {return character;}
+        void setChar (string c) {character = c;}
+        void setChar (boolean toNull) {isNull = toNull;}
+        string getChar () {return character;}
 
     private:
     int x = -1;

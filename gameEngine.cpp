@@ -6,7 +6,7 @@
 #include <fstream>
 #include <chrono> 
 
-#include "Classes\_char.cpp"
+// #include "Classes\_char.cpp"
 #include "Classes\_color.cpp"
 #include "Classes\_sprite.cpp"
 #include "Classes\fileToString.cpp"
@@ -102,8 +102,6 @@ class Game {
         screen.loadScreen();
         screen.refreshScreen();
 
-        _sprite s;
-        cout << s.test;
 
 
         // t.stopTimer();
@@ -123,7 +121,7 @@ int main() {
 
     system("@echo off");
 
-    _char c = _char("a", 1, 1);
+    _char c = _char("a");
 
     //Character c = Character('e',"Red");
     //c.printChar();

@@ -4,8 +4,9 @@
 #include <cstdio>
 #include <windows.h>
 #include <fstream>
-#include <chrono> // Include the chrono header
-
+#include <chrono> 
+#include <vector>
+#include "_char.cpp"
 
 #define UNICODE
 
@@ -19,13 +20,34 @@ using namespace std::chrono;
 // =================================================
 class _sprite {
     public:
-    int x = 0;
-    int y = 0;
-    string test = "XXXX\n" \
-    "cccc";
+        _sprite (vector<_char> charArray, string name) {
+            characters = charArray;
+            setSpriteName(name);
+        }
 
-    // To-do using character class
-    void strToCharArray () {
-        
-    }
+        void setX (int X) {x = X;}
+        void setY (int Y) {y = Y;}
+        void setZ (int Z) {z = Z;}
+        void setXYZ (int X, int Y, int Z) {
+            x = X;
+            y = Y;
+            z = Z;
+        }
+
+        int getX () {return x;}
+        int getY () {return y;}
+        int getZ () {return z;}
+
+        vector<_char> getCharArray () {return characters;}
+
+        void setSpriteName (string name) {spriteName = name;}
+        string getSpriteName () {return spriteName;}
+    
+    private:
+        int x = -1;
+        int y = -1;
+        int z = -1;
+
+        vector<_char> characters;
+        string spriteName = "";
 };
