@@ -4,7 +4,13 @@
 #include <cstdio>
 #include <windows.h>
 #include <fstream>
-#include <chrono> // Include the chrono header
+#include <chrono> 
+
+#include "Classes\_char.cpp"
+#include "Classes\_color.cpp"
+#include "Classes\_sprite.cpp"
+#include "Classes\fileToString.cpp"
+#include "Classes\Timer.cpp"
 
 #define UNICODE
 
@@ -12,113 +18,8 @@ using namespace std;
 using namespace std::chrono; // To avoid typing std::chrono:: every time
 
 
-// =================================================
-// Used for timing frames and functions.
 
 
-// =================================================
-
-//STILL NEEDS TESTING
-class fileInputs {
-    public:
-        string content; 
-
-        txtToString(const string& filePath) {
-            fstream file;
-            file.open(filePath,ios::in);
-            if (!file.is_open()) {return;}
-
-            string tp = "";
-            while(getline(file, tp)){ //read data from file object and put it into string.
-                cout << tp << "\n"; //print the data of the string
-            }
-            file.close();
-        }
-
-
-        string getContent() const {
-            return content;
-        }
-};
-
-class Timer {
-    public:
-        Timer() : start(high_resolution_clock::now()), stop(high_resolution_clock::now()) {}
-
-        void startTimer() {start = high_resolution_clock::now();}
-
-        void stopTimer() {stop = high_resolution_clock::now();}
-
-        void returnDuration() {
-            auto duration = duration_cast<milliseconds>(stop - start);
-            cout << "Time taken: " << duration.count() << " milliseconds" << endl;
-        }
-
-    private:
-        time_point<high_resolution_clock> start;
-        time_point<high_resolution_clock> stop;
-};
-
-
-// =================================================
-// Deals with the sprite characters
-
-
-// =================================================
-class Sprite {
-    public:
-    int x = 0;
-    int y = 0;
-    string test = "XXXX\n" \
-    "cccc";
-
-    // To-do using character class
-    void strToCharArray () {
-        
-    }
-};
-
-// =================================================
-// Deals with individual characters.
-
-
-// =================================================
-
-class Character {
-    public:
-    string character;
-    int txtColor = 1;
-    int backgroundColor = 1;
-
-    Character (string cha, int col, int back) {
-        character = cha;
-        txtColor = col;
-        backgroundColor = back;
-    }
-};
-
-
-// =================================================
-// Sets the current background color and text color for any printed text.
-
-
-// =================================================
-class ColorLine {
-    public:
-    void setCurrentColor (int txt, int bg) {
-        textColor = txt;
-        bgColor = bg;
-
-        SetConsoleTextAttribute(hConsole, (bgColor << 4) | textColor);
-    }
-
-    void setDefault () {SetConsoleTextAttribute(hConsole, 7);}
-
-    private:
-    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-    int textColor = 1;
-    int bgColor = 1;
-};
 
 // =================================================
 // Deals with code relating to the screen
@@ -150,7 +51,7 @@ public:
     }
 
     void loadScreen () {
-        ColorLine c;
+        _color c;
         c.setCurrentColor(1,1);
 
         // Load current screen testing
@@ -201,7 +102,7 @@ class Game {
         screen.loadScreen();
         screen.refreshScreen();
 
-        Sprite s;
+        _sprite s;
         cout << s.test;
 
 
@@ -222,7 +123,7 @@ int main() {
 
     system("@echo off");
 
-
+    _char c = _char("a", 1, 1);
 
     //Character c = Character('e',"Red");
     //c.printChar();
