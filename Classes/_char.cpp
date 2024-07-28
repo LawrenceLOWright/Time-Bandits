@@ -20,7 +20,6 @@ using namespace std::chrono;
 
 class _char {
     public:
-        _char (string c) {setChar(c);}
 
         void setColor (int color) {
             txtColor = color;

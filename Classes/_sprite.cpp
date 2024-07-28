@@ -6,7 +6,7 @@
 #include <fstream>
 #include <chrono> 
 #include <vector>
-#include "_char.cpp"
+#include "_char.hpp"
 
 #define UNICODE
 

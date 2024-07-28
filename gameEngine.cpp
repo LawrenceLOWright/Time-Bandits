@@ -6,7 +6,7 @@
 #include <fstream>
 #include <chrono> 
 
-// #include "Classes\_char.cpp"
+#include "Classes\_char.hpp"
 #include "Classes\_color.cpp"
 #include "Classes\_sprite.cpp"
 #include "Classes\fileToString.cpp"
@@ -121,7 +121,10 @@ int main() {
 
     system("@echo off");
 
-    _char c = _char("a");
+    _char c;
+
+    fileToString f = fileToString("test.txt");
+    f.textToChar();
 
     //Character c = Character('e',"Red");
     //c.printChar();
