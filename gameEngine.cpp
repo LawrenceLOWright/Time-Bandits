@@ -3,7 +3,14 @@
 #include <thread>
 #include <cstdio>
 #include <windows.h>
-#include <chrono> // Include the chrono header
+#include <fstream>
+#include <chrono> 
+
+#include "Classes\_char.hpp"
+#include "Classes\_color.cpp"
+#include "Classes\_sprite.cpp"
+#include "Classes\fileToString.cpp"
+#include "Classes\Timer.cpp"
 
 #define UNICODE
 
@@ -11,107 +18,8 @@ using namespace std;
 using namespace std::chrono; // To avoid typing std::chrono:: every time
 
 
-// =================================================
-// Used for timing frames and functions.
 
 
-// =================================================
-
-class Timer {
-    public:
-        Timer() : start(high_resolution_clock::now()), stop(high_resolution_clock::now()) {}
-
-        void startTimer() {start = high_resolution_clock::now();}
-
-        void stopTimer() {stop = high_resolution_clock::now();}
-
-        void returnDuration() {
-            auto duration = duration_cast<milliseconds>(stop - start);
-            cout << "Time taken: " << duration.count() << " milliseconds" << endl;
-        }
-
-    private:
-        time_point<high_resolution_clock> start;
-        time_point<high_resolution_clock> stop;
-};
-
-
-// =================================================
-// Deals with the sprite characters
-
-
-// =================================================
-class Sprite {
-    public:
-    int z = 1;
-    string test = "XXXX\n" \
-    "cccc";
-    Character spriteBlock[] ;
-
-    Sprite(int zz, string s){
-        z = zz;
-        strToCharArray(s);
-    }
-
-    // To-do using character class
-    void strToCharArray (string rawSprite) {
-        int size = rawSprite.size();
-        Character newSpriteBlock[size];
-        for (size_t i = 0; i < size; i++)
-        {
-            
-        }
-        
-    }
-};
-
-// =================================================
-// Deals with individual characters.
-
-
-// =================================================
-
-class Character {
-    public:
-    string character;
-    int txtColor = 1;
-    int backgroundColor = 1;
-    bool isNull = false;
-    int x, y = 0;
-
-    Character (string cha, int col, int back) {
-        character = cha;
-        txtColor = col;
-        backgroundColor = back;
-    }
-    
-    setNull(){
-        isNull = true;
-    }
-};
-
-
-// =================================================
-// Sets the current background color and text color for any printed text.
-
-
-// =================================================
-class ColorLine {
-    public:
-    void setCurrentColor (int txt, int bg) {
-        textColor = txt;
-        bgColor = bg;
-
-        SetConsoleTextAttribute(hConsole, (bgColor << 4) | textColor);
-    }
-
-    void setDefault () {SetConsoleTextAttribute(hConsole, 7);}
-
-    private:
-    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-    int textColor = 1;
-    int bgColor = 1;
-};
 
 // =================================================
 // Deals with code relating to the screen
@@ -143,7 +51,7 @@ public:
     }
 
     void loadScreen () {
-        ColorLine c;
+        _color c;
         c.setCurrentColor(1,1);
 
         // Load current screen testing
@@ -194,8 +102,6 @@ class Game {
         screen.loadScreen();
         screen.refreshScreen();
 
-        Sprite s;
-        cout << s.test;
 
 
         // t.stopTimer();
@@ -215,7 +121,10 @@ int main() {
 
     system("@echo off");
 
+    _char c;
 
+    fileToString f = fileToString("test.txt");
+    f.textToChar();
 
     //Character c = Character('e',"Red");
     //c.printChar();

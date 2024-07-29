@@ -25,6 +25,7 @@ if '%errorlevel%' NEQ '0' (
 ::--------------------------------------
 
 ::ENTER YOUR CODE BELOW:
+g++ -g Classes/*.cpp -o output_executable
 g++ -g gameEngine.cpp -o gameEngine.exe
 gameEngine.exe
 pause
