@@ -43,13 +43,24 @@ class Timer {
 // =================================================
 class Sprite {
     public:
-    int x = 0;
-    int y = 0;
+    int z = 1;
     string test = "XXXX\n" \
     "cccc";
+    Character spriteBlock[] ;
+
+    Sprite(int zz, string s){
+        z = zz;
+        strToCharArray(s);
+    }
 
     // To-do using character class
-    void strToCharArray () {
+    void strToCharArray (string rawSprite) {
+        int size = rawSprite.size();
+        Character newSpriteBlock[size];
+        for (size_t i = 0; i < size; i++)
+        {
+            
+        }
         
     }
 };
@@ -65,11 +76,17 @@ class Character {
     string character;
     int txtColor = 1;
     int backgroundColor = 1;
+    bool isNull = false;
+    int x, y = 0;
 
     Character (string cha, int col, int back) {
         character = cha;
         txtColor = col;
         backgroundColor = back;
+    }
+    
+    setNull(){
+        isNull = true;
     }
 };
 
