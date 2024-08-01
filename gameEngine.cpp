@@ -4,7 +4,13 @@
 #include <cstdio>
 #include <windows.h>
 #include <fstream>
-#include <chrono> // Include the chrono header
+#include <chrono> 
+
+#include "Classes\_char.hpp"
+#include "Classes\_color.cpp"
+#include "Classes\_sprite.cpp"
+#include "Classes\fileToString.cpp"
+#include "Classes\Timer.cpp"
 
 #define UNICODE
 
@@ -12,45 +18,13 @@ using namespace std;
 using namespace std::chrono; // To avoid typing std::chrono:: every time
 
 
+
+
 // =================================================
 // Used for timing frames and functions.
 
 
 // =================================================
-
-//STILL NEEDS TESTING
-class fileInputs {
-    public:
-        string content; 
-
-        txtToString(const string& filePath) {
-            fstream file;
-            file.open(filePath,ios::in);
-            if (!file.is_open()) {return;}
-
-            string tp = "";
-            while(getline(file, tp)){ //read data from file object and put it into string.
-                cout << tp << "\n"; //print the data of the string
-            }
-            file.close();
-        }
-
-    Character* toCharacterArray(int txtColor = 1, int backgroundColor = 1) const {
-        size_t length = content.size();
-        Character* characters = new Character[length];
-
-        for (size_t i = 0; i < length; ++i) {
-            char c = (content[i] == '\n') ? '\0' : content[i];
-            characters[i] = Character(std::string(1, c), txtColor, backgroundColor);
-        }
-
-        return characters;
-    }
-
-        string getContent() const {
-            return content;
-        }
-};
 
 class Timer {
     public:
@@ -161,7 +135,7 @@ public:
     }
 
     void loadScreen () {
-        ColorLine c;
+        _color c;
         c.setCurrentColor(1,1);
 
         // Load current screen testing
@@ -212,8 +186,6 @@ class Game {
         screen.loadScreen();
         screen.refreshScreen();
 
-        Sprite s;
-        cout << s.test;
 
 
         // t.stopTimer();
@@ -233,7 +205,10 @@ int main() {
 
     system("@echo off");
 
+    _char c;
 
+    fileToString f = fileToString("test.txt");
+    f.textToChar();
 
     //Character c = Character('e',"Red");
     //c.printChar();
