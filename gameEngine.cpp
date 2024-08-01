@@ -35,6 +35,17 @@ class fileInputs {
             file.close();
         }
 
+    Character* toCharacterArray(int txtColor = 1, int backgroundColor = 1) const {
+        size_t length = content.size();
+        Character* characters = new Character[length];
+
+        for (size_t i = 0; i < length; ++i) {
+            char c = (content[i] == '\n') ? '\0' : content[i];
+            characters[i] = Character(std::string(1, c), txtColor, backgroundColor);
+        }
+
+        return characters;
+    }
 
         string getContent() const {
             return content;
