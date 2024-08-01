@@ -29,7 +29,7 @@ class _char {
 
         void setXYZ ();
 
-        void setChar (string);
+        void setChar (const std::string&);
         void setChar (boolean);
         string getChar ();
 
