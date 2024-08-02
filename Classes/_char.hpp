@@ -1,5 +1,6 @@
 #pragma once
 
+
 #include <iostream>
 #include <string>
 #include <thread>
@@ -17,7 +18,8 @@ using namespace std::chrono;
 class _char {
     public:
 
-        void setColor ();
+        void setColor (int color);
+        void setColor (int txt, int background);
 
 
         int getBackgroundColor ();
@@ -27,19 +29,19 @@ class _char {
         int getY ();
         int getZ ();
 
-        void setXYZ ();
+        void setXYZ (int X, int Y, int Z);
 
-        void setChar (const std::string&);
-        void setChar (boolean);
+        void setChar (string);
+        void setCharNull (bool);
         string getChar ();
 
     private:
-    int x;
-    int y;
-    int z;
+        int x;
+        int y;
+        int z;
 
-    string character;
-    boolean isNull;
-    int txtColor;
-    int backgroundColor;
+        string character;
+        boolean isNull;
+        int txtColor;
+        int backgroundColor;
 };
