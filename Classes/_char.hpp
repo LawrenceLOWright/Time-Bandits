@@ -41,7 +41,7 @@ class _char {
         int z;
 
         string character;
-        boolean isNull;
+        bool isNull;
         int txtColor;
         int backgroundColor;
 };
