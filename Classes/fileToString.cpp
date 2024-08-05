@@ -18,23 +18,25 @@ class fileToString {
     public:
         fileToString(string filePath) {getText(filePath);}
 
-        void getText (string filePath) {
+        string getText (string filePath) {
             fstream file;
             file.open(filePath,ios::in);
-            if (!file.is_open()) {return;}
+            if (!file.is_open()) {return NULL;}
 
             string lines = "";
             string tp = "";
             while(getline(file, tp)){ 
-                lines = lines + "😎" + tp; 
+                lines = lines + "\n" + tp; 
             }
             str = lines;
             file.close();
+            return str;
         }
 
         string getText () {return str;}
 
         // vector<_char>
+        /*
         void textToChar () {
             string nullChar = "😎";
             int length = str.length();
@@ -51,7 +53,7 @@ class fileToString {
                 
             }
         }
-
+        */
 
 
     private:

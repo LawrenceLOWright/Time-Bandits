@@ -6,6 +6,7 @@
 #include <fstream>
 #include <chrono> 
 #include <vector>
+#include "_sprite.cpp"
 #include "_char.hpp"
 
 #define UNICODE
@@ -15,32 +16,29 @@ using namespace std::chrono;
 
 // =================================================
 // Deals with individual sprites.
-//----------variables-------------
-//sceneName
-//spritesArray
-//backgroundSprite
-//-----------methods--------------
-//initilizer : sets a sprites array, backgroundSprite and sceneName
-//drawScene : draws the scene to the screen.
-//--------------------------------
+
 // =================================================
 
 class _scene {
     public:
-        void initilizer(string sn, vector(_sprite) sa, _sprite bgs){
+        void initilizer(string sn, vector<_sprite> sa, _sprite bgs){
             sceneName = sn;
-            spriteArray = sa;
+            sprites = sa;
             backgroundSprite = bgs;
         }
 
         void drawScene(){
+            for (size_t i = 0; i < sprites.size(); i++)
+            {
+                std::cout << sprites[i] << std::endl
+            }
             
         }
 
     private:
         string sceneName;
-        vector(_sprite) spriteArray;
+        std::vector<_sprite> sprites;
         _sprite backgroundSprite;
 
     
-}
+};
