@@ -27,10 +27,15 @@ class _scene {
             backgroundSprite = bgs;
         }
 
+        void initilizer(string sn, vector<_sprite> sa){
+            sceneName = sn;
+            sprites = sa;
+        }
+
         void drawScene(){
             for (size_t i = 0; i < sprites.size(); i++)
             {
-                std::cout << sprites[i] << std::endl
+                std::cout << sprites[i].getSpriteString() << std::endl;
             }
             
         }

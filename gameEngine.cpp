@@ -11,6 +11,7 @@
 #include "Classes\_sprite.cpp"
 #include "Classes\fileToString.cpp"
 #include "Classes\Timer.cpp"
+#include "Classes\_scene.cpp"
 
 #define UNICODE
 
@@ -116,15 +117,24 @@ class Game {
 int main() {
     Timer timer;
     Game game;
+    vector<_sprite> sprites;
+    _scene scene;
 
     game.LoadGame();
 
     system("@echo off");
 
-    _char c;
+    //_char c;
 
     fileToString f = fileToString("test.txt");
-    f.textToChar();
+    sprites.push_back(_sprite(f.getText(), "test.txt"));
+    
+    scene.initializer("test.txt", sprites);
+
+    
+    
+
+    //f.textToChar();
 
     //Character c = Character('e',"Red");
     //c.printChar();
