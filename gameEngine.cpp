@@ -118,7 +118,7 @@ int main() {
     Timer timer;
     Game game;
     vector<_sprite> sprites;
-    _scene scene;
+    _scene derpScene;
 
     game.LoadGame();
 
@@ -129,7 +129,7 @@ int main() {
     fileToString f = fileToString("test.txt");
     sprites.push_back(_sprite(f.getText(), "test.txt"));
     
-    scene.initializer("test.txt", sprites);
+    derpScene.initializer("test.txt", sprites);
 
     
     

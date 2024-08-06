@@ -29,7 +29,8 @@ class _scene {
 
         void initilizer(string sn, vector<_sprite> sa){
             sceneName = sn;
-            sprites = sa;
+            sprites = sa;+
+
         }
 
         void drawScene(){
