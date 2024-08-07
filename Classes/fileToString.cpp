@@ -25,8 +25,10 @@ class fileToString {
 
             string lines = "";
             string tp = "";
+            int lineNum = 0;
             while(getline(file, tp)){ 
-                lines = lines + "😎" + tp; 
+                if (lineNum == 0) {lines = lines + tp;} 
+                else {lines = lines + "}" + tp;}
             }
             str = lines;
             file.close();
@@ -35,7 +37,7 @@ class fileToString {
         string getText () {return str;}
 
         // vector<_char>
-        void textToChar () {
+        vector<_char> textToChar () {
             string nullChar = "😎";
             int length = str.length();
             std::vector<_char> vec;
@@ -48,8 +50,13 @@ class fileToString {
                 if (c == nullChar) {character.setCharNull(true);} 
                 else {character.setChar(c);}
                 vec.push_back(character);
+                cout << vec[x].getChar();
                 
             }
+
+            
+
+            return vec;
         }
 
 
