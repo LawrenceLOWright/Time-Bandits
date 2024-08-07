@@ -117,14 +117,28 @@ int main() {
     Timer timer;
     Game game;
 
-    game.LoadGame();
+    //game.LoadGame();
 
-    system("@echo off");
+    //system("@echo off");
 
     _char c;
 
     fileToString f = fileToString("test.txt");
-    f.textToChar();
+    vector<_char> scene = f.textToChar();
+    cout << f.getText() << endl;
+    std::cout << "Vector size: " << scene.size() << std::endl;
+
+    cout << "=======Hello=====" << endl;
+    cout << scene[0].getChar(); //nothing but needs 2 be here
+    cout << scene[1].getChar(); //emoji
+    cout << scene[2].getChar(); //nothing
+    cout << scene[3].getChar(); //nothing
+    cout << scene[4].getChar(); // B
+    cout << scene[5].getChar();
+    cout << scene[6].getChar();
+    //cout << scene[11].getChar();
+    cout << "============" << endl;
+
 
     //Character c = Character('e',"Red");
     //c.printChar();

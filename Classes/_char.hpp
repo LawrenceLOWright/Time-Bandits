@@ -31,8 +31,8 @@ class _char {
 
         void setXYZ (int X, int Y, int Z);
 
-        void setChar (string);
-        void setCharNull (bool);
+        void setChar (string c);
+        void setCharNull (bool toNull);
         string getChar ();
 
     private:
