@@ -45,7 +45,7 @@ class fileToString {
             for (int x = 0; x < length; x++) {
                 string c(1, str.at(x));
                 _char character;
-                if (c == nullChar) {character.setChar(true);} 
+                if (c == nullChar) {character.setCharNull(true);} 
                 else {character.setChar(c);}
                 vec.push_back(character);
                 
