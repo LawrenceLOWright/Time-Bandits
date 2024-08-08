@@ -118,6 +118,7 @@ int main() {
     Timer timer;
     Game game;
     vector<_sprite> sprites;
+    _sprite* testSprt = new _sprite("ggggggg", "GGSprite");
     _scene derpScene;
 
     game.LoadGame();
@@ -129,9 +130,9 @@ int main() {
     fileToString f = fileToString("test.txt");
     sprites.push_back(_sprite(f.getText(), "test.txt"));
     
-    derpScene.initializer("test.txt", sprites);
+    derpScene.initilizer("test.txt", sprites);
 
-    
+    derpScene.drawScene();    
     
 
     //f.textToChar();

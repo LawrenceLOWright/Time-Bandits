@@ -1,3 +1,4 @@
+#pragma once
 #include <iostream>
 #include <string>
 #include <thread>
@@ -21,7 +22,7 @@ using namespace std::chrono;
 
 class _scene {
     public:
-        void initilizer(string sn, vector<_sprite> sa, _sprite bgs){
+        void initilizer(string sn, vector<_sprite> sa, _sprite* bgs){
             sceneName = sn;
             sprites = sa;
             backgroundSprite = bgs;
@@ -44,7 +45,7 @@ class _scene {
     private:
         string sceneName;
         std::vector<_sprite> sprites;
-        _sprite backgroundSprite;
+        _sprite* backgroundSprite;
 
     
 };
