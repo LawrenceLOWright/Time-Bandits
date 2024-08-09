@@ -11,6 +11,7 @@
 #include "Classes\_sprite.cpp"
 #include "Classes\fileToString.cpp"
 #include "Classes\Timer.cpp"
+#include "Classes\_scene.cpp"
 
 #define UNICODE
 
@@ -116,29 +117,25 @@ class Game {
 int main() {
     Timer timer;
     Game game;
+    vector<_sprite> sprites;
+    _sprite* testSprt = new _sprite("ggggggg", "GGSprite");
+    _scene derpScene;
 
     //game.LoadGame();
 
     //system("@echo off");
 
-    _char c;
+    //_char c;
 
     fileToString f = fileToString("test.txt");
-    vector<_char> scene = f.textToChar();
-    cout << f.getText() << endl;
-    std::cout << "Vector size: " << scene.size() << std::endl;
+    sprites.push_back(_sprite(f.getText(), "test.txt"));
+    
+    derpScene.initilizer("test.txt", sprites);
 
-    cout << "=======Hello=====" << endl;
-    cout << scene[0].getChar(); //nothing but needs 2 be here
-    cout << scene[1].getChar(); //emoji
-    cout << scene[2].getChar(); //nothing
-    cout << scene[3].getChar(); //nothing
-    cout << scene[4].getChar(); // B
-    cout << scene[5].getChar();
-    cout << scene[6].getChar();
-    //cout << scene[11].getChar();
-    cout << "============" << endl;
+    derpScene.drawScene();    
+    
 
+    //f.textToChar();
 
     //Character c = Character('e',"Red");
     //c.printChar();

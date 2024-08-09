@@ -1,3 +1,4 @@
+#pragma once
 #include <iostream>
 #include <string>
 #include <thread>
@@ -20,8 +21,8 @@ using namespace std::chrono;
 // =================================================
 class _sprite {
     public:
-        _sprite (vector<_char> charArray, string name) {
-            characters = charArray;
+        _sprite (string sp, string name) {
+            sprite = sp;
             setSpriteName(name);
         }
 
@@ -38,7 +39,7 @@ class _sprite {
         int getY () {return y;}
         int getZ () {return z;}
 
-        vector<_char> getCharArray () {return characters;}
+        string getSpriteString () {return sprite;}
 
         void setSpriteName (string name) {spriteName = name;}
         string getSpriteName () {return spriteName;}
@@ -48,6 +49,6 @@ class _sprite {
         int y = -1;
         int z = -1;
 
-        vector<_char> characters;
+        string sprite;
         string spriteName = "";
 };
