@@ -8,10 +8,10 @@
 
 #include "Classes\_char.hpp"
 #include "Classes\_color.cpp"
-#include "Classes\_sprite.cpp"
+#include "Classes\_sprite.hpp"
 #include "Classes\fileToString.cpp"
 #include "Classes\Timer.cpp"
-#include "Classes\_scene.cpp"
+#include "Classes\_scene.hpp"
 
 #define UNICODE
 
@@ -117,23 +117,14 @@ class Game {
 int main() {
     Timer timer;
     Game game;
-    vector<_sprite> sprites;
-    _sprite* testSprt = new _sprite("ggggggg", "GGSprite");
-    _scene derpScene;
 
-    //game.LoadGame();
+    game.LoadGame();
 
-    //system("@echo off");
+    system("@echo off");
 
     //_char c;
 
     fileToString f = fileToString("test.txt");
-    sprites.push_back(_sprite(f.getText(), "test.txt"));
-    
-    derpScene.initilizer("test.txt", sprites);
-
-    derpScene.drawScene();    
-    
 
     //f.textToChar();
 
