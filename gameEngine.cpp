@@ -51,30 +51,41 @@ public:
 
     }
 
-    void loadScreen () {
-        _color c;
-        c.setCurrentColor(1,1);
+    vector<_char> loadAsset (string fileName) {
+        fileToString f = fileToString(fileName);
+        std::vector<_char> vec = f.textToChar();
+        return vec;
+    }
 
-        // Load current screen testing
-        string s = "";
-        for (int y = 0; y <= screenHeight; y++) {
-            for (int x = 0; x <= screenWidth; x++) {
-                s = s + "1";
+    void loadScreen (vector<_char> vec) {
+        refreshScreen();
+        
+        _color color;
+
+        // Must be kept in main code
+        int prevCol2 = 999;
+        int prevCol = 999;
+
+        for (int x = 0; x < vec.size(); x++) {
+            int col2 = vec[x].getBackgroundColor();
+            int col = vec[x].getTextColor();
+            if (col == prevCol && col2 == prevCol2) {prevCol = col;}
+            else {
+                prevCol = col;
+                prevCol2 = col2;
+                color.setCurrentColor(col,col2);
             }
+            
+            cout << vec[x].getChar();
         }
-        
-        cout << s;
-        c.setDefault();
-        
+
+        color.setDefault();
     }
 
 private:
     string fullBox = "█";
     int screenWidth = 120;
     int screenHeight = 200;
-    string txt1 = "Dragons have always been a central figure in mythology, legends, and fantasy literature. Among the various species of dr\n";
-    string txt3 = "entities that embody the essence of the heavens. They are considered guardians of celestial bodies and cosmic balance. I";
-    string txt2 = "and hybrids such as the Solarus dragon stand out for their unique characteristics and lore.Celestial dragons are often d";
 };
 
 
@@ -87,6 +98,7 @@ class Game {
     public:
     void LoadGame () {
         Screen screen;
+        Timer t;
 
         // Set the encoding to utf-8 for cmd
         system("chcp 65001");
@@ -94,14 +106,10 @@ class Game {
         // Set screen size to 120 x by 40 y
         screen.changeScreenSize(150,50);
 
-        // Timer t;
-
-        // t.startTimer();
-
-        screen.loadScreen();
-        screen.refreshScreen();
-        screen.loadScreen();
-        screen.refreshScreen();
+        vector<_char> test = screen.loadAsset("test");
+        screen.loadScreen(test);
+        screen.loadScreen(test);
+        screen.loadScreen(test);
 
 
 
@@ -115,31 +123,15 @@ class Game {
 // ===============================================================
 
 int main() {
-    Timer timer;
+    
     Game game;
+    _color c;
 
     game.LoadGame();
+    c.setDefault();
+
+    
 
     system("@echo off");
-
-    //_char c;
-
-    fileToString f = fileToString("test.txt","test.color");
-
-    std::vector<_char> vec = f.textToChar();
-
-    _color color;
-    for (int x = 0; x < vec.size(); x++) {
-        int col = vec[x].getBackgroundColor();
-        //cout << col;
-        color.setCurrentColor(0,col);
-        cout << vec[x].getChar();
-    }
-    color.setDefault();
-    
-
-    //Character c = Character('e',"Red");
-    //c.printChar();
-    
-    //system("Pause");
 }
+
