@@ -124,9 +124,19 @@ int main() {
 
     //_char c;
 
-    fileToString f = fileToString("test.txt");
+    fileToString f = fileToString("test.txt","test.color");
 
-    //f.textToChar();
+    std::vector<_char> vec = f.textToChar();
+
+    _color color;
+    for (int x = 0; x < vec.size(); x++) {
+        int col = vec[x].getBackgroundColor();
+        //cout << col;
+        color.setCurrentColor(0,col);
+        cout << vec[x].getChar();
+    }
+    color.setDefault();
+    
 
     //Character c = Character('e',"Red");
     //c.printChar();
