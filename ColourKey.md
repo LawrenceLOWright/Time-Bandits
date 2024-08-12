@@ -3,13 +3,19 @@
 
 
 Key - Colour
-W - AliceBlue
-E - AntiqueWhite
-A - Aqua
-M - AquaMarine
-B - Black
-U - Blue
-P - BlueViolet
-G - Chartreuse
-C - Chocolate
-R - Crimson
+0 Black
+1 DarkBlue
+2 DarkGreen
+3 DarkCyan
+4 DarkRed
+5 DarkMagenta
+6 DarkYellow
+7 Gray
+8 DarkGray
+b Blue
+g Green
+c Cyan
+r Red
+m Magenta
+y Yellow
+w White
