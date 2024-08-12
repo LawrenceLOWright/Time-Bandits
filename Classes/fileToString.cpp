@@ -16,7 +16,11 @@ using namespace std::chrono;
 
 class fileToString {
     public:
-        fileToString(string filePath) {getText(filePath);}
+        fileToString(string filePath, string colorPath) {
+            str = getText(filePath);
+            colors = getText(colorPath);
+            colors = colors.substr(2);
+        }
 
         string getText (string filePath) {
             fstream file;
@@ -29,16 +33,16 @@ class fileToString {
             while(getline(file, tp)){ 
                 lines = lines + "\n" + tp; 
             }
-            str = lines;
+
             file.close();
-            return str;
+            return lines;
         }
 
         string getText () {return str;}
 
         // vector<_char>
-        /*
-        void textToChar () {
+        
+        vector<_char> textToChar () {
             string nullChar = "😎";
             int length = str.length();
             std::vector<_char> vec;
@@ -47,23 +51,31 @@ class fileToString {
             // Convert each char into a _char array
             for (int x = 0; x < length; x++) {
                 string c(1, str.at(x));
+                string e(1, colors.at(x));
+
                 _char character;
                 if (c == nullChar) {character.setCharNull(true);} 
                 else {character.setChar(c);}
+
+                if (e == "b") {
+                    character.setColor(9);
+                }
+
+
                 vec.push_back(character);
-                cout << vec[x].getChar();
+                // Print to screen (testing)
+                //cout << vec[x].getChar();
+
                 
             }
-
-            
-
             return vec;
         }
-        */
+        
 
 
     private:
         string str;
-
+        string colors;
 
 };
+
