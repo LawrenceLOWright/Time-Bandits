@@ -15,8 +15,21 @@ using namespace std::chrono;
 
 class _actionHandler(){
     public:
-        int getSingleInput(){
+        int getMultiChoice(int range){
+            int input = listener.singleInputListen() - '0';
+            if (input => 0 && input <= range){
+                return input;
+            }
+        }
 
+        vector<string> getlongAnswer(vector<string> keyWords){
+            vector<string> foundWords;
+            string input = listener.stringInputListener();
+            for(auto &i : keyWords){
+                if (input.find(i)){
+                    foundWords.pushBack(i);
+                }
+            }
         }
 
     private:
