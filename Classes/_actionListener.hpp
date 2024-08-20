@@ -1,3 +1,4 @@
+#pragma once
 #include <iostream>
 #include <windows.h>
 
@@ -9,9 +10,6 @@ using namespace std::chrono;
 
 class _actionListener{
     public:
-        char singleInputListen(){}
-        string stringInputListener(){}
-    private:
-
-    
-}
+        char singleInputListen();
+        string stringInputListener();
+};
