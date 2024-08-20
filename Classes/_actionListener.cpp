@@ -1,5 +1,6 @@
 #include <iostream>
 #include <windows.h>
+#include "_actionListener.hpp"
 
 
 #define UNICODE
@@ -7,9 +8,8 @@
 using namespace std;
 using namespace std::chrono;
 
-class _actionListener{
-    public:
-        char singleInputListen(){
+
+        char _actionListener::singleInputListen(){
             while (true) {
                 // Iterate through all possible key codes (0 to 255)
                 for (int keyCode = 0; keyCode < 256; ++keyCode) {
@@ -24,12 +24,8 @@ class _actionListener{
             }
         }
 
-        string stringInputListener(){
+        string _actionListener::stringInputListener(){
             string input;
             cin>>input;
             return input;
         }
-    private:
-
-    
-}
