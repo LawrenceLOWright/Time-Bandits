@@ -25,8 +25,8 @@ if '%errorlevel%' NEQ '0' (
 ::--------------------------------------
 
 ::ENTER YOUR CODE BELOW:
-g++ -g Classes/*.cpp -o output_executable
-g++ -g gameEngine.cpp -o gameEngine.exe
+::g++ -g Classes/*.cpp -o output_executable
+g++ -g -IClasses gameEngine.cpp Classes/_char.cpp -o gameEngine.exe
 gameEngine.exe
 pause
 :: NEW COMPILE METHOD
