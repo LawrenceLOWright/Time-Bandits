@@ -24,6 +24,21 @@ using namespace std::chrono;
             }
         }
 
+        int _actionListener::codeInputListener(){
+            while (true) {
+                // Iterate through all possible key codes (0 to 255)
+                for (int keyCode = 0; keyCode < 256; ++keyCode) {
+                    // Check if the key with keyCode is currently pressed
+                    if (GetAsyncKeyState(keyCode) & 0x8000) {
+                        // Convert the key code to ASCII character
+                        
+                        return keyCode;
+                    }
+                }
+                Sleep(100);
+            }
+        }
+
         string _actionListener::stringInputListener(){
             string input;
             cin>>input;

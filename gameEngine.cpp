@@ -12,6 +12,8 @@
 #include "Classes\fileToString.cpp"
 #include "Classes\Timer.cpp"
 #include "Classes\_scene.hpp"
+#include "Classes\_action.cpp"
+#include "Classes\_actionListener.cpp"
 
 #define UNICODE
 
@@ -82,8 +84,52 @@ public:
         color.setDefault();
     }
 
+    int loadScene (vector<_char> scene, string text, vector<_action> actions) {
+        int keyCode = 0;
+        _actionListener action;
+
+        loadScreen(scene);
+        cout << text << endl;
+
+        while (true) {
+            keyCode = action.codeInputListener();
+            
+            // If certain button is pressed
+            for (int x = 0; x < actions.size(); x++) {
+                if (actions[x].checkAction(keyCode) == true) {return keyCode;}
+            }
+
+        }
+
+    }
+
+    int loadScene (vector<_char> scene, string text, vector<_action> actions, bool actionHeader) {
+        int keyCode = 0;
+        _actionListener action;
+        // [D : Description] [enter : Continue]
+        string header = " <     Available Actions : ";
+
+        for (int e = 0; e < actions.size(); e++) {
+            header = header + " [" + actions[e].getKeyCodeName() + " : " + actions[e].getActionName() + "]";
+        }
+
+        loadScreen(scene);
+        cout << header + "\n---------------" << endl;
+        cout << text << endl;
+
+        while (true) {
+            keyCode = action.codeInputListener();
+
+            // If certain button is pressed
+            for (int x = 0; x < actions.size(); x++) {
+                if (actions[x].checkAction(keyCode) == true) {return keyCode;}
+            }
+
+        }
+
+    }
+
 private:
-    string fullBox = "█";
     int screenWidth = 120;
     int screenHeight = 200;
 };
@@ -97,29 +143,68 @@ private:
 class Game {
     public:
     void LoadGame () {
+
+
+        // ===========   Load Game details    =========
         Screen screen;
         Timer t;
+        _color c;
 
         // Set the encoding to utf-8 for cmd
         system("chcp 65001");
 
         // Set screen size to 120 x by 40 y
-        screen.changeScreenSize(150,50);
+        screen.changeScreenSize(150,40);
 
-        //vector<_char> test = screen.loadAsset("test");
-        //screen.loadScreen(test);
-        //screen.loadScreen(test);
-        //screen.loadScreen(test);
-        //vector<_char> mainMenu = screen.loadAsset("mainMenu");
+        // ========================================
+
+
+
+
+
+        // ===========   Load actions     =========
+        _action enter, description;
+        enter.setActionDetails("Continue","enter",13);
+        description.setActionDetails("Description", "D",68);
+
+        vector<_action> basic{enter};
+        vector<_action> basicArea{enter,description};
+        vector<_action> tutorial1{description};
+
+        // ========================================
+
+
+
+
+        // ===========   Load assets     =========
         vector<_char> mainMenu = screen.loadAsset("Backgrounds/mainMenu/mainMenu");
 
-        screen.loadScreen(mainMenu);
-        screen.loadScreen(mainMenu);
-        screen.loadScreen(mainMenu);
+        // ========================================
+        
+
+        // ===============================================================
+        // ===============================================================
+        // ===============================================================
+
+        // Main Menu
+        screen.loadScene(mainMenu,"",basic);
+
+        // Shady Pines Park
+        screen.changeScreenSize(150,50);
+        screen.loadScene(mainMenu, " <     Where am I? [Press 'enter' to continue]",  basic);
+        screen.loadScene(mainMenu, " <     [You can press 'D' for a description of the area]", tutorial1);
+        screen.loadScene(mainMenu, " <     You realise that you are currently in Shady Pines Park. \n <     You see a neglected playground, covered in graffiti and grime, standing starkly against the cloudy sky. \n <     A sea of dandelions have overrun the grassy field around it, \n <     their bright yellow heads a stark contrast to the park's otherwise desolate state.", basic,true);
+        
+        // ===============================================================
+        // ===============================================================
+        // ===============================================================
 
 
-        // t.stopTimer();
-        // t.returnDuration();
+        // ========  Clean up code at end     =====
+
+        c.setDefault();
+
+        // ========================================
     }
 };
 
@@ -130,13 +215,13 @@ class Game {
 int main() {
     
     Game game;
-    _color c;
+    
 
     game.LoadGame();
-    c.setDefault();
+    
 
     
 
-    system("@echo off");
+    // system("@echo off");
 }
 
