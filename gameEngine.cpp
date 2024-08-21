@@ -106,11 +106,16 @@ class Game {
         // Set screen size to 120 x by 40 y
         screen.changeScreenSize(150,50);
 
-        vector<_char> test = screen.loadAsset("test");
-        screen.loadScreen(test);
-        screen.loadScreen(test);
-        screen.loadScreen(test);
+        //vector<_char> test = screen.loadAsset("test");
+        //screen.loadScreen(test);
+        //screen.loadScreen(test);
+        //screen.loadScreen(test);
+        //vector<_char> mainMenu = screen.loadAsset("mainMenu");
+        vector<_char> mainMenu = screen.loadAsset("Backgrounds/mainMenu/mainMenu");
 
+        screen.loadScreen(mainMenu);
+        screen.loadScreen(mainMenu);
+        screen.loadScreen(mainMenu);
 
 
         // t.stopTimer();
