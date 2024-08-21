@@ -178,7 +178,7 @@ class Game {
 
         // ===========   Load assets     =========
         vector<_char> mainMenu = screen.loadAsset("Backgrounds/mainMenu/mainMenu");
-
+        vector<_char> shadyPinesPark = screen.loadAsset("Backgrounds/shadyPinesPark/shadyPinesPark");
         // ========================================
         
 
@@ -193,7 +193,7 @@ class Game {
         screen.changeScreenSize(150,50);
         screen.loadScene(mainMenu, " <     Where am I? [Press 'enter' to continue]",  basic);
         screen.loadScene(mainMenu, " <     [You can press 'D' for a description of the area]", tutorial1);
-        screen.loadScene(mainMenu, " <     You realise that you are currently in Shady Pines Park. \n <     You see a neglected playground, covered in graffiti and grime, standing starkly against the cloudy sky. \n <     A sea of dandelions have overrun the grassy field around it, \n <     their bright yellow heads a stark contrast to the park's otherwise desolate state.", basic,true);
+        screen.loadScene(shadyPinesPark, " <     You realise that you are currently in Shady Pines Park. \n <     You see a neglected playground, covered in graffiti and grime, standing starkly against the cloudy sky. \n <     A sea of dandelions have overrun the grassy field around it, \n <     their bright yellow heads a stark contrast to the park's otherwise desolate state.", basic,true);
         
         // ===============================================================
         // ===============================================================
