@@ -16,8 +16,8 @@
                                                                                                                                                       
                          The clock is ticking....                                                                                                     
                          Something is wrong within the town                                                                                           
-                         of Hourglass. Find out how to escape                                                                                         
-                         before time runs out.                                                                                                        
+                         of Hourglass. Find out how to                                                                                                
+                         escape before time runs out.                                                                                                 
                                                                                                                                                       
                          When you feel ready to begin,                                                                                                
                          press 'Enter' to start.                                                                                                      
