@@ -66,6 +66,7 @@
         "xutility": "cpp",
         "fstream": "cpp",
         "mutex": "cpp",
-        "xstddef": "cpp"
+        "xstddef": "cpp",
+        "map": "cpp"
     }
 }
