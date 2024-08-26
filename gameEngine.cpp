@@ -83,6 +83,7 @@ public:
         }
 
         color.setDefault();
+        Sleep(100);
     }
 
     int loadScene (vector<_char> scene, string text, vector<_action> actions) {
@@ -165,12 +166,16 @@ class Game {
         enter.setActionDetails("Continue","enter", 13);
         description.setActionDetails("Description", "D", 68);
         pickDandelions.setActionDetails("Pick Dandelions", "1" , 49);
+        swings.setActionDetails("Sit on Swings", "2", 50);
+
 
 
         vector<_action> basic{enter};
         vector<_action> basicArea{enter,description};
         vector<_action> tutorial1{description};
-        vector<_action> shadyPinesParkActions{enter, description, pickDandelions};
+        vector<_action> shadyPinesParkActions{enter, description, pickDandelions, swings};
+
+
         allActionLists["basic"] = basic;
         allActionLists["basicArea"] = basicArea;
         allActionLists["tutorial1"] = tutorial1;
@@ -209,25 +214,38 @@ class Game {
         // ========================================
     }
 
+    // Loads Shady Pines Park and all of its options with what each thing does
     void loadShadyPinesPark(){
-        screen.loadScene(shadyPinesPark, " <     You realise that you are currently in Shady Pines Park. \n <     You see a neglected playground, covered in graffiti and grime, standing starkly against the cloudy sky. \n <     A sea of dandelions have overrun the grassy field around it, \n <     their bright yellow heads a stark contrast to the park's otherwise desolate state.", allActionLists["basic"],true);
-        if (screen.loadScene(shadyPinesPark, " <     You're at shady pines park", allActionLists["shadyPinesParkActions"], true) == pickDandelions.getkeyCode())
+        int input = screen.loadScene(shadyPinesPark, " <     You're at shady pines park", allActionLists["shadyPinesParkActions"], true);
+        if (input == pickDandelions.getkeyCode())
         {
-            loadMainMenu();
+            screen.loadScene(shadyPinesPark, " <     You pick a bouquet of dandelions. \n <     In a flight of fancy, you consider making them into a dandelion crown, but settle for leaving the bundle under a leafless oak. ", allActionLists["basic"], true);
+            
         }
+        if(input == swings.getkeyCode())
+        {
+            screen.loadScene(shadyPinesPark, " <     The swings creak ominously under your weight. \n <     Given how rusty they are, maybe it’s best not to stay for too long.", allActionLists["basic"], true);
+        }
+        
+
+        loadMainMenu();
+        
     }
 
+    // Loads the Main menu.
     void loadMainMenu(){
         screen.loadScene(mainMenu,"",allActionLists["basic"]);
 
         screen.changeScreenSize(150,50);
         screen.loadScene(mainMenu, " <     Where am I? [Press 'enter' to continue]",  allActionLists["basic"]);
         screen.loadScene(mainMenu, " <     [You can press 'D' for a description of the area]", allActionLists["tutorial1"]);
+
+        screen.loadScene(shadyPinesPark, " <     You realise that you are currently in Shady Pines Park. \n <     You see a neglected playground, covered in graffiti and grime, standing starkly against the cloudy sky. \n <     A sea of dandelions have overrun the grassy field around it, \n <     their bright yellow heads a stark contrast to the park's otherwise desolate state.", allActionLists["basic"],true);
         loadShadyPinesPark();
     }
 
     private:
-        _action enter, description, pickDandelions;
+        _action enter, description, pickDandelions, swings;
         Screen screen;
         Timer t;
         _color c;
