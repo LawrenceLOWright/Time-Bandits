@@ -4,13 +4,14 @@
 #include <cstdio>
 #include <windows.h>
 #include <fstream>
-#include <chrono>
-#include <map>
+#include <chrono> 
 
 #include "Classes\_char.hpp"
 #include "Classes\_color.cpp"
 #include "Classes\_sprite.hpp"
 #include "Classes\fileToString.cpp"
+#include "Classes\fileMessagesToString.cpp"
+#include "Classes\_message.hpp"
 #include "Classes\Timer.cpp"
 #include "Classes\_scene.hpp"
 #include "Classes\_action.cpp"
