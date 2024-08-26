@@ -5,6 +5,7 @@
 #include <windows.h>
 #include <fstream>
 #include <chrono> 
+#include <map>
 
 #include "Classes\_char.hpp"
 #include "Classes\_color.cpp"
@@ -106,6 +107,25 @@ public:
 
     }
 
+    int loadScene (vector<_char> scene, _message text, vector<_action> actions) {
+        int keyCode = 0;
+        _actionListener action;
+
+        loadScreen(scene);
+        text.printMessages();
+
+        while (true) {
+            keyCode = action.codeInputListener();
+            
+            // If certain button is pressed
+            for (int x = 0; x < actions.size(); x++) {
+                if (actions[x].checkAction(keyCode) == true) {return keyCode;}
+            }
+
+        }
+
+    }
+
     int loadScene (vector<_char> scene, string text, vector<_action> actions, bool actionHeader) {
         int keyCode = 0;
         _actionListener action;
@@ -119,6 +139,32 @@ public:
         loadScreen(scene);
         cout << header + "\n---------------" << endl;
         cout << text << endl;
+
+        while (true) {
+            keyCode = action.codeInputListener();
+
+            // If certain button is pressed
+            for (int x = 0; x < actions.size(); x++) {
+                if (actions[x].checkAction(keyCode) == true) {return keyCode;}
+            }
+
+        }
+
+    }
+
+    int loadScene (vector<_char> scene, _message text, vector<_action> actions, bool actionHeader) {
+        int keyCode = 0;
+        _actionListener action;
+        // [D : Description] [enter : Continue]
+        string header = " <     Available Actions : ";
+
+        for (int e = 0; e < actions.size(); e++) {
+            header = header + " [" + actions[e].getKeyCodeName() + " : " + actions[e].getActionName() + "]";
+        }
+
+        loadScreen(scene);
+        cout << header + "\n---------------" << endl;
+        text.printMessages();
 
         while (true) {
             keyCode = action.codeInputListener();
@@ -192,7 +238,13 @@ class Game {
         mainMenu = screen.loadAsset("Backgrounds/mainMenu/mainMenu");
         shadyPinesPark = screen.loadAsset("Backgrounds/shadyPinesPark/shadyPinesPark");
         // ========================================
-        
+
+
+        fileMessagesToString shadydata = fileMessagesToString("shadyPines");
+        vector<_message> shadyPinesText = shadydata.getLines();
+        allMessageLists["shadyPinesPark"] = shadyPinesText;
+
+
 
         // ===============================================================
         // ===============================================================
@@ -217,16 +269,11 @@ class Game {
 
     // Loads Shady Pines Park and all of its options with what each thing does
     void loadShadyPinesPark(){
-        int input = screen.loadScene(shadyPinesPark, " <     You're at shady pines park", allActionLists["shadyPinesParkActions"], true);
-        if (input == pickDandelions.getkeyCode())
-        {
-            screen.loadScene(shadyPinesPark, " <     You pick a bouquet of dandelions. \n <     In a flight of fancy, you consider making them into a dandelion crown, but settle for leaving the bundle under a leafless oak. ", allActionLists["basic"], true);
-            
-        }
-        if(input == swings.getkeyCode())
-        {
-            screen.loadScene(shadyPinesPark, " <     The swings creak ominously under your weight. \n <     Given how rusty they are, maybe it’s best not to stay for too long.", allActionLists["basic"], true);
-        }
+
+        int input = screen.loadScene(shadyPinesPark, allMessageLists["shadyPinesPark"][0], allActionLists["shadyPinesParkActions"], true);
+
+        if (input == pickDandelions.getkeyCode()){screen.loadScene(shadyPinesPark, allMessageLists["shadyPinesPark"][4], allActionLists["basic"], true);}
+        if (input == swings.getkeyCode()) {screen.loadScene(shadyPinesPark, allMessageLists["shadyPinesPark"][5], allActionLists["basic"], true);}
         
 
         loadMainMenu();
@@ -238,10 +285,10 @@ class Game {
         screen.loadScene(mainMenu,"",allActionLists["basic"]);
 
         screen.changeScreenSize(150,50);
-        screen.loadScene(mainMenu, " <     Where am I? [Press 'enter' to continue]",  allActionLists["basic"]);
-        screen.loadScene(mainMenu, " <     [You can press 'D' for a description of the area]", allActionLists["tutorial1"]);
+        screen.loadScene(mainMenu, allMessageLists["shadyPinesPark"][0],  allActionLists["basic"]);
+        screen.loadScene(mainMenu, allMessageLists["shadyPinesPark"][1], allActionLists["tutorial1"]);
 
-        screen.loadScene(shadyPinesPark, " <     You realise that you are currently in Shady Pines Park. \n <     You see a neglected playground, covered in graffiti and grime, standing starkly against the cloudy sky. \n <     A sea of dandelions have overrun the grassy field around it, \n <     their bright yellow heads a stark contrast to the park's otherwise desolate state.", allActionLists["basic"],true);
+        screen.loadScene(shadyPinesPark, allMessageLists["shadyPinesPark"][2], allActionLists["basic"],true);
         loadShadyPinesPark();
     }
 
@@ -253,6 +300,7 @@ class Game {
         vector<_char> mainMenu;
         vector<_char> shadyPinesPark;
         map<string, vector<_action>> allActionLists;
+        map<string, vector<_message>> allMessageLists;
 };
 
 // ===============================================================
