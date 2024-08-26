@@ -20,7 +20,6 @@ using namespace std::chrono;
         void _scene::initilizer(string sn, vector<_sprite> sa){
             sceneName = sn;
             sprites = sa;
-
         }
 
         void _scene::drawScene(){
