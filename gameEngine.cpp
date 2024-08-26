@@ -4,7 +4,8 @@
 #include <cstdio>
 #include <windows.h>
 #include <fstream>
-#include <chrono> 
+#include <chrono>
+#include <map>
 
 #include "Classes\_char.hpp"
 #include "Classes\_color.cpp"
@@ -146,9 +147,7 @@ class Game {
 
 
         // ===========   Load Game details    =========
-        Screen screen;
-        Timer t;
-        _color c;
+
 
         // Set the encoding to utf-8 for cmd
         system("chcp 65001");
@@ -163,13 +162,20 @@ class Game {
 
 
         // ===========   Load actions     =========
-        _action enter, description;
-        enter.setActionDetails("Continue","enter",13);
-        description.setActionDetails("Description", "D",68);
+        enter.setActionDetails("Continue","enter", 13);
+        description.setActionDetails("Description", "D", 68);
+        pickDandelions.setActionDetails("Pick Dandelions", "1" , 49);
+
 
         vector<_action> basic{enter};
         vector<_action> basicArea{enter,description};
         vector<_action> tutorial1{description};
+        vector<_action> shadyPinesParkActions{enter, description, pickDandelions};
+        allActionLists["basic"] = basic;
+        allActionLists["basicArea"] = basicArea;
+        allActionLists["tutorial1"] = tutorial1;
+        allActionLists["shadyPinesParkActions"] = shadyPinesParkActions;
+        
 
         // ========================================
 
@@ -177,8 +183,8 @@ class Game {
 
 
         // ===========   Load assets     =========
-        vector<_char> mainMenu = screen.loadAsset("Backgrounds/mainMenu/mainMenu");
-        vector<_char> shadyPinesPark = screen.loadAsset("Backgrounds/shadyPinesPark/shadyPinesPark");
+        mainMenu = screen.loadAsset("Backgrounds/mainMenu/mainMenu");
+        shadyPinesPark = screen.loadAsset("Backgrounds/shadyPinesPark/shadyPinesPark");
         // ========================================
         
 
@@ -187,13 +193,9 @@ class Game {
         // ===============================================================
 
         // Main Menu
-        screen.loadScene(mainMenu,"",basic);
-
-        // Shady Pines Park
-        screen.changeScreenSize(150,50);
-        screen.loadScene(mainMenu, " <     Where am I? [Press 'enter' to continue]",  basic);
-        screen.loadScene(mainMenu, " <     [You can press 'D' for a description of the area]", tutorial1);
-        screen.loadScene(shadyPinesPark, " <     You realise that you are currently in Shady Pines Park. \n <     You see a neglected playground, covered in graffiti and grime, standing starkly against the cloudy sky. \n <     A sea of dandelions have overrun the grassy field around it, \n <     their bright yellow heads a stark contrast to the park's otherwise desolate state.", basic,true);
+        loadMainMenu();
+        
+        
         
         // ===============================================================
         // ===============================================================
@@ -206,6 +208,32 @@ class Game {
 
         // ========================================
     }
+
+    void loadShadyPinesPark(){
+        screen.loadScene(shadyPinesPark, " <     You realise that you are currently in Shady Pines Park. \n <     You see a neglected playground, covered in graffiti and grime, standing starkly against the cloudy sky. \n <     A sea of dandelions have overrun the grassy field around it, \n <     their bright yellow heads a stark contrast to the park's otherwise desolate state.", allActionLists["basic"],true);
+        if (screen.loadScene(shadyPinesPark, " <     You're at shady pines park", allActionLists["shadyPinesParkActions"], true) == pickDandelions.getkeyCode())
+        {
+            loadMainMenu();
+        }
+    }
+
+    void loadMainMenu(){
+        screen.loadScene(mainMenu,"",allActionLists["basic"]);
+
+        screen.changeScreenSize(150,50);
+        screen.loadScene(mainMenu, " <     Where am I? [Press 'enter' to continue]",  allActionLists["basic"]);
+        screen.loadScene(mainMenu, " <     [You can press 'D' for a description of the area]", allActionLists["tutorial1"]);
+        loadShadyPinesPark();
+    }
+
+    private:
+        _action enter, description, pickDandelions;
+        Screen screen;
+        Timer t;
+        _color c;
+        vector<_char> mainMenu;
+        vector<_char> shadyPinesPark;
+        map<string, vector<_action>> allActionLists;
 };
 
 // ===============================================================
