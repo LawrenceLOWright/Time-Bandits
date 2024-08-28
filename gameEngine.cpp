@@ -6,22 +6,25 @@
 #include <fstream>
 #include <chrono> 
 #include <map>
+#include <vector>
 
-#include "Classes\_char.hpp"
-#include "Classes\_color.cpp"
-#include "Classes\_sprite.hpp"
-#include "Classes\fileToString.cpp"
-#include "Classes\fileMessagesToString.cpp"
-#include "Classes\_message.hpp"
-#include "Classes\Timer.cpp"
-#include "Classes\_scene.hpp"
-#include "Classes\_action.cpp"
-#include "Classes\_actionListener.cpp"
+// Not used
+
+// Used
+
+#include "character.h"
+#include "color.h"
+#include "fileToString.h"
+#include "fileMessagesToString.h"
+#include "message.h"
+#include "timer.h"
+#include "action.h"
+#include "actionListener.h"
 
 #define UNICODE
 
 using namespace std;
-using namespace std::chrono; // To avoid typing std::chrono:: every time
+//using namespace std::chrono; // To avoid typing std::chrono:: every time
 
 
 
@@ -47,7 +50,7 @@ public:
         //std::this_thread::sleep_for(chrono::milliseconds(10));
     }
 
-    void changeScreenSize (int width, int height) {
+    void changeScreenSize(int width, int height) {
         screenWidth = width;
         screenHeight = height;
 
@@ -56,16 +59,16 @@ public:
 
     }
 
-    vector<_char> loadAsset (string fileName) {
+    vector<character> loadAsset(string fileName) {
         fileToString f = fileToString(fileName);
-        std::vector<_char> vec = f.textToChar();
+        std::vector<character> vec = f.textToChar();
         return vec;
     }
 
-    void loadScreen (vector<_char> vec) {
+    void loadScreen(vector<character> vec) {
         refreshScreen();
-        
-        _color color;
+
+        color color;
 
         // Must be kept in main code
         int prevCol2 = 999;
@@ -74,13 +77,13 @@ public:
         for (int x = 0; x < vec.size(); x++) {
             int col2 = vec[x].getBackgroundColor();
             int col = vec[x].getTextColor();
-            if (col == prevCol && col2 == prevCol2) {prevCol = col;}
+            if (col == prevCol && col2 == prevCol2) { prevCol = col; }
             else {
                 prevCol = col;
                 prevCol2 = col2;
-                color.setCurrentColor(col,col2);
+                color.setCurrentColor(col, col2);
             }
-            
+
             cout << vec[x].getChar();
         }
 
@@ -88,47 +91,28 @@ public:
         Sleep(100);
     }
 
-    int loadScene (vector<_char> scene, string text, vector<_action> actions) {
+    int loadScene(vector<character> scene, string text, vector<action> actions) {
         int keyCode = 0;
-        _actionListener action;
+        actionListener action;
 
         loadScreen(scene);
         cout << text << endl;
 
         while (true) {
             keyCode = action.codeInputListener();
-            
+
             // If certain button is pressed
             for (int x = 0; x < actions.size(); x++) {
-                if (actions[x].checkAction(keyCode) == true) {return keyCode;}
+                if (actions[x].checkAction(keyCode) == true) { return keyCode; }
             }
 
         }
 
     }
 
-    int loadScene (vector<_char> scene, _message text, vector<_action> actions) {
+    int loadScene(vector<character> scene, string text, vector<action> actions, bool actionHeader) {
         int keyCode = 0;
-        _actionListener action;
-
-        loadScreen(scene);
-        text.printMessages();
-
-        while (true) {
-            keyCode = action.codeInputListener();
-            
-            // If certain button is pressed
-            for (int x = 0; x < actions.size(); x++) {
-                if (actions[x].checkAction(keyCode) == true) {return keyCode;}
-            }
-
-        }
-
-    }
-
-    int loadScene (vector<_char> scene, string text, vector<_action> actions, bool actionHeader) {
-        int keyCode = 0;
-        _actionListener action;
+        actionListener action;
         // [D : Description] [enter : Continue]
         string header = " <     Available Actions : ";
 
@@ -145,33 +129,7 @@ public:
 
             // If certain button is pressed
             for (int x = 0; x < actions.size(); x++) {
-                if (actions[x].checkAction(keyCode) == true) {return keyCode;}
-            }
-
-        }
-
-    }
-
-    int loadScene (vector<_char> scene, _message text, vector<_action> actions, bool actionHeader) {
-        int keyCode = 0;
-        _actionListener action;
-        // [D : Description] [enter : Continue]
-        string header = " <     Available Actions : ";
-
-        for (int e = 0; e < actions.size(); e++) {
-            header = header + " [" + actions[e].getKeyCodeName() + " : " + actions[e].getActionName() + "]";
-        }
-
-        loadScreen(scene);
-        cout << header + "\n---------------" << endl;
-        text.printMessages();
-
-        while (true) {
-            keyCode = action.codeInputListener();
-
-            // If certain button is pressed
-            for (int x = 0; x < actions.size(); x++) {
-                if (actions[x].checkAction(keyCode) == true) {return keyCode;}
+                if (actions[x].checkAction(keyCode) == true) { return keyCode; }
             }
 
         }
@@ -190,8 +148,8 @@ private:
 
 // =================================================
 class Game {
-    public:
-    void LoadGame () {
+public:
+    void LoadGame() {
 
 
         // ===========   Load Game details    =========
@@ -201,7 +159,7 @@ class Game {
         system("chcp 65001");
 
         // Set screen size to 120 x by 40 y
-        screen.changeScreenSize(150,40);
+        screen.changeScreenSize(150, 40);
 
         // ========================================
 
@@ -210,24 +168,24 @@ class Game {
 
 
         // ===========   Load actions     =========
-        enter.setActionDetails("Continue","enter", 13);
+        enter.setActionDetails("Continue", "enter", 13);
         description.setActionDetails("Description", "D", 68);
-        pickDandelions.setActionDetails("Pick Dandelions", "1" , 49);
+        pickDandelions.setActionDetails("Pick Dandelions", "1", 49);
         swings.setActionDetails("Sit on Swings", "2", 50);
 
 
 
-        vector<_action> basic{enter};
-        vector<_action> basicArea{enter,description};
-        vector<_action> tutorial1{description};
-        vector<_action> shadyPinesParkActions{enter, description, pickDandelions, swings};
+        vector<action> basic{ enter };
+        vector<action> basicArea{ enter,description };
+        vector<action> tutorial1{ description };
+        vector<action> shadyPinesParkActions{ enter, description, pickDandelions, swings };
 
 
         allActionLists["basic"] = basic;
         allActionLists["basicArea"] = basicArea;
         allActionLists["tutorial1"] = tutorial1;
         allActionLists["shadyPinesParkActions"] = shadyPinesParkActions;
-        
+
 
         // ========================================
 
@@ -240,21 +198,15 @@ class Game {
         // ========================================
 
 
-        fileMessagesToString shadydata = fileMessagesToString("shadyPines");
-        vector<_message> shadyPinesText = shadydata.getLines();
-        allMessageLists["shadyPinesPark"] = shadyPinesText;
-
-
-
         // ===============================================================
         // ===============================================================
         // ===============================================================
 
         // Main Menu
         loadMainMenu();
-        
-        
-        
+
+
+
         // ===============================================================
         // ===============================================================
         // ===============================================================
@@ -268,39 +220,43 @@ class Game {
     }
 
     // Loads Shady Pines Park and all of its options with what each thing does
-    void loadShadyPinesPark(){
+    void loadShadyPinesPark() {
+        int input = screen.loadScene(shadyPinesPark, " <     You're at shady pines park", allActionLists["shadyPinesParkActions"], true);
+        if (input == pickDandelions.getkeyCode())
+        {
+            screen.loadScene(shadyPinesPark, " <     You pick a bouquet of dandelions. \n <     In a flight of fancy, you consider making them into a dandelion crown, but settle for leaving the bundle under a leafless oak. ", allActionLists["basic"], true);
 
-        int input = screen.loadScene(shadyPinesPark, allMessageLists["shadyPinesPark"][0], allActionLists["shadyPinesParkActions"], true);
+        }
+        if (input == swings.getkeyCode())
+        {
+            screen.loadScene(shadyPinesPark, " <     The swings creak ominously under your weight. \n <     Given how rusty they are, maybe it’s best not to stay for too long.", allActionLists["basic"], true);
+        }
 
-        if (input == pickDandelions.getkeyCode()){screen.loadScene(shadyPinesPark, allMessageLists["shadyPinesPark"][4], allActionLists["basic"], true);}
-        if (input == swings.getkeyCode()) {screen.loadScene(shadyPinesPark, allMessageLists["shadyPinesPark"][5], allActionLists["basic"], true);}
-        
 
         loadMainMenu();
-        
+
     }
 
     // Loads the Main menu.
-    void loadMainMenu(){
-        screen.loadScene(mainMenu,"",allActionLists["basic"]);
+    void loadMainMenu() {
+        screen.loadScene(mainMenu, "", allActionLists["basic"]);
 
-        screen.changeScreenSize(150,50);
-        screen.loadScene(mainMenu, allMessageLists["shadyPinesPark"][0],  allActionLists["basic"]);
-        screen.loadScene(mainMenu, allMessageLists["shadyPinesPark"][1], allActionLists["tutorial1"]);
+        screen.changeScreenSize(150, 50);
+        screen.loadScene(mainMenu, " <     Where am I? [Press 'enter' to continue]", allActionLists["basic"]);
+        screen.loadScene(mainMenu, " <     [You can press 'D' for a description of the area]", allActionLists["tutorial1"]);
 
-        screen.loadScene(shadyPinesPark, allMessageLists["shadyPinesPark"][2], allActionLists["basic"],true);
+        screen.loadScene(shadyPinesPark, " <     You realise that you are currently in Shady Pines Park. \n <     You see a neglected playground, covered in graffiti and grime, standing starkly against the cloudy sky. \n <     A sea of dandelions have overrun the grassy field around it, \n <     their bright yellow heads a stark contrast to the park's otherwise desolate state.", allActionLists["basic"], true);
         loadShadyPinesPark();
     }
 
-    private:
-        _action enter, description, pickDandelions, swings;
-        Screen screen;
-        Timer t;
-        _color c;
-        vector<_char> mainMenu;
-        vector<_char> shadyPinesPark;
-        map<string, vector<_action>> allActionLists;
-        map<string, vector<_message>> allMessageLists;
+private:
+    action enter, description, pickDandelions, swings;
+    Screen screen;
+    timer t;
+    color c;
+    vector<character> mainMenu;
+    vector<character> shadyPinesPark;
+    map<string, vector<action>> allActionLists;
 };
 
 // ===============================================================
@@ -308,14 +264,14 @@ class Game {
 // ===============================================================
 
 int main() {
-    
+
     Game game;
-    
+
 
     game.LoadGame();
-    
 
-    
+
+
 
     // system("@echo off");
 }

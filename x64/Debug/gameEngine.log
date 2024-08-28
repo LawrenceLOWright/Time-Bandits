@@ -1,0 +1,16 @@
+﻿  action.cpp
+  actionListener.cpp
+  character.cpp
+  color.cpp
+  fileMessagesToString.cpp
+\\student.otago.ac.nz\mds\Profiles-V2\g\gasca681\RedirectedFolders\Documents\TB5\Time-Bandits\fileMessagesToString.cpp(41,17): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  fileToString.cpp
+\\student.otago.ac.nz\mds\Profiles-V2\g\gasca681\RedirectedFolders\Documents\TB5\Time-Bandits\fileToString.cpp(55,34): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  gameEngine.cpp
+\\student.otago.ac.nz\mds\Profiles-V2\g\gasca681\RedirectedFolders\Documents\TB5\Time-Bandits\gameEngine.cpp(24,1): warning C4005: 'UNICODE': macro redefinition
+\\student.otago.ac.nz\mds\Profiles-V2\g\gasca681\RedirectedFolders\Documents\TB5\Time-Bandits\gameEngine.cpp(24,1): message : 'UNICODE' previously declared on the command line
+  message.cpp
+  timer.cpp
+  Generating Code...
+  LINK : \\student.otago.ac.nz\mds\Profiles-V2\g\gasca681\RedirectedFolders\Documents\TB5\Time-Bandits\x64\Debug\gameEngine.exe not found or not built by the last incremental link; performing full link
+  gameEngine.vcxproj -> \\student.otago.ac.nz\mds\Profiles-V2\g\gasca681\RedirectedFolders\Documents\TB5\Time-Bandits\x64\Debug\gameEngine.exe
