@@ -1,6 +1,6 @@
 ﻿# CMakeList.txt : CMake project for Time Bandits, include source and define
 # project specific logic here.
-#
+
 
 # Add source to this project's executable.
 add_executable (CMakeTarget 
@@ -50,3 +50,18 @@ endif()
 #file(COPY mainMenu.color DESTINATION ${CMAKE_BINARY_DIR}/test)
 #file(COPY mainMenu.txt DESTINATION ${CMAKE_BINARY_DIR}/test)
 # TODO: Add tests and install targets if needed.
+
+
+enable_testing()
+
+add_executable(
+  hello_test
+  hello_test.cc
+)
+target_link_libraries(
+  hello_test
+  GTest::gtest_main
+)
+
+include(GoogleTest)
+gtest_discover_tests(hello_test)

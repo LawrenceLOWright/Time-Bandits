@@ -1,0 +1,5 @@
+if(EXISTS "C:/Users/gasca681/Documents/TB13/Time-Bandits/out/build/x64-debug/Time Bandits/hello_test[1]_tests.cmake")
+  include("C:/Users/gasca681/Documents/TB13/Time-Bandits/out/build/x64-debug/Time Bandits/hello_test[1]_tests.cmake")
+else()
+  add_test(hello_test_NOT_BUILT hello_test_NOT_BUILT)
+endif()
