@@ -8,3 +8,6 @@
 *.dylib
 *.dll
 *.exe
+.vs/*
+.vscode/*
+out/*

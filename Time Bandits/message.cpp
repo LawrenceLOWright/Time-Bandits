@@ -29,3 +29,12 @@ void message::printMessages() {
         cout << messages[x] << endl;
     }
 }
+
+string message::getMessage(int location) {
+    string msg = "";
+    for (int x = 0; x < messages.size(); x++) {
+        msg = msg + messages[x];
+    }
+
+    return msg;
+}
