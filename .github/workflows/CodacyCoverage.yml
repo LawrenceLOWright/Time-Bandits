@@ -40,9 +40,10 @@ jobs:
       
       - name: List files
         working-directory: ${{github.workspace}}\build
+        shell: pwsh
         run: |
-          dir /s
-          dir /b *.gcda *.gcno
+          Get-ChildItem -Recurse
+          Get-ChildItem -Recurse -Include *.gcda, *.gcno
       
       - name: Run Codacy Coverage Reporter
         uses: codacy/codacy-coverage-reporter-action@v1
