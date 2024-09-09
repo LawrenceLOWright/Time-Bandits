@@ -12,8 +12,18 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Install Chocolatey
+        run: |
+          @SET "PATH=%PATH%;C:\ProgramData\chocolatey\bin"
+          choco install chocolatey --yes
+
       - name: Set up Doxygen
         run: choco install doxygen.install --version 1.9.2 --yes
+        
+      - name: Verify Doxygen Installation
+        run: |
+          doxygen --version
+          echo "Doxygen is installed and available in the PATH."
 
       - name: Generate Doxygen documentation
         run: doxygen Doxyfile
