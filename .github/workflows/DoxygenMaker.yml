@@ -4,26 +4,18 @@ on:
   push:
     branches:
       - main  
+
 jobs:
   doxygen:
-    runs-on: windows-latest
+    runs-on: macos-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Install Chocolatey
-        run: |
-          @SET "PATH=%PATH%;C:\ProgramData\chocolatey\bin"
-          choco install chocolatey --yes
-
-      - name: Set up Doxygen
-        run: choco install doxygen.install --version 1.9.2 --yes
-        
-      - name: Verify Doxygen Installation
-        run: |
-          doxygen --version
-          echo "Doxygen is installed and available in the PATH."
+      - name: Install Doxygen
+        run: brew install doxygen
+        # Uses Homebrew to install Doxygen on macOS
 
       - name: Generate Doxygen documentation
         run: doxygen Doxyfile
