@@ -3,8 +3,7 @@ name: Doxygen Documentation
 on:
   push:
     branches:
-      - main  # or the branch you want to trigger the workflow
-
+      - main  
 jobs:
   doxygen:
     runs-on: windows-latest
@@ -15,7 +14,6 @@ jobs:
 
       - name: Set up Doxygen
         run: choco install doxygen.install --version 1.9.2 --yes
-        # You can adjust the version if needed. Chocolatey is used to install Doxygen on Windows.
 
       - name: Generate Doxygen documentation
         run: doxygen Doxyfile
