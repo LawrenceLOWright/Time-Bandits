@@ -9,3 +9,7 @@
 *.dll
 *.exe
 .vs/*
+.vscode/*
+out/*
+.git/*
+.github/*

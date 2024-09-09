@@ -57,6 +57,12 @@ enable_testing()
 add_executable(
   hello_test
   hello_test.cc
+  action.cpp
+  actionListener.cpp
+  character.cpp
+  fileMessagesToString.cpp
+  message.cpp
+  fileToString.cpp
 )
 target_link_libraries(
   hello_test
