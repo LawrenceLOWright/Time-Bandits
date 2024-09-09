@@ -200,6 +200,12 @@ public:
         allActionLists["tutorial1"] = tutorial1;
         allActionLists["shadyPinesParkActions"] = shadyPinesParkActions;
 
+        // Load messages
+
+        vector<message> shadyPinesParkMessages = fileMessagesToString("shadyPines").getLines();
+
+        allMessageLists["shadyPines"] = shadyPinesParkMessages;
+
         // Load assets
         mainMenu = screen.loadAsset("mainMenu");
         shadyPinesPark = screen.loadAsset("shadyPinesPark");
@@ -244,6 +250,7 @@ private:
     vector<character> mainMenu; /**< Vector of character objects representing the main menu. */
     vector<character> shadyPinesPark; /**< Vector of character objects representing Shady Pines Park. */
     map<string, vector<action>> allActionLists; /**< Map of action lists for different scenes. */
+    map<string, vector<message>> allMessageLists; /**< list of all different messages for */
 };
 
 
