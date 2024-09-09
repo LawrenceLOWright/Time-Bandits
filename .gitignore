@@ -8,3 +8,4 @@
 *.dylib
 *.dll
 *.exe
+.vs/*
