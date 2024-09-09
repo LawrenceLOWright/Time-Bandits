@@ -1,0 +1,28 @@
+name: Doxygen Documentation
+
+on:
+  push:
+    branches:
+      - main  # or the branch you want to trigger the workflow
+
+jobs:
+  doxygen:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Doxygen
+        run: choco install doxygen.install --version 1.9.2 --yes
+        # You can adjust the version if needed. Chocolatey is used to install Doxygen on Windows.
+
+      - name: Generate Doxygen documentation
+        run: doxygen Doxyfile
+        # Ensure Doxyfile is in the root of your repository or specify the correct path.
+
+      - name: Upload documentation as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: doxygen-docs
+          path: ./html  # Adjust this path if your Doxygen output is located elsewhere
