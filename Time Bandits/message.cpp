@@ -30,7 +30,7 @@ void message::printMessages() {
     }
 }
 
-string message::getMessage(int location) {
+string message::getMessage() {
     string msg = "";
     for (int x = 0; x < messages.size(); x++) {
         msg = msg + messages[x];

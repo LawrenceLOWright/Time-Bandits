@@ -55,3 +55,22 @@ bool action::checkAction(int code) {
     if (code == keyCode) { return true; }
     else { return false; }
 }
+
+/**
+ * @brief retrives if the action is active or inactive (if is on or has been turned off).
+ * @returns true if the action is active (on) or false if action is inactive (off)
+ */
+bool action::isActive(){ return activity; }
+
+/**
+ * @brief if the action is active, it is turned inactive, if the action is inactive, it is turn active
+ */
+void action::flipActive() {
+    if (activity)
+    {
+        activity = false;
+        return;
+    }
+    activity = true;
+
+}

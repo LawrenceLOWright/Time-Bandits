@@ -219,12 +219,13 @@ public:
      * @brief Loads the Shady Pines Park scene and handles user interactions within the park.
      */
     void loadShadyPinesPark() {
-        int input = screen.loadScene(shadyPinesPark, " <     You're at shady pines park", allActionLists["shadyPinesParkActions"], true);
-        if (input == pickDandelions.getkeyCode()) {
-            screen.loadScene(shadyPinesPark, " <     You pick a bouquet of dandelions. \n <     In a flight of fancy, you consider making them into a dandelion crown, but settle for leaving the bundle under a leafless oak.", allActionLists["basic"], true);
+        int input = screen.loadScene(shadyPinesPark, allMessageLists["shadyPinesPark"][3].getMessage(), allActionLists["shadyPinesParkActions"], true);
+        if (input == pickDandelions.getkeyCode() && pickDandelions.isActive()) {
+            screen.loadScene(shadyPinesPark, allMessageLists["shadyPinesPark"][5].getMessage(), allActionLists["basic"], true);
+            pickDandelions.flipActive();
         }
         if (input == swings.getkeyCode()) {
-            screen.loadScene(shadyPinesPark, " <     The swings creak ominously under your weight. \n <     Given how rusty they are, maybe it’s best not to stay for too long.", allActionLists["basic"], true);
+            screen.loadScene(shadyPinesPark, allMessageLists["shadyPinesPark"][6].getMessage(), allActionLists["basic"], true);
         }
 
         loadMainMenu(); // Return to main menu after interaction
@@ -236,9 +237,9 @@ public:
     void loadMainMenu() {
         screen.loadScene(mainMenu, "", allActionLists["basic"]);
         screen.changeScreenSize(150, 50);
-        screen.loadScene(mainMenu, " <     Where am I? [Press 'enter' to continue]", allActionLists["basic"]);
-        screen.loadScene(mainMenu, " <     [You can press 'D' for a description of the area]", allActionLists["tutorial1"]);
-        screen.loadScene(shadyPinesPark, " <     You realise that you are currently in Shady Pines Park. \n <     You see a neglected playground, covered in graffiti and grime, standing starkly against the cloudy sky. \n <     A sea of dandelions have overrun the grassy field around it, \n <     their bright yellow heads a stark contrast to the park's otherwise desolate state.", allActionLists["basic"], true);
+        screen.loadScene(mainMenu, allMessageLists["shadyPinesPark"][1].getMessage(), allActionLists["basic"]);
+        screen.loadScene(mainMenu, allMessageLists["shadyPinesPark"][2].getMessage(), allActionLists["tutorial1"]);
+        screen.loadScene(shadyPinesPark, allMessageLists["shadyPinesPark"][4].getMessage(), allActionLists["basic"], true);
         loadShadyPinesPark();
     }
 

@@ -27,7 +27,7 @@ class message {
 
         void printMessages();
 
-        string getMessage(int location);
+        string getMessage();
 
     private:
         vector<string> messages;
