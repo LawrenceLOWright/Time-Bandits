@@ -38,9 +38,11 @@ target_include_directories(CMakeTarget PRIVATE
 
 # Collect all files in the Backgrounds directory
 file(GLOB BACKGROUND_FILES "${CMAKE_CURRENT_SOURCE_DIR}/Backgrounds/*")
+file(GLOB MESSAGE_FILES "${CMAKE_CURRENT_SOURCE_DIR}/Text-Messages/*")
 
 # Copy all collected files to the build directory
 file(COPY ${BACKGROUND_FILES} DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+file(COPY ${MESSAGE_FILES} DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
   set_property(TARGET CMakeTarget PROPERTY CXX_STANDARD 20)
