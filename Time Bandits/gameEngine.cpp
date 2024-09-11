@@ -81,7 +81,7 @@ public:
      * @param vec Vector of character objects to display.
      */
     void loadScreen(vector<character> vec) {
-        refreshScreen();
+        //refreshScreen();
 
         color color;
         int prevCol2 = 999;
@@ -144,7 +144,10 @@ public:
         string header = " <     Available Actions : ";
 
         for (int e = 0; e < actions.size(); e++) {
-            header = header + " [" + actions[e].getKeyCodeName() + " : " + actions[e].getActionName() + "]";
+            if (actions[e].isActive()) {
+                header = header + " [" + actions[e].getKeyCodeName() + " : " + actions[e].getActionName() + "]";
+            }
+            
         }
 
         loadScreen(scene);
@@ -156,7 +159,10 @@ public:
 
             // Check if certain button is pressed
             for (int x = 0; x < actions.size(); x++) {
-                if (actions[x].checkAction(keyCode) == true) { return keyCode; }
+                if (actions[x].isActive())
+                {
+                    if (actions[x].checkAction(keyCode) == true) { return keyCode; }
+                }
             }
         }
     }
@@ -202,9 +208,17 @@ public:
 
         // Load messages
 
-        vector<message> shadyPinesParkMessages = fileMessagesToString("shadyPines").getLines();
+        fileMessagesToString messages = fileMessagesToString("shadyPines");
+
+        vector<message> shadyPinesParkMessages = messages.getLines();
 
         allMessageLists["shadyPines"] = shadyPinesParkMessages;
+
+        
+        for (int x = 0; x < shadyPinesParkMessages.size(); x++) {
+            cout << "HELLO";
+            cout << shadyPinesParkMessages[x].getMessage();
+        }
 
         // Load assets
         mainMenu = screen.loadAsset("mainMenu");
@@ -219,13 +233,13 @@ public:
      * @brief Loads the Shady Pines Park scene and handles user interactions within the park.
      */
     void loadShadyPinesPark() {
-        int input = screen.loadScene(shadyPinesPark, allMessageLists["shadyPinesPark"][3].getMessage(), allActionLists["shadyPinesParkActions"], true);
+        int input = screen.loadScene(shadyPinesPark, allMessageLists["shadyPines"][2].getMessage(), allActionLists["shadyPinesParkActions"], true);
         if (input == pickDandelions.getkeyCode() && pickDandelions.isActive()) {
-            screen.loadScene(shadyPinesPark, allMessageLists["shadyPinesPark"][5].getMessage(), allActionLists["basic"], true);
+            screen.loadScene(shadyPinesPark, allMessageLists["shadyPines"][4].getMessage(), allActionLists["basic"], true);
             pickDandelions.flipActive();
         }
         if (input == swings.getkeyCode()) {
-            screen.loadScene(shadyPinesPark, allMessageLists["shadyPinesPark"][6].getMessage(), allActionLists["basic"], true);
+            screen.loadScene(shadyPinesPark, allMessageLists["shadyPines"][5].getMessage(), allActionLists["basic"], true);
         }
 
         loadMainMenu(); // Return to main menu after interaction
@@ -237,9 +251,9 @@ public:
     void loadMainMenu() {
         screen.loadScene(mainMenu, "", allActionLists["basic"]);
         screen.changeScreenSize(150, 50);
-        screen.loadScene(mainMenu, allMessageLists["shadyPinesPark"][1].getMessage(), allActionLists["basic"]);
-        screen.loadScene(mainMenu, allMessageLists["shadyPinesPark"][2].getMessage(), allActionLists["tutorial1"]);
-        screen.loadScene(shadyPinesPark, allMessageLists["shadyPinesPark"][4].getMessage(), allActionLists["basic"], true);
+        screen.loadScene(mainMenu, allMessageLists["shadyPines"][0].getMessage(), allActionLists["basic"]);
+        screen.loadScene(mainMenu, allMessageLists["shadyPines"][1].getMessage(), allActionLists["tutorial1"]);
+        screen.loadScene(shadyPinesPark, allMessageLists["shadyPines"][3].getMessage(), allActionLists["basic"], true);
         loadShadyPinesPark();
     }
 

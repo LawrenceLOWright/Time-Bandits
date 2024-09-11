@@ -52,7 +52,10 @@ vector<message> fileMessagesToString::getLines() { return str; }
 vector<message> fileMessagesToString::getText(string filePath) {
     fstream file;
     file.open(filePath, ios::in);
-    if (!file.is_open()) { return std::vector<message>(); }
+    if (!file.is_open()) { 
+        cout << "Here";
+        return std::vector<message>(); 
+    }
 
     vector<message> lines;
     string tp = "";
