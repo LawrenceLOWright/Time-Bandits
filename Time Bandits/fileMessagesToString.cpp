@@ -53,7 +53,6 @@ vector<message> fileMessagesToString::getText(string filePath) {
     fstream file;
     file.open(filePath, ios::in);
     if (!file.is_open()) { 
-        cout << "Here";
         return std::vector<message>(); 
     }
 
