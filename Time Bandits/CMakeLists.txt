@@ -70,7 +70,11 @@ add_executable(
   fileToString.cpp
  fileActionsToString.cpp
  fileActionsToString.h
+<<<<<<< HEAD
  "gameTools.cpp" "gameTools.h" "loadGame.cpp" "loadGame.h" "error.cpp" "error.h")
+=======
+ "gameTools.cpp" "gameTools.h")
+>>>>>>> a0a65ba4816a56a47bf0c505dd49f26b32d4844c
 
 target_link_libraries(
   hello_test
