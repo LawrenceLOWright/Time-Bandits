@@ -35,6 +35,9 @@ class gameTools {
 		int loadScene(vector<character> scene, string text, vector<action> actions, bool actionHeader);
 		int loadScene(vector<character> scene, message text, vector<action> actions, bool actionHeader);
 		int loadScene(vector<character> scene, message text, vector<action> actions);
+		int checkInputs(vector<action> actions);
+		string writeActions(vector<action> actions);
+
 
 	private:
 		int screenWidth = 120; /**< The width of the screen in characters. */
