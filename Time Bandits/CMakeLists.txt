@@ -3,7 +3,7 @@
 
 
 # Add source to this project's executable.
-add_executable (CMakeTarget 
+add_executable (hourglass 
 "Time Bandits.cpp" 
 "Time Bandits.h"
 "color.h"
@@ -23,11 +23,18 @@ add_executable (CMakeTarget
 "fileToString.cpp"
 "message.cpp"
 "timer.cpp"
-
- "fileActionsToString.cpp" "fileActionsToString.h" "gameTools.cpp" "gameTools.h" "loadGame.cpp" "loadGame.h" "error.cpp" "error.h")
+"fileActionsToString.cpp"
+"fileActionsToString.h"
+"gameTools.cpp"
+"gameTools.h"
+"loadGame.cpp"
+"loadGame.h"
+"error.cpp"
+"error.h"
+)
 
 # Include directories for header files
-target_include_directories(CMakeTarget PRIVATE
+target_include_directories(hourglass PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}   # Include the current source directory
 )
 #file(GLOB SOURCES 
@@ -48,7 +55,7 @@ file(COPY ${MESSAGE_FILES} DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 file(COPY ${SETTING_FILES} DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
-  set_property(TARGET CMakeTarget PROPERTY CXX_STANDARD 20)
+  set_property(TARGET hourglass PROPERTY CXX_STANDARD 20)
 endif()
 
 #file(COPY mainMenu.background DESTINATION ${CMAKE_BINARY_DIR}/test)
@@ -68,13 +75,15 @@ add_executable(
   fileMessagesToString.cpp
   message.cpp
   fileToString.cpp
- fileActionsToString.cpp
- fileActionsToString.h
-<<<<<<< HEAD
- "gameTools.cpp" "gameTools.h" "loadGame.cpp" "loadGame.h" "error.cpp" "error.h")
-=======
- "gameTools.cpp" "gameTools.h")
->>>>>>> a0a65ba4816a56a47bf0c505dd49f26b32d4844c
+  fileActionsToString.cpp
+  fileActionsToString.h
+  "gameTools.cpp"
+  "gameTools.h"
+  "loadGame.cpp"
+  "loadGame.h"
+  "error.cpp"
+  "error.h"
+)
 
 target_link_libraries(
   hello_test

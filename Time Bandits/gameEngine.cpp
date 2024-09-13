@@ -39,11 +39,8 @@ public:
      * @brief Initializes the game, loads assets, and starts the game sequence.
      */
     void LoadGame() {
-<<<<<<< HEAD
-=======
         system("chcp 65001"); // Set the encoding to UTF-8 for cmd
         game.changeScreenSize(150, 40); // Set screen size
->>>>>>> a0a65ba4816a56a47bf0c505dd49f26b32d4844c
 
         // Load actions
 
