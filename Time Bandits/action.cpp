@@ -65,12 +65,6 @@ bool action::isActive(){ return activity; }
 /**
  * @brief if the action is active, it is turned inactive, if the action is inactive, it is turn active
  */
-void action::flipActive() {
-    if (activity)
-    {
-        activity = false;
-        return;
-    }
-    activity = true;
-
+void action::setActive(bool setTo) {
+    activity = setTo;
 }

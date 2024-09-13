@@ -58,7 +58,7 @@ public:
     /**
      * @brief if the action is active, it is turned inactive, if the action is inactive, it is turn active
      */
-    void flipActive();
+    void setActive(bool setTo);
        
 
 private:

@@ -73,7 +73,7 @@ public:
         int input = game.loadScene(shadyPinesPark, allMessageLists["shadyPines"][0], allActionLists["shadyPinesParkActions"], true);
         if (input == pickDandelions.getkeyCode() && pickDandelions.isActive()) {
             game.loadScene(shadyPinesPark, allMessageLists["shadyPines"][4], allActionLists["basic"], true);
-            pickDandelions.flipActive();
+            pickDandelions.setActive(false);
         }
         if (input == swings.getkeyCode()) {
             game.loadScene(shadyPinesPark, allMessageLists["shadyPines"][5], allActionLists["basic"], true);
