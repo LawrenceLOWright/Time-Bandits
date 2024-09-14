@@ -11,42 +11,42 @@ on:
 
 jobs:
   codacy-coverage-reporter:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3
       
       - name: Install dependencies
         run: |
-          sudo apt-get update
-          sudo apt-get install -y cmake lcov
-      
+          choco install cmake
+          pip install gcovr
+
       - name: Configure CMake
         run: |
-          mkdir build && cd build
-          cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_FLAGS="--coverage" ..
+          mkdir build
+          cd build
+          cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_FLAGS="/MD /Zc:__cplusplus" -DCMAKE_CXX_FLAGS_DEBUG="/MDd /Zc:__cplusplus /Zc:forScope" ..
       
       - name: Build
-        working-directory: ${{github.workspace}}/build
+        working-directory: ${{github.workspace}}\build
         run: cmake --build .
       
       - name: Run tests
-        working-directory: ${{github.workspace}}/build
+        working-directory: ${{github.workspace}}\build
         run: ctest -C Debug --output-on-failure
       
       - name: Generate coverage report
-        working-directory: ${{github.workspace}}/build
-        run: |
-          lcov --capture --directory . --output-file coverage.info
-          lcov --remove coverage.info '/usr/*' --output-file coverage.info
+        working-directory: ${{ github.workspace }}\build
+        run: gcovr -r . --xml -o coverage.xml
       
       - name: List files
-        working-directory: ${{github.workspace}}/build
+        working-directory: ${{github.workspace}}\build
+        shell: pwsh
         run: |
-          ls -R
-          find . -name "*.gcda" -o -name "*.gcno"
+          Get-ChildItem -Recurse
+          Get-ChildItem -Recurse -Include *.gcda, *.gcno
       
       - name: Run Codacy Coverage Reporter
         uses: codacy/codacy-coverage-reporter-action@v1
         with:
           project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
-          coverage-reports: build/coverage.info
+          coverage-reports: ${{ github.workspace }}/build/coverage.xml

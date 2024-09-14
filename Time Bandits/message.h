@@ -47,6 +47,8 @@ class message {
          */
         void printMessages();
 
+        string getMessage();
+
     private:
         vector<string> messages; /**< Vector to store messages */
 };

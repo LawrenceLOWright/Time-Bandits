@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ALL_BUILD", "ALL_BUILD.vcxproj", "{332CBCC0-9803-3128-9EC6-3C01BEC0021F}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+		MinSizeRel|x64 = MinSizeRel|x64
+		RelWithDebInfo|x64 = RelWithDebInfo|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{332CBCC0-9803-3128-9EC6-3C01BEC0021F}.Debug|x64.ActiveCfg = Debug|x64
+		{332CBCC0-9803-3128-9EC6-3C01BEC0021F}.Release|x64.ActiveCfg = Release|x64
+		{332CBCC0-9803-3128-9EC6-3C01BEC0021F}.MinSizeRel|x64.ActiveCfg = MinSizeRel|x64
+		{332CBCC0-9803-3128-9EC6-3C01BEC0021F}.RelWithDebInfo|x64.ActiveCfg = RelWithDebInfo|x64
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DD8B509A-E50A-3B27-97E7-15AFCED02E50}
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

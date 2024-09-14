@@ -49,8 +49,21 @@ public:
      */
     bool checkAction(int code);
 
+    /**
+     * @brief retrives if the action is active or inactive (if is on or has been turned off).
+     * @returns true if the action is active (on) or false if action is inactive (off)
+     */
+    bool isActive();
+
+    /**
+     * @brief if the action is active, it is turned inactive, if the action is inactive, it is turn active
+     */
+    void setActive(bool setTo);
+       
+
 private:
     string actionName = "None";  /**< The name of the action. */
     string keyCodeName = "";     /**< The name of the key code associated with the action. */
     int keyCode = 0;             /**< The integer value of the key code. */
+    bool activity = true;           /**< Default is true, used to turn off or on an event*/
 };
