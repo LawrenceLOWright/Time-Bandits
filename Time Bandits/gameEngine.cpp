@@ -93,6 +93,10 @@ public:
         loadShadyPinesPark(load);
     }
 
+    void loadMainStreet(loadGame load){
+        
+    }
+
 private:
     gameTools game;
     action enter, description, pickDandelions, swings; /**< Action objects representing different user actions. */
