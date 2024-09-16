@@ -38,15 +38,15 @@ public:
     /**
      * @brief Initializes the game, loads assets, and starts the game sequence.
      */
-    void LoadGame() {
-        system("chcp 65001"); // Set the encoding to UTF-8 for cmd
-        game.changeScreenSize(150, 40); // Set screen size
+    void LoadGame(loadGame load) {
+        //system("chcp 65001"); // Set the encoding to UTF-8 for cmd
+        //game.changeScreenSize(150, 40); // Set screen size
 
         // Load actions
 
-        fileActionsToString actionList = fileActionsToString("actionList", "actionCombos");
-        vector<action> actions = actionList.getActions();
-        allActionLists = actionList.getActionMap();
+        //fileActionsToString actionList = fileActionsToString("actionList", "actionCombos");
+        //vector<action> actions = actionList.getActions();
+        //allActionLists = actionList.getActionMap();
 
         // Load messages
 
@@ -61,7 +61,7 @@ public:
         mainMenu = game.loadAsset("mainMenu");
         shadyPinesPark = game.loadAsset("shadyPinesPark");
 
-        loadMainMenu(); // Load main menu
+        loadMainMenu(load); // Load main menu
 
         c.setDefault(); // Reset colors at end
     }
@@ -69,29 +69,30 @@ public:
     /**
      * @brief Loads the Shady Pines Park scene and handles user interactions within the park.
      */
-    void loadShadyPinesPark() {
-        int input = game.loadScene(shadyPinesPark, allMessageLists["shadyPines"][0], allActionLists["shadyPinesParkActions"], true);
+    void loadShadyPinesPark(loadGame load) {
+        int input = game.loadScene(shadyPinesPark, allMessageLists["shadyPines"][0], load.allActionLists["shadyPinesParkActions"], true);
         if (input == pickDandelions.getkeyCode() && pickDandelions.isActive()) {
-            game.loadScene(shadyPinesPark, allMessageLists["shadyPines"][4], allActionLists["basic"], true);
+            game.loadScene(shadyPinesPark, allMessageLists["shadyPines"][4], load.allActionLists["basic"], true);
             pickDandelions.setActive(false);
         }
         if (input == swings.getkeyCode()) {
-            game.loadScene(shadyPinesPark, allMessageLists["shadyPines"][5], allActionLists["basic"], true);
+            game.loadScene(shadyPinesPark, allMessageLists["shadyPines"][5], load.allActionLists["basic"], true);
         }
 
-        loadMainMenu(); // Return to main menu after interaction
+        loadMainMenu(load); // Return to main menu after interaction
     }
 
     /**
      * @brief Loads the Main Menu and the subsequent game tutorial.
      */
-    void loadMainMenu() {
-        game.loadScene(mainMenu, "", allActionLists["basic"]);
-        game.changeScreenSize(150, 40); // Set screen size
-        game.loadScene(mainMenu, allMessageLists["shadyPines"][0], allActionLists["basic"]);
-        game.loadScene(mainMenu, allMessageLists["shadyPines"][1], allActionLists["tutorial1"]);
-        game.loadScene(shadyPinesPark, allMessageLists["shadyPines"][3], allActionLists["basic"], true);
-        loadShadyPinesPark();
+    void loadMainMenu(loadGame load) {
+        game.loadScene(mainMenu, "", load.allActionLists["basic"]);
+
+        game.changeScreenSize(151, 41); // Set screen size 151/41 legacy 4 windows 11, 150,40 for other machines
+        game.loadScene(mainMenu, allMessageLists["shadyPines"][0], load.allActionLists["basic"]);
+        game.loadScene(mainMenu, allMessageLists["shadyPines"][1], load.allActionLists["tutorial1"]);
+        game.loadScene(shadyPinesPark, allMessageLists["shadyPines"][3], load.allActionLists["basic"], true);
+        loadShadyPinesPark(load);
     }
 
 private:
@@ -125,7 +126,7 @@ public:
     void runGame() {
         Game game;
         loadGame load = loadGame();
-        game.LoadGame();
+        game.LoadGame(load);
         
     }
 

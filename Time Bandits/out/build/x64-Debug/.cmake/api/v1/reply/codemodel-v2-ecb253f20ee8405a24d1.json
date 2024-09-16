@@ -1,0 +1,65 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-Debug-d0094a50bb2071803777.json",
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "Project",
+					"targetIndexes" : 
+					[
+						0,
+						1
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "hello_test::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-hello_test-Debug-04e87cdf65f05705fbef.json",
+					"name" : "hello_test",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "hourglass::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-hourglass-Debug-5be638c1f8be4cdc7b23.json",
+					"name" : "hourglass",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "C:/Users/Carinn Gaspar/Documents/Hourglass Game/Time Bandits/out/build/x64-Debug",
+		"source" : "C:/Users/Carinn Gaspar/Documents/Hourglass Game/Time Bandits"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 6
+	}
+}

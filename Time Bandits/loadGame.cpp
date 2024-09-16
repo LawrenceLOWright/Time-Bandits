@@ -29,6 +29,12 @@ loadGame::loadGame() {
     ss2 >> num2;
     game.changeScreenSize(num, num2);
 
+    // Get Actions for the game
+
+    fileActionsToString actionList = fileActionsToString("actionList", "actionCombos");
+    actions = actionList.getActions();
+    allActionLists = actionList.getActionMap();
+
     //std::string tp = retrieveSetting("ScreenHeight");
     //std::string command = "msg %username% 1" + tp;
 

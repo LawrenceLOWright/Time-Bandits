@@ -90,7 +90,7 @@ int gameTools::loadScene(vector<character> scene, string text, vector<action> ac
     loadScreen(scene);
     cout << text << endl;
 
-    checkInputs(actions);
+    return checkInputs(actions);
 }
 
 /**
@@ -109,7 +109,7 @@ int gameTools::loadScene(vector<character> scene, string text, vector<action> ac
     cout << header + "\n---------------" << endl;
     cout << text << endl;
 
-    checkInputs(actions);
+    return checkInputs(actions);
 }
 
 int gameTools::loadScene(vector<character> scene, message text, vector<action> actions, bool actionHeader) {
@@ -122,7 +122,7 @@ int gameTools::loadScene(vector<character> scene, message text, vector<action> a
     cout << header + "\n---------------" << endl;
     text.printMessages();
 
-    checkInputs(actions);
+    return checkInputs(actions);
 
     
 }
@@ -134,7 +134,7 @@ int gameTools::loadScene(vector<character> scene, message text, vector<action> a
     game.loadScreen(scene);
     text.printMessages();
 
-    checkInputs(actions);
+    return checkInputs(actions);
 
     
 }

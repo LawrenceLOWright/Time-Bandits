@@ -30,6 +30,8 @@ using namespace std::chrono;
 class loadGame {
 	public:
 		loadGame();
+		vector<action> actions;
+		map<string, vector<action>> allActionLists;
 
 
 
