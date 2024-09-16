@@ -50,16 +50,14 @@ public:
 
         // Load messages
 
-        fileMessagesToString messages = fileMessagesToString("shadyPines");
-
-        vector<message> shadyPinesParkMessages = messages.getLines();
-
-        allMessageLists["shadyPines"] = shadyPinesParkMessages;
+        //fileMessagesToString messages = fileMessagesToString("shadyPines");
+        //vector<message> shadyPinesParkMessages = messages.getLines();
+        //allMessageLists["shadyPines"] = shadyPinesParkMessages;
 
 
         // Load assets
-        mainMenu = game.loadAsset("mainMenu");
-        shadyPinesPark = game.loadAsset("shadyPinesPark");
+        //mainMenu = game.loadAsset("mainMenu");
+        //shadyPinesPark = game.loadAsset("shadyPinesPark");
 
         loadMainMenu(load); // Load main menu
 
@@ -70,13 +68,13 @@ public:
      * @brief Loads the Shady Pines Park scene and handles user interactions within the park.
      */
     void loadShadyPinesPark(loadGame load) {
-        int input = game.loadScene(shadyPinesPark, allMessageLists["shadyPines"][0], load.allActionLists["shadyPinesParkActions"], true);
+        int input = game.loadScene(load.allAssetsLists["shadyPinesPark"], load.allMessageLists["shadyPines"][0], load.allActionLists["shadyPinesParkActions"], true);
         if (input == pickDandelions.getkeyCode() && pickDandelions.isActive()) {
-            game.loadScene(shadyPinesPark, allMessageLists["shadyPines"][4], load.allActionLists["basic"], true);
+            game.loadScene(load.allAssetsLists["shadyPinesPark"], load.allMessageLists["shadyPines"][4], load.allActionLists["basic"], true);
             pickDandelions.setActive(false);
         }
         if (input == swings.getkeyCode()) {
-            game.loadScene(shadyPinesPark, allMessageLists["shadyPines"][5], load.allActionLists["basic"], true);
+            game.loadScene(load.allAssetsLists["shadyPinesPark"], load.allMessageLists["shadyPines"][5], load.allActionLists["basic"], true);
         }
 
         loadMainMenu(load); // Return to main menu after interaction
@@ -86,12 +84,12 @@ public:
      * @brief Loads the Main Menu and the subsequent game tutorial.
      */
     void loadMainMenu(loadGame load) {
-        game.loadScene(mainMenu, "", load.allActionLists["basic"]);
+        game.loadScene(load.allAssetsLists["mainMenu"], "", load.allActionLists["basic"]);
 
         game.changeScreenSize(151, 41); // Set screen size 151/41 legacy 4 windows 11, 150,40 for other machines
-        game.loadScene(mainMenu, allMessageLists["shadyPines"][0], load.allActionLists["basic"]);
-        game.loadScene(mainMenu, allMessageLists["shadyPines"][1], load.allActionLists["tutorial1"]);
-        game.loadScene(shadyPinesPark, allMessageLists["shadyPines"][3], load.allActionLists["basic"], true);
+        game.loadScene(load.allAssetsLists["mainMenu"], load.allMessageLists["shadyPines"][0], load.allActionLists["basic"]);
+        game.loadScene(load.allAssetsLists["mainMenu"], load.allMessageLists["shadyPines"][1], load.allActionLists["tutorial1"]);
+        game.loadScene(load.allAssetsLists["shadyPinesPark"], load.allMessageLists["shadyPines"][3], load.allActionLists["basic"], true);
         loadShadyPinesPark(load);
     }
 

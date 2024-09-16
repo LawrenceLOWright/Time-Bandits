@@ -35,6 +35,14 @@ loadGame::loadGame() {
     actions = actionList.getActions();
     allActionLists = actionList.getActionMap();
 
+    // Get Messages for the game
+    fileTextToString messageList = fileTextToString("messageList");
+    allMessageLists = messageList.allMessageLists;
+
+    // Get all assets for the game
+    fileAssetsToString assetList = fileAssetsToString("assets");
+    allAssetsLists = assetList.allAssetsLists;
+
     //std::string tp = retrieveSetting("ScreenHeight");
     //std::string command = "msg %username% 1" + tp;
 

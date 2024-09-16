@@ -21,6 +21,8 @@
 #include "action.h"
 #include "actionListener.h"
 #include "gameTools.h"
+#include "fileTextToString.h"
+#include "fileAssetsToString.h"
 
 
 
@@ -32,6 +34,8 @@ class loadGame {
 		loadGame();
 		vector<action> actions;
 		map<string, vector<action>> allActionLists;
+		map<string, vector<message>> allMessageLists;
+		map < string, vector<character>> allAssetsLists;
 
 
 
