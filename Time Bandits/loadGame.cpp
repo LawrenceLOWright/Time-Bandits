@@ -1,4 +1,3 @@
-
 #include "loadGame.h"
 
 #include <iostream>
@@ -14,7 +13,9 @@
 
 
 
-loadGame::loadGame() {
+loadGame::loadGame() {}
+
+void loadGame::load(int (*startGame) (loadGame load, gameTools game)) {
     // Set the encoding
     string str = retrieveSetting("Encoding");
     const char* cstr = str.c_str();
@@ -43,11 +44,15 @@ loadGame::loadGame() {
     fileAssetsToString assetList = fileAssetsToString("assets");
     allAssetsLists = assetList.allAssetsLists;
 
-    //std::string tp = retrieveSetting("ScreenHeight");
-    //std::string command = "msg %username% 1" + tp;
+    // Set color to default
+    color c;
+    c.setDefault();
 
-    // Execute the command using Boost.Process
-    //system(command.c_str());
+    // Run the game
+    int exit = 1;
+    while (exit == 1) {
+        exit = startGame(*this, game);
+    }
 
 }
 
@@ -65,17 +70,17 @@ string loadGame::retrieveSetting(string settingName) {
         stringstream details(tp);
         string segment1 = "";
 
-        
+
         while (getline(details, segment1, ',')) {
-            
+
             if (settingName == segment1) {
                 getline(details, segment1, ',');
-                
+
                 return segment1;
                 break;
             }
         }
-        
+
     }
 
 
@@ -84,4 +89,11 @@ string loadGame::retrieveSetting(string settingName) {
     return "Nothing";
 
 }
+
+/**
+int loadGame::loadScene(string sceneName, int location) {
+    gameTools game;
+    return game.loadScene(allAssetsLists["shadyPines"], allMessageLists[sceneName][location], allActionLists[sceneName + to_string(location)]);
+}
+*/
 

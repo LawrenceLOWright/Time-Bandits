@@ -9,6 +9,7 @@
 #include <chrono> // Include the chrono header
 #include <vector>
 #include <map>
+#include <functional>
 
 #include "error.h"
 #include "character.h"
@@ -30,15 +31,17 @@ using namespace std;
 using namespace std::chrono;
 
 class loadGame {
-	public:
-		loadGame();
-		vector<action> actions;
-		map<string, vector<action>> allActionLists;
-		map<string, vector<message>> allMessageLists;
-		map < string, vector<character>> allAssetsLists;
+public:
+	loadGame();
+	void load(int (*startGame) (loadGame load, gameTools game));
+	vector<action> actions;
+	map<string, vector<action>> allActionLists;
+	map<string, vector<message>> allMessageLists;
+	map < string, vector<character>> allAssetsLists;
+
+	//int loadScene(string sceneName, int location);
 
 
-
-	private:
-		string retrieveSetting(string settingName);
+private:
+	string retrieveSetting(string settingName);
 };
