@@ -1,5 +1,0 @@
-if(EXISTS "C:/Users/Carinn Gaspar/Documents/Hourglass Game/Time Bandits/out/build/x64-Debug/hello_test[1]_tests.cmake")
-  include("C:/Users/Carinn Gaspar/Documents/Hourglass Game/Time Bandits/out/build/x64-Debug/hello_test[1]_tests.cmake")
-else()
-  add_test(hello_test_NOT_BUILT hello_test_NOT_BUILT)
-endif()
