@@ -71,11 +71,11 @@ public:
         cout << "Loading shady pines park" << endl;
         int input = game.loadScene(load.allAssetsLists["shadyPinesPark"], load.allMessageLists["shadyPines"][3], load.allActionLists["shadyPinesParkActions"], true);
         cout << input;
-        if (allActionLists["shadyPinesParkActions"][0].checkAction(input)) {
+        if (load.allActionLists["shadyPinesParkActions"][0].checkAction(input)) {
             game.loadScene(load.allAssetsLists["shadyPinesPark"], load.allMessageLists["shadyPines"][4], load.allActionLists["basic"], true);
             pickDandelions.setActive(false);
         }
-        if (allActionLists["shadyPinesParkActions"][1].checkAction(input)) {
+        if (load.allActionLists["shadyPinesParkActions"][1].checkAction(input)) {
             game.loadScene(load.allAssetsLists["shadyPinesPark"], load.allMessageLists["shadyPines"][5], load.allActionLists["basic"], true);
         }
 

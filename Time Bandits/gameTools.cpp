@@ -115,19 +115,12 @@ int gameTools::loadScene(vector<character> scene, message text, vector<action> a
     
 
     string header = writeActions(actions);
-    changeActions(actions);
-    for (size_t i = 0; i < actions.size(); i++)
-    {
-        cout << actions[i].getActionName() << "'s keycode is " << actions[i].getkeyCode() << "; loadScene debug1" << endl;
-    }
-    Sleep(10000);
+    int i = 1;
+    
+    Sleep(2000);
     loadScreen(scene);
     cout << header + "\n---------------" << endl;
     text.printMessages();
-    for (size_t i = 0; i < actions.size(); i++)
-    {
-        cout << actions[i].getActionName() << "'s keycode is " << actions[i].getkeyCode() << "; loadScene debug2" << endl;
-    }
     return checkInputs(actions);
 
     
@@ -168,20 +161,10 @@ string gameTools::writeActions(vector<action> actions) {
     for (int e = 0; e < actions.size(); e++) {
         if (actions[e].isActive()) {
             header = header + " [" + actions[e].getKeyCodeName() + " : " + actions[e].getActionName() + "]";
-        }
-
-    }
-    return header;
-}
-
-void gameTools::changeActions(vector<action> actions) {
-    int i = 1;
-    for (int e = 0; e < actions.size(); e++) {
-        if (actions[e].isActive()) {
-            cout << "changing action key codes" << endl;
             actions[e].setKeycode(i);
             i++;
         }
 
     }
+    return header;
 }
