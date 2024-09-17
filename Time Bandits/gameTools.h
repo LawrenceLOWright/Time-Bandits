@@ -31,12 +31,12 @@ class gameTools {
 		void changeScreenSize(int width, int height);
 		vector<character> loadAsset(string fileName);
 		void loadScreen(vector<character> vec);
-		int loadScene(vector<character> scene, string text, vector<action> actions);
-		int loadScene(vector<character> scene, string text, vector<action> actions, bool actionHeader);
-		int loadScene(vector<character> scene, message text, vector<action> actions, bool actionHeader);
-		int loadScene(vector<character> scene, message text, vector<action> actions);
-		int checkInputs(vector<action> actions);
-		string writeActions(vector<action> actions);
+		int loadScene(vector<character> scene, string text, vector<action>* actions);
+		int loadScene(vector<character> scene, string text, vector<action>* actions, bool actionHeader);
+		int loadScene(vector<character> scene, message text, vector<action>* actions, bool actionHeader);
+		int loadScene(vector<character> scene, message text, vector<action>* actions);
+		int checkInputs(vector<action>* actions);
+		string writeActions(vector<action>* actions);
 
 		void changeActions(vector<action> actions);
 

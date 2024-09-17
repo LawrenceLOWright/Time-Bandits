@@ -69,17 +69,20 @@ public:
      */
     void loadShadyPinesPark(loadGame load) {
         cout << "Loading shady pines park" << endl;
-        int input = game.loadScene(load.allAssetsLists["shadyPinesPark"], load.allMessageLists["shadyPines"][3], load.allActionLists["shadyPinesParkActions"], true);
-        cout << input;
+        int input = game.loadScene(load.allAssetsLists["shadyPinesPark"], load.allMessageLists["shadyPines"][3], &load.allActionLists["shadyPinesParkActions"], true);
+        //cout << input;
         if (load.allActionLists["shadyPinesParkActions"][0].checkAction(input)) {
-            game.loadScene(load.allAssetsLists["shadyPinesPark"], load.allMessageLists["shadyPines"][4], load.allActionLists["basic"], true);
-            pickDandelions.setActive(false);
+            game.loadScene(load.allAssetsLists["shadyPinesPark"], load.allMessageLists["shadyPines"][4], &load.allActionLists["basic"], true);
+            load.allActionLists["shadyPinesParkActions"][0].setActive(false);
         }
         if (load.allActionLists["shadyPinesParkActions"][1].checkAction(input)) {
-            game.loadScene(load.allAssetsLists["shadyPinesPark"], load.allMessageLists["shadyPines"][5], load.allActionLists["basic"], true);
+            game.loadScene(load.allAssetsLists["shadyPinesPark"], load.allMessageLists["shadyPines"][5], &load.allActionLists["basic"], true);
+        }
+        if (load.allActionLists["shadyPinesParkActions"][2].checkAction(input)) {
+            loadMainStreet(load);
         }
 
-        loadMainMenu(load); // Return to main menu after interaction
+        loadShadyPinesPark(load); // Return to main menu after interaction
     }
 
     /**
@@ -87,25 +90,20 @@ public:
      */
     void loadMainMenu(loadGame load) {
         game.changeScreenSize(151, 41); // Set screen size 151/41 legacy 4 windows 11, 150,40 for other machines
-        game.loadScene(load.allAssetsLists["mainMenu"], load.allMessageLists["shadyPines"][0], load.allActionLists["basic"]);
-        game.loadScene(load.allAssetsLists["mainMenu"], load.allMessageLists["shadyPines"][1], load.allActionLists["tutorial1"]);
-        game.loadScene(load.allAssetsLists["shadyPinesPark"], load.allMessageLists["shadyPines"][2], load.allActionLists["basic"], true);
+        game.loadScene(load.allAssetsLists["mainMenu"], load.allMessageLists["shadyPines"][0], &load.allActionLists["basic"]);
+        game.loadScene(load.allAssetsLists["mainMenu"], load.allMessageLists["shadyPines"][1], &load.allActionLists["tutorial1"]);
+        game.loadScene(load.allAssetsLists["shadyPinesPark"], load.allMessageLists["shadyPines"][2], &load.allActionLists["basic"], true);
         loadShadyPinesPark(load);
     }
 
     void loadMainStreet(loadGame load){
-        
+        int input = game.loadScene(load.allAssetsLists["mainStreet"], load.allMessageLists["mainStreet"][0], &load.allActionLists["mainStreetActions"], true);
     }
 
 private:
     gameTools game;
-    action enter, description, pickDandelions, swings; /**< Action objects representing different user actions. */
     timer t; /**< Timer object for time-based operations. */
     color c; /**< Color object for managing text and background colors. */
-    vector<character> mainMenu; /**< Vector of character objects representing the main menu. */
-    vector<character> shadyPinesPark; /**< Vector of character objects representing Shady Pines Park. */
-    map<string, vector<action>> allActionLists; /**< Map of action lists for different scenes. */
-    map<string, vector<message>> allMessageLists; /**< list of all different messages for */
 };
 
 
