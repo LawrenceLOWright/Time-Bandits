@@ -1,4 +1,5 @@
 #include "action.h"
+#include "error.h"
 
 #include <iostream>
 #include <string>
@@ -40,10 +41,29 @@ int action::getkeyCode() { return keyCode; }
  * @param keyName The name of the key code.
  * @param key The integer value of the key code.
  */
-void action::setActionDetails(string name, string keyName, int key) {
+void action::setActionDetails(string name, string activity, string keyName, int key) {
     actionName = name;
     keyCode = key;
     keyCodeName = keyName;
+    setActive(activity);
+}
+
+void action::setActionDetails(string name, string activity) {
+    actionName = name;
+    setActive(activity);
+}
+
+void action::setKeycode(int key) {
+    switch (keyCode)
+    {
+    case (13):
+        return;
+    case(68):
+        return;
+    default:
+        keyCode = key;
+        keyCodeName = to_string(key);
+    }
 }
 
 /**
@@ -67,4 +87,17 @@ bool action::isActive(){ return activity; }
  */
 void action::setActive(bool setTo) {
     activity = setTo;
+}
+
+void action::setActive(string setTo) {
+    if (setTo == "1") {
+        activity = true;
+        return;
+    }
+    if (setTo == "0") {
+        activity = false;
+        return;
+    }
+    error e = error("Invalid String Input for Action Activity");
+
 }

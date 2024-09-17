@@ -58,8 +58,8 @@ public:
         // Load assets
         //mainMenu = game.loadAsset("mainMenu");
         //shadyPinesPark = game.loadAsset("shadyPinesPark");
-
         loadMainMenu(load); // Load main menu
+
 
         c.setDefault(); // Reset colors at end
     }
@@ -77,13 +77,14 @@ public:
             game.loadScene(load.allAssetsLists["shadyPinesPark"], load.allMessageLists["shadyPines"][5], load.allActionLists["basic"], true);
         }
 
-        loadMainMenu(load); // Return to main menu after interaction
+        loadShadyPinesPark(load); // Return to main menu after interaction
     }
 
     /**
      * @brief Loads the Main Menu and the subsequent game tutorial.
      */
     void loadMainMenu(loadGame load) {
+        
         game.loadScene(load.allAssetsLists["mainMenu"], "", load.allActionLists["basic"]);
 
         game.changeScreenSize(151, 41); // Set screen size 151/41 legacy 4 windows 11, 150,40 for other machines
@@ -125,9 +126,8 @@ public:
      * and calling its `LoadGame()` method. The game loop and all initializations
      * are managed within the `Game` class.
      */
-    void runGame() {
+    void runGame(loadGame load) {
         Game game;
-        loadGame load = loadGame();
         game.LoadGame(load);
         
     }

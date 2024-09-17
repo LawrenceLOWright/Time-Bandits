@@ -157,9 +157,12 @@ int gameTools::checkInputs(vector<action> actions) {
 
 string gameTools::writeActions(vector<action> actions) {
     string header = " <     Available Actions : ";
+    int i = 1;
     for (int e = 0; e < actions.size(); e++) {
         if (actions[e].isActive()) {
+            actions[e].setKeycode(i);
             header = header + " [" + actions[e].getKeyCodeName() + " : " + actions[e].getActionName() + "]";
+            i++;
         }
 
     }

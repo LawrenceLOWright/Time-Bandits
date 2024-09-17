@@ -30,7 +30,8 @@ using namespace std;
 
 
 int startGame(loadGame load, gameTools game) {
-	game.loadScene(load.allAssetsLists["shadyPinesPark"], load.allMessageLists["shadyPines"][3], load.allActionLists["basic"], true);
+	gameEngine engine;
+	engine.runGame(load);
 
 	return 0;
 }

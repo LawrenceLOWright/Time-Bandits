@@ -9,6 +9,7 @@
 #include <chrono> // Include the chrono header
 #include <vector>
 #include <sstream>
+#include <string>
 #include "character.h"
 
 using namespace std;
@@ -36,17 +37,18 @@ vector<action> fileActionsToString::getText(string filePath) {
 
     string lines = "";
     string tp = "";
+    int keycode = 1;
+
     while (getline(file, tp)) {
         stringstream actionDetails(tp);
-        string segment2 = "";
-        string segment3 = "";
-        string segment4 = "";
-        getline(actionDetails, segment2, ',');
-        getline(actionDetails, segment3, ',');
-        getline(actionDetails, segment4, ',');
+        string actionName = "";
+        string activity = "";
+        getline(actionDetails, actionName, ',');
+        getline(actionDetails, activity, ',');
         action a;
-        a.setActionDetails(segment2, segment3, stoi(segment4));
+        a.setActionDetails(actionName, activity);
         actions.push_back(a);
+        keycode++;
     }
 
     file.close();

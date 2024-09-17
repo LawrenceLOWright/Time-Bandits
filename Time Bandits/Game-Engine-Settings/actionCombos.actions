@@ -1,5 +1,3 @@
-basic,Continue
-basicArea,Continue,Description
-tutorial1,Description
-shadyPinesParkActions,Continue,Description,Pick Dandelions,Sit on Swings
+shadyPinesParkActions,Pick Dandelions,Sit on Swings,Leave
+leaveShadyPines,Main Street,Road to New Slovakia
 mainStreetActions,Peer in abandoned storefronts,Inspect Lampposts,Write "I WUZ HERE",Leave

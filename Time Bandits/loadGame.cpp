@@ -44,6 +44,21 @@ void loadGame::load(int (*startGame) (loadGame load, gameTools game)) {
     fileAssetsToString assetList = fileAssetsToString("assets");
     allAssetsLists = assetList.allAssetsLists;
 
+    // Hard coded actions for special inputs 
+    action cont;
+    action desc;
+
+    cont.setActionDetails("Continue", "1", "enter", 13);
+    desc.setActionDetails("Description", "1", "D", 68);
+
+    vector<action> basic = { cont };
+    vector<action> basicArea = { cont, desc };
+    vector<action> tutorial1 = { desc };
+
+    allActionLists["basic"] = basic;
+    allActionLists["basicArea"] = basicArea;
+    allActionLists["tutorial1"] = tutorial1;
+
     // Set color to default
     color c;
     c.setDefault();
