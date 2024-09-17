@@ -68,29 +68,28 @@ public:
      * @brief Loads the Shady Pines Park scene and handles user interactions within the park.
      */
     void loadShadyPinesPark(loadGame load) {
-        int input = game.loadScene(load.allAssetsLists["shadyPinesPark"], load.allMessageLists["shadyPines"][0], load.allActionLists["shadyPinesParkActions"], true);
-        if (input == pickDandelions.getkeyCode() && pickDandelions.isActive()) {
+        cout << "Loading shady pines park" << endl;
+        int input = game.loadScene(load.allAssetsLists["shadyPinesPark"], load.allMessageLists["shadyPines"][3], load.allActionLists["shadyPinesParkActions"], true);
+        cout << input;
+        if (allActionLists["shadyPinesParkActions"][0].checkAction(input)) {
             game.loadScene(load.allAssetsLists["shadyPinesPark"], load.allMessageLists["shadyPines"][4], load.allActionLists["basic"], true);
             pickDandelions.setActive(false);
         }
-        if (input == swings.getkeyCode()) {
+        if (allActionLists["shadyPinesParkActions"][1].checkAction(input)) {
             game.loadScene(load.allAssetsLists["shadyPinesPark"], load.allMessageLists["shadyPines"][5], load.allActionLists["basic"], true);
         }
 
-        loadShadyPinesPark(load); // Return to main menu after interaction
+        loadMainMenu(load); // Return to main menu after interaction
     }
 
     /**
      * @brief Loads the Main Menu and the subsequent game tutorial.
      */
     void loadMainMenu(loadGame load) {
-        
-        game.loadScene(load.allAssetsLists["mainMenu"], "", load.allActionLists["basic"]);
-
         game.changeScreenSize(151, 41); // Set screen size 151/41 legacy 4 windows 11, 150,40 for other machines
         game.loadScene(load.allAssetsLists["mainMenu"], load.allMessageLists["shadyPines"][0], load.allActionLists["basic"]);
         game.loadScene(load.allAssetsLists["mainMenu"], load.allMessageLists["shadyPines"][1], load.allActionLists["tutorial1"]);
-        game.loadScene(load.allAssetsLists["shadyPinesPark"], load.allMessageLists["shadyPines"][3], load.allActionLists["basic"], true);
+        game.loadScene(load.allAssetsLists["shadyPinesPark"], load.allMessageLists["shadyPines"][2], load.allActionLists["basic"], true);
         loadShadyPinesPark(load);
     }
 

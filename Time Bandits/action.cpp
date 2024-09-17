@@ -42,6 +42,7 @@ int action::getkeyCode() { return keyCode; }
  * @param key The integer value of the key code.
  */
 void action::setActionDetails(string name, string activity, string keyName, int key) {
+    cout << "extended action detail set" << endl;
     actionName = name;
     keyCode = key;
     keyCodeName = keyName;
@@ -49,21 +50,26 @@ void action::setActionDetails(string name, string activity, string keyName, int 
 }
 
 void action::setActionDetails(string name, string activity) {
+    cout << "short action detail set" << endl;
     actionName = name;
     setActive(activity);
 }
 
 void action::setKeycode(int key) {
+    cout << "attempting to change keyCode" << endl;
     switch (keyCode)
     {
-    case (13):
-        return;
-    case(68):
-        return;
-    default:
-        keyCode = key;
-        keyCodeName = to_string(key);
+        case(13):
+            cout << "Special case Found, skipping" << endl;
+            return;
+        case(68):
+            cout << "Special case Found, skipping" << endl;
+            return;
+        default:
+            keyCode = key + 48;
+            keyCodeName = to_string(key);
     }
+    cout << actionName << "'s keycode is " << keyCode << endl;
 }
 
 /**
@@ -72,6 +78,7 @@ void action::setKeycode(int key) {
  * @return true if the key code matches, false otherwise.
  */
 bool action::checkAction(int code) {
+    cout << "checking " << actionName << " input: " << code << ">" << keyCode << "; ";
     if (code == keyCode) { return true; }
     else { return false; }
 }
@@ -92,10 +99,12 @@ void action::setActive(bool setTo) {
 void action::setActive(string setTo) {
     if (setTo == "1") {
         activity = true;
+        cout << actionName << " is active " << endl;
         return;
     }
     if (setTo == "0") {
         activity = false;
+        cout << actionName << " is inactive " << endl;
         return;
     }
     error e = error("Invalid String Input for Action Activity");

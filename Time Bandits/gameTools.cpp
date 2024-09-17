@@ -53,8 +53,7 @@ vector<character> gameTools::loadAsset(string fileName) {
 * @param vec Vector of character objects to display.
 */
 void gameTools::loadScreen(vector<character> vec) {
-    gameTools game;
-    game.refreshScreen();
+    refreshScreen();
 
     color color;
     int prevCol2 = 999;
@@ -116,22 +115,26 @@ int gameTools::loadScene(vector<character> scene, message text, vector<action> a
     
 
     string header = writeActions(actions);
-
-    gameTools game;
-    game.loadScreen(scene);
+    changeActions(actions);
+    for (size_t i = 0; i < actions.size(); i++)
+    {
+        cout << actions[i].getActionName() << "'s keycode is " << actions[i].getkeyCode() << "; loadScene debug1" << endl;
+    }
+    Sleep(10000);
+    loadScreen(scene);
     cout << header + "\n---------------" << endl;
     text.printMessages();
-
+    for (size_t i = 0; i < actions.size(); i++)
+    {
+        cout << actions[i].getActionName() << "'s keycode is " << actions[i].getkeyCode() << "; loadScene debug2" << endl;
+    }
     return checkInputs(actions);
 
     
 }
 
 int gameTools::loadScene(vector<character> scene, message text, vector<action> actions) {
-    
-
-    gameTools game;
-    game.loadScreen(scene);
+    loadScreen(scene);
     text.printMessages();
 
     return checkInputs(actions);
@@ -144,12 +147,16 @@ int gameTools::checkInputs(vector<action> actions) {
     actionListener action;
     while (true) {
         keyCode = action.codeInputListener();
-
+        cout << keyCode << " ";
         // Check if certain button is pressed
         for (int x = 0; x < actions.size(); x++) {
             if (actions[x].isActive())
             {
-                if (actions[x].checkAction(keyCode) == true) { return keyCode; }
+                //cout << "foundActiveKey";
+                if (actions[x].checkAction(keyCode) == true) { 
+                    cout << "correctKeyPressed";
+                    return keyCode;
+                }
             }
         }
     }
@@ -160,11 +167,21 @@ string gameTools::writeActions(vector<action> actions) {
     int i = 1;
     for (int e = 0; e < actions.size(); e++) {
         if (actions[e].isActive()) {
-            actions[e].setKeycode(i);
             header = header + " [" + actions[e].getKeyCodeName() + " : " + actions[e].getActionName() + "]";
-            i++;
         }
 
     }
     return header;
+}
+
+void gameTools::changeActions(vector<action> actions) {
+    int i = 1;
+    for (int e = 0; e < actions.size(); e++) {
+        if (actions[e].isActive()) {
+            cout << "changing action key codes" << endl;
+            actions[e].setKeycode(i);
+            i++;
+        }
+
+    }
 }

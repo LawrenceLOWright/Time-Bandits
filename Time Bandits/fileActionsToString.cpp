@@ -34,6 +34,7 @@ vector<action> fileActionsToString::getText(string filePath) {
         return actions;
     }
 
+    //cout << "file action to string";
 
     string lines = "";
     string tp = "";

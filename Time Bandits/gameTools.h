@@ -38,6 +38,8 @@ class gameTools {
 		int checkInputs(vector<action> actions);
 		string writeActions(vector<action> actions);
 
+		void changeActions(vector<action> actions);
+
 
 	private:
 		int screenWidth = 120; /**< The width of the screen in characters. */
