@@ -14,6 +14,7 @@
 #include "error.h"
 #include "gameTools.h"
 #include "File.h"
+#include "FileRetrival.h"
 
 using namespace std;
 using namespace std::chrono;

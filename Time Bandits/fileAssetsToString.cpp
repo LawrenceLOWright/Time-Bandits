@@ -26,17 +26,11 @@ map<string, vector<character>> fileAssetsToString::getText(string filePath) {
     File file = File(filePath);
     file.openFile();
 
-    
-    string lines = "";
-    string tp = "";
-    while (getline(file.file, tp)) {
-        stringstream actionDetails(tp);
-        string segment2 = "";
-        getline(actionDetails, segment2, ',');
-        cout << segment2;
+    FileRetrival data = FileRetrival(file);
 
-        vector<character> currAsset = game.loadAsset(segment2);
-        allAssetsLists[segment2] = currAsset;
+    for (int x = 0; x < data.size(); x++) {
+        vector<character> currAsset = game.loadAsset(data.getData(x, 0));
+        allAssetsLists[data.getData(x, 0)] = currAsset;
     }
     
     file.closeFile();

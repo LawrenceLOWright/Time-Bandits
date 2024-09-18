@@ -19,7 +19,10 @@ using namespace std::chrono;
 * @brief Refreshes the screen to a new frame.
 * Clears the console screen using the system "cls" command.
 */
-void gameTools::refreshScreen() {system("cls");}
+void gameTools::refreshScreen() {
+    //system("cls");
+    cout << "";
+}
 
 /**
 * @brief Changes the size of the console screen.
@@ -32,7 +35,7 @@ void gameTools::changeScreenSize(int width, int height) {
     screenHeight = height;
 
     std::string command = "mode con: cols=" + std::to_string(screenWidth) + " lines=" + std::to_string(screenHeight);
-    system(command.c_str());
+    //system(command.c_str());
 }
 
 /**
