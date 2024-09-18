@@ -31,7 +31,14 @@ add_executable (hourglass
 "loadGame.h"
 "error.cpp"
 "error.h"
-"fileTextToString.cpp" "fileTextToString.h" "fileAssetsToString.cpp" "fileAssetsToString.h" "File.cpp" "FileRetrival.cpp" "FileRetrival.h")
+"fileTextToString.cpp"
+"fileTextToString.h"
+"fileAssetsToString.cpp"
+"fileAssetsToString.h"
+"File.cpp"
+"FileRetrival.cpp"
+"FileRetrival.h")
+
 
 # Include directories for header files
 target_include_directories(hourglass PRIVATE
