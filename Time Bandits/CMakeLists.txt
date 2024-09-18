@@ -3,7 +3,7 @@
 
 
 # Add source to this project's executable.
-add_executable (hourglass 
+add_executable (hourglass
 "Time Bandits.cpp" 
 "Time Bandits.h"
 "color.h"
@@ -26,18 +26,18 @@ add_executable (hourglass
 "fileActionsToString.cpp"
 "fileActionsToString.h"
 "gameTools.cpp"
-"gameTools.h"
-"loadGame.cpp"
-"loadGame.h"
-"error.cpp"
-"error.h"
-"fileTextToString.cpp"
-"fileTextToString.h"
-"fileAssetsToString.cpp"
-"fileAssetsToString.h"
-"File.cpp"
-"FileRetrival.cpp"
-"FileRetrival.h")
+"gameTools.h")
+#"loadGame.cpp"
+#"loadGame.h"
+#"error.cpp"
+#"error.h"
+#"fileTextToString.cpp"
+#"fileTextToString.h"
+#"fileAssetsToString.cpp"
+#"fileAssetsToString.h"
+#"File.cpp"
+#"FileRetrival.cpp"
+#"FileRetrival.h")
 
 
 # Include directories for header files
