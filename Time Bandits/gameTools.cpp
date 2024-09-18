@@ -19,7 +19,10 @@ using namespace std::chrono;
 * @brief Refreshes the screen to a new frame.
 * Clears the console screen using the system "cls" command.
 */
-void gameTools::refreshScreen() {system("cls");}
+void gameTools::refreshScreen() {
+    //system("cls");
+    cout << "";
+}
 
 /**
 * @brief Changes the size of the console screen.
@@ -32,7 +35,7 @@ void gameTools::changeScreenSize(int width, int height) {
     screenHeight = height;
 
     std::string command = "mode con: cols=" + std::to_string(screenWidth) + " lines=" + std::to_string(screenHeight);
-    system(command.c_str());
+    //system(command.c_str());
 }
 
 /**
@@ -53,8 +56,7 @@ vector<character> gameTools::loadAsset(string fileName) {
 * @param vec Vector of character objects to display.
 */
 void gameTools::loadScreen(vector<character> vec) {
-    gameTools game;
-    game.refreshScreen();
+    refreshScreen();
 
     color color;
     int prevCol2 = 999;
@@ -85,22 +87,12 @@ void gameTools::loadScreen(vector<character> vec) {
      * @param actions Vector of action objects representing possible user actions.
      * @return The key code of the action performed.
      */
-int gameTools::loadScene(vector<character> scene, string text, vector<action> actions) {
-    int keyCode = 0;
-    actionListener action;
-
+int gameTools::loadScene(vector<character> scene, string text, vector<action>* actions) {
     
     loadScreen(scene);
     cout << text << endl;
 
-    while (true) {
-        keyCode = action.codeInputListener();
-
-        // Check if certain button is pressed
-        for (int x = 0; x < actions.size(); x++) {
-            if (actions[x].checkAction(keyCode) == true) { return keyCode; }
-        }
-    }
+    return checkInputs(actions);
 }
 
 /**
@@ -112,79 +104,70 @@ int gameTools::loadScene(vector<character> scene, string text, vector<action> ac
      * @param actionHeader Boolean flag to indicate whether to show the action header.
      * @return The key code of the action performed.
      */
-int gameTools::loadScene(vector<character> scene, string text, vector<action> actions, bool actionHeader) {
-    int keyCode = 0;
-    actionListener action;
-    string header = " <     Available Actions : ";
-
-    for (int e = 0; e < actions.size(); e++) {
-        if (actions[e].isActive()) {
-            header = header + " [" + actions[e].getKeyCodeName() + " : " + actions[e].getActionName() + "]";
-        }
-
-    }
+int gameTools::loadScene(vector<character> scene, string text, vector<action>* actions, bool actionHeader) {
+    string header = writeActions(actions);
 
     loadScreen(scene);
     cout << header + "\n---------------" << endl;
     cout << text << endl;
 
-    while (true) {
-        keyCode = action.codeInputListener();
-
-        // Check if certain button is pressed
-        for (int x = 0; x < actions.size(); x++) {
-            if (actions[x].isActive())
-            {
-                if (actions[x].checkAction(keyCode) == true) { return keyCode; }
-            }
-        }
-    }
+    return checkInputs(actions);
 }
 
-int gameTools::loadScene(vector<character> scene, message text, vector<action> actions, bool actionHeader) {
-    int keyCode = 0;
-    actionListener action;
-    string header = " <     Available Actions : ";
+int gameTools::loadScene(vector<character> scene, message text, vector<action>* actions, bool actionHeader) {
+    
 
-    for (int e = 0; e < actions.size(); e++) {
-        if (actions[e].isActive()) {
-            header = header + " [" + actions[e].getKeyCodeName() + " : " + actions[e].getActionName() + "]";
-        }
-
-    }
-
-    gameTools game;
-    game.loadScreen(scene);
+    string header = writeActions(actions);
+    int i = 1;
+    
+    //Sleep(2000);
+    loadScreen(scene);
     cout << header + "\n---------------" << endl;
     text.printMessages();
+    return checkInputs(actions);
 
+    
+}
+
+int gameTools::loadScene(vector<character> scene, message text, vector<action>* actions) {
+    loadScreen(scene);
+    text.printMessages();
+
+    return checkInputs(actions);
+
+    
+}
+
+int gameTools::checkInputs(vector<action>* actions) {
+    int keyCode = 0;
+    actionListener action;
     while (true) {
         keyCode = action.codeInputListener();
-
+        //cout << keyCode << " ";
         // Check if certain button is pressed
-        for (int x = 0; x < actions.size(); x++) {
-            if (actions[x].isActive())
+        for (int x = 0; x < actions->size(); x++) {
+            if (actions->at(x).isActive())
             {
-                if (actions[x].checkAction(keyCode) == true) { return keyCode; }
+                //cout << "foundActiveKey";
+                if (actions->at(x).checkAction(keyCode) == true) {
+                    //cout << "correctKeyPressed";
+                    return keyCode;
+                }
             }
         }
     }
 }
 
-int gameTools::loadScene(vector<character> scene, message text, vector<action> actions) {
-    int keyCode = 0;
-    actionListener action;
-
-    gameTools game;
-    game.loadScreen(scene);
-    text.printMessages();
-
-    while (true) {
-        keyCode = action.codeInputListener();
-
-        // Check if certain button is pressed
-        for (int x = 0; x < actions.size(); x++) {
-            if (actions[x].checkAction(keyCode) == true) { return keyCode; }
+string gameTools::writeActions(vector<action>* actions) {
+    string header = " <     Available Actions : ";
+    int i = 1;
+    for (int e = 0; e < actions->size(); e++) {
+        if (actions->at(e).isActive()) {
+            actions->at(e).setKeycode(i);
+            header = header + " [" + actions->at(e).getKeyCodeName() + " : " + actions->at(e).getActionName() + "]";
+            i++;
         }
+
     }
+    return header;
 }

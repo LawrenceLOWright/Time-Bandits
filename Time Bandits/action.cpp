@@ -1,4 +1,5 @@
 #include "action.h"
+#include "error.h"
 
 #include <iostream>
 #include <string>
@@ -40,10 +41,35 @@ int action::getkeyCode() { return keyCode; }
  * @param keyName The name of the key code.
  * @param key The integer value of the key code.
  */
-void action::setActionDetails(string name, string keyName, int key) {
+void action::setActionDetails(string name, string activity, string keyName, int key) {
+    cout << "extended action detail set" << endl;
     actionName = name;
     keyCode = key;
     keyCodeName = keyName;
+    setActive(activity);
+}
+
+void action::setActionDetails(string name, string activity) {
+    cout << "short action detail set" << endl;
+    actionName = name;
+    setActive(activity);
+}
+
+void action::setKeycode(int key) {
+    cout << "attempting to change keyCode" << endl;
+    switch (keyCode)
+    {
+        case(13):
+            cout << "Special case Found, skipping" << endl;
+            return;
+        case(68):
+            cout << "Special case Found, skipping" << endl;
+            return;
+        default:
+            keyCode = key + 48;
+            keyCodeName = to_string(key);
+    }
+    //cout << actionName << "'s keycode is " << keyCode << endl;
 }
 
 /**
@@ -52,6 +78,7 @@ void action::setActionDetails(string name, string keyName, int key) {
  * @return true if the key code matches, false otherwise.
  */
 bool action::checkAction(int code) {
+    //cout << "checking " << actionName << " input: " << code << ">" << keyCode << "; ";
     if (code == keyCode) { return true; }
     else { return false; }
 }
@@ -65,12 +92,21 @@ bool action::isActive(){ return activity; }
 /**
  * @brief if the action is active, it is turned inactive, if the action is inactive, it is turn active
  */
-void action::flipActive() {
-    if (activity)
-    {
-        activity = false;
+void action::setActive(bool setTo) {
+    activity = setTo;
+}
+
+void action::setActive(string setTo) {
+    if (setTo == "1") {
+        activity = true;
+        //cout << actionName << " is active " << endl;
         return;
     }
-    activity = true;
+    if (setTo == "0") {
+        activity = false;
+        //cout << actionName << " is inactive " << endl;
+        return;
+    }
+    error e = error("Invalid String Input for Action Activity");
 
 }

@@ -11,6 +11,8 @@
 #include <map>
 #include "character.h"
 #include "action.h"
+#include "error.h"
+#include "gameTools.h"
 #include "File.h"
 #include "FileRetrival.h"
 
@@ -21,19 +23,14 @@ using namespace std::chrono;
  * @class fileMessagesToString
  * @brief A class to handle reading text from a file and converting it into a vector of message objects.
  */
-class fileActionsToString {
-    public:
-        fileActionsToString(string filename, string filename2);
-        vector<action> getActions();
-        map<string, vector<action>> getActionMap();
-    
+class fileAssetsToString {
+public:
+    fileAssetsToString(string filename);
+    map<string, vector<character>> allAssetsLists = {};
 
-    private:
-        string filePath;
-        string filePath2;
-        vector<action> actions = {};
-        map<string, vector<action>> map;
 
-        void createActionMap(string filePath2);
-        vector<action> getText(string filePath);
+private:
+    string filePath;
+    map<string, vector<character>> getText(string filePath);
+
 };

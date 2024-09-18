@@ -37,10 +37,17 @@ public:
     /**
      * @brief Sets the details of the action, including the action name, key code name, and key code.
      * @param name The name of the action.
-     * @param keyName The name of the key code.
-     * @param key The integer value of the key code.
+     * @param Overload keyName The name of the key code.
+     * @param Overloadkey The integer value of the key code.
      */
-    void setActionDetails(string name, string keyName, int key);
+    void setActionDetails(string name, string activity);
+    void setActionDetails(string name, string activity, string keyName, int key);
+
+    /**
+     * @brief sets the actions keycode to a key.
+     * @param key to change keycode to.
+     */
+    void setKeycode(int key);
 
     /**
      * @brief Checks if a given key code matches the action's key code.
@@ -56,9 +63,16 @@ public:
     bool isActive();
 
     /**
-     * @brief if the action is active, it is turned inactive, if the action is inactive, it is turn active
+     * @brief sets the action to the input activity, this one is for boolean input
+     * @param sets the action to the given boolean
      */
-    void flipActive();
+    void setActive(bool setTo);
+
+    /**
+     * @brief sets the action to the input activity, this one is for string input
+     * @param sets the action to the given string if the string is "1" (true) or "0" (false)
+     */
+    void setActive(string setTo);
        
 
 private:

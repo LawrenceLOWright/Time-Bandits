@@ -8,6 +8,7 @@
 #include <chrono> // Include the chrono header
 #include <vector>
 #include "character.h"
+#include "File.h"
 
 using namespace std;
 using namespace std::chrono;

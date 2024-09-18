@@ -50,16 +50,13 @@ vector<message> fileMessagesToString::getLines() { return str; }
  * @return A vector of message objects created from the file's text.
  */
 vector<message> fileMessagesToString::getText(string filePath) {
-    fstream file;
-    file.open(filePath, ios::in);
-    if (!file.is_open()) { 
-        return std::vector<message>(); 
-    }
+    File file = File(filePath);
+    file.openFile();
 
     vector<message> lines;
     string tp = "";
     int pos = 0;
-    while (getline(file, tp)) {
+    while (getline(file.file, tp)) {
         vector<string> msg;
         while (tp.length() > 85) {
             for (int splitChar = tp.length(); splitChar > 0; splitChar--) {
@@ -78,6 +75,6 @@ vector<message> fileMessagesToString::getText(string filePath) {
         lines.push_back(mess);
     }
 
-    file.close();
+    file.closeFile();
     return lines;
 }

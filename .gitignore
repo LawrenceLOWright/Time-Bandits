@@ -458,3 +458,5 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+Time Bandits/out/build/x64-Debug/.ninja_deps
+Time Bandits/out/

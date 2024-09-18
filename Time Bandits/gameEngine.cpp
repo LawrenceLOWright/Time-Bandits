@@ -38,30 +38,28 @@ public:
     /**
      * @brief Initializes the game, loads assets, and starts the game sequence.
      */
-    void LoadGame() {
-        system("chcp 65001"); // Set the encoding to UTF-8 for cmd
-        game.changeScreenSize(150, 40); // Set screen size
+    void LoadGame(loadGame load) {
+        //system("chcp 65001"); // Set the encoding to UTF-8 for cmd
+        //game.changeScreenSize(150, 40); // Set screen size
 
         // Load actions
 
-        fileActionsToString actionList = fileActionsToString("actionList", "actionCombos");
-        vector<action> actions = actionList.getActions();
-        allActionLists = actionList.getActionMap();
+        //fileActionsToString actionList = fileActionsToString("actionList", "actionCombos");
+        //vector<action> actions = actionList.getActions();
+        //allActionLists = actionList.getActionMap();
 
         // Load messages
 
-        fileMessagesToString messages = fileMessagesToString("shadyPines");
-
-        vector<message> shadyPinesParkMessages = messages.getLines();
-
-        allMessageLists["shadyPines"] = shadyPinesParkMessages;
+        //fileMessagesToString messages = fileMessagesToString("shadyPines");
+        //vector<message> shadyPinesParkMessages = messages.getLines();
+        //allMessageLists["shadyPines"] = shadyPinesParkMessages;
 
 
         // Load assets
-        mainMenu = game.loadAsset("mainMenu");
-        shadyPinesPark = game.loadAsset("shadyPinesPark");
+        //mainMenu = game.loadAsset("mainMenu");
+        //shadyPinesPark = game.loadAsset("shadyPinesPark");
+        loadMainMenu(load); // Load main menu
 
-        loadMainMenu(); // Load main menu
 
         c.setDefault(); // Reset colors at end
     }
@@ -69,40 +67,55 @@ public:
     /**
      * @brief Loads the Shady Pines Park scene and handles user interactions within the park.
      */
-    void loadShadyPinesPark() {
-        int input = game.loadScene(shadyPinesPark, allMessageLists["shadyPines"][0], allActionLists["shadyPinesParkActions"], true);
-        if (input == pickDandelions.getkeyCode() && pickDandelions.isActive()) {
-            game.loadScene(shadyPinesPark, allMessageLists["shadyPines"][4], allActionLists["basic"], true);
-            pickDandelions.flipActive();
+    void loadShadyPinesPark(loadGame load) {
+        cout << "Loading shady pines park" << endl;
+        int input = game.loadScene(load.allAssetsLists["shadyPinesPark"], load.allMessageLists["shadyPines"][3], &load.allActionLists["shadyPinesParkActions"], true);
+        //cout << input;
+        if (load.allActionLists["shadyPinesParkActions"][0].checkAction(input)) {
+            game.loadScene(load.allAssetsLists["shadyPinesPark"], load.allMessageLists["shadyPines"][4], &load.allActionLists["basic"], true);
+            load.allActionLists["shadyPinesParkActions"][0].setActive(false);
         }
-        if (input == swings.getkeyCode()) {
-            game.loadScene(shadyPinesPark, allMessageLists["shadyPines"][5], allActionLists["basic"], true);
+        if (load.allActionLists["shadyPinesParkActions"][1].checkAction(input)) {
+            game.loadScene(load.allAssetsLists["shadyPinesPark"], load.allMessageLists["shadyPines"][5], &load.allActionLists["basic"], true);
+        }
+        if (load.allActionLists["shadyPinesParkActions"][2].checkAction(input)) {
+            input = game.loadScene(load.allAssetsLists["shadyPinesPark"], "Where do you want to go?", &load.allActionLists["leaveShadyPines"], true);
+            if (load.allActionLists["leaveShadyPines"][0].checkAction(input))
+            {
+                loadMainStreet(load);
+            }
+            if (load.allActionLists["leaveShadyPines"][1].checkAction(input)) {
+                loadMainMenu(load);
+            }
         }
 
-        loadMainMenu(); // Return to main menu after interaction
+        loadShadyPinesPark(load); // Return to main menu after interaction
     }
 
     /**
      * @brief Loads the Main Menu and the subsequent game tutorial.
      */
-    void loadMainMenu() {
-        game.loadScene(mainMenu, "", allActionLists["basic"]);
-        game.changeScreenSize(150, 40); // Set screen size
-        game.loadScene(mainMenu, allMessageLists["shadyPines"][0], allActionLists["basic"]);
-        game.loadScene(mainMenu, allMessageLists["shadyPines"][1], allActionLists["tutorial1"]);
-        game.loadScene(shadyPinesPark, allMessageLists["shadyPines"][3], allActionLists["basic"], true);
-        loadShadyPinesPark();
+    void loadMainMenu(loadGame load) {
+        game.changeScreenSize(151, 41); // Set screen size 151/41 legacy 4 windows 11, 150,40 for other machines
+        game.loadScene(load.allAssetsLists["mainMenu"], load.allMessageLists["shadyPines"][0], &load.allActionLists["basic"]);
+        game.loadScene(load.allAssetsLists["mainMenu"], load.allMessageLists["shadyPines"][1], &load.allActionLists["tutorial1"]);
+        game.loadScene(load.allAssetsLists["shadyPinesPark"], load.allMessageLists["shadyPines"][2], &load.allActionLists["basic"], true);
+        loadShadyPinesPark(load);
+    }
+
+    void loadMainStreet(loadGame load){
+        int input = game.loadScene(load.allAssetsLists["mainStreet"], load.allMessageLists["mainStreet"][0], &load.allActionLists["mainStreetActions"], true);
+
+    }
+
+    void loadcafe(loadGame load) {
+        
     }
 
 private:
     gameTools game;
-    action enter, description, pickDandelions, swings; /**< Action objects representing different user actions. */
     timer t; /**< Timer object for time-based operations. */
     color c; /**< Color object for managing text and background colors. */
-    vector<character> mainMenu; /**< Vector of character objects representing the main menu. */
-    vector<character> shadyPinesPark; /**< Vector of character objects representing Shady Pines Park. */
-    map<string, vector<action>> allActionLists; /**< Map of action lists for different scenes. */
-    map<string, vector<message>> allMessageLists; /**< list of all different messages for */
 };
 
 
@@ -122,10 +135,9 @@ public:
      * and calling its `LoadGame()` method. The game loop and all initializations
      * are managed within the `Game` class.
      */
-    void runGame() {
+    void runGame(loadGame load) {
         Game game;
-        loadGame load = loadGame();
-        game.LoadGame();
+        game.LoadGame(load);
         
     }
 

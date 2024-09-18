@@ -25,16 +25,12 @@ void message::setMessages(vector<string> msg) { messages = msg; }
 void message::addMessage(string msg) { messages.push_back(msg); }
 
 void message::printMessages() {
-    for (int x = 0; x < messages.size(); x++) {
-        cout << messages[x] << endl;
-    }
+    for (int x = 0; x < messages.size(); x++) {cout << messages[x] << endl;}
 }
 
 string message::getMessage() {
     string msg = "";
-    for (int x = 0; x < messages.size(); x++) {
-        msg = msg + messages[x];
-    }
+    for (int x = 0; x < messages.size(); x++) {msg = msg + messages[x];}
 
     return msg;
 }
