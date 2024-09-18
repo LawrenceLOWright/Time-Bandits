@@ -25,8 +25,8 @@ add_executable (hourglass
 "timer.cpp"
 "fileActionsToString.cpp"
 "fileActionsToString.h"
-"gameTools.cpp"
-"gameTools.h")
+"gameTools.cpp")
+#"gameTools.h")
 #"loadGame.cpp"
 #"loadGame.h"
 #"error.cpp"
