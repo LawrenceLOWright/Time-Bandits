@@ -14,6 +14,7 @@
 #include "fileMessagesToString.h"
 #include "error.h"
 #include "File.h"
+#include "FileRetrival.h"
 
 using namespace std;
 using namespace std::chrono;

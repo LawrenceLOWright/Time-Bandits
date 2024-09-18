@@ -23,16 +23,11 @@ map<string, vector<message>> fileTextToString::getText(string filePath) {
     File file = File(filePath);
     file.openFile();
 
-    string lines = "";
-    string tp = "";
-    while (getline(file.file, tp)) {
-        stringstream actionDetails(tp);
-        string segment2 = "";
-        getline(actionDetails, segment2, ',');
-
-        fileMessagesToString msgToStr = fileMessagesToString(segment2);
-        vector<message> text = msgToStr.getLines();
-        allMessageLists[segment2] = text;
+    FileRetrival data = FileRetrival(file);
+    for (int x = 0; x < data.size(); x++) {
+        fileMessagesToString msgToStr = fileMessagesToString(data.getData(x,0));
+        vector<message> lines = msgToStr.getLines();
+        allMessageLists[data.getData(x, 0)] = lines;
     }
 
     file.closeFile();
