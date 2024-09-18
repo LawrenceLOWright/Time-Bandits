@@ -27,12 +27,8 @@ vector<action> fileActionsToString::getActions() { return actions;}
 map<string, vector<action>> fileActionsToString::getActionMap() { return map; }
 
 vector<action> fileActionsToString::getText(string filePath) {
-    fstream file;
-    file.open(filePath, ios::in);
-    if (!file.is_open()) {
-        cout << "HERE55";
-        return actions;
-    }
+    File file = File(filePath);
+    file.openFile();
 
     //cout << "file action to string";
 
@@ -40,33 +36,32 @@ vector<action> fileActionsToString::getText(string filePath) {
     string tp = "";
     int keycode = 1;
 
-    while (getline(file, tp)) {
+    while (getline(file.file, tp)) {
         stringstream actionDetails(tp);
+
         string actionName = "";
         string activity = "";
         getline(actionDetails, actionName, ',');
         getline(actionDetails, activity, ',');
+        
         action a;
         a.setActionDetails(actionName, activity);
         actions.push_back(a);
         keycode++;
     }
 
-    file.close();
+    file.closeFile();
     return actions;
 };
 
 void fileActionsToString::createActionMap(string filePath2) {
-    fstream file;
-    file.open(filePath2, ios::in);
-    if (!file.is_open()) {
-        cout << "HERE23";
-    }
+    File file = File(filePath2);
+    file.openFile();
 
 
     string lines = "";
     string tp = "";
-    while (getline(file, tp)) {
+    while (getline(file.file, tp)) {
         vector<action> test;
         stringstream actionDetails(tp);
         string name = "";
@@ -83,5 +78,6 @@ void fileActionsToString::createActionMap(string filePath2) {
         }
 
     }
+    file.closeFile();
 
 }

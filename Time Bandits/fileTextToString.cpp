@@ -20,16 +20,12 @@ fileTextToString::fileTextToString(string filePath) {
 }
 
 map<string, vector<message>> fileTextToString::getText(string filePath) {
-    fstream file;
-    file.open(filePath, ios::in);
-    if (!file.is_open()) {
-        error e = error("Cannot find file");
-        return allMessageLists;
-    }
+    File file = File(filePath);
+    file.openFile();
 
     string lines = "";
     string tp = "";
-    while (getline(file, tp)) {
+    while (getline(file.file, tp)) {
         stringstream actionDetails(tp);
         string segment2 = "";
         getline(actionDetails, segment2, ',');
@@ -39,6 +35,6 @@ map<string, vector<message>> fileTextToString::getText(string filePath) {
         allMessageLists[segment2] = text;
     }
 
-    file.close();
+    file.closeFile();
     return allMessageLists;
 }

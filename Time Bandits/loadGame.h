@@ -24,7 +24,7 @@
 #include "gameTools.h"
 #include "fileTextToString.h"
 #include "fileAssetsToString.h"
-
+#include "File.h"
 
 
 using namespace std;

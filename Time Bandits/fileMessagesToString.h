@@ -10,6 +10,7 @@
 #include <vector>
 #include "character.h"
 #include "message.h"
+#include "File.h"
 
 using namespace std;
 using namespace std::chrono;

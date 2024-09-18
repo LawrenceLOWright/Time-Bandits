@@ -21,19 +21,15 @@ fileAssetsToString::fileAssetsToString(string filePath) {
 }
 
 map<string, vector<character>> fileAssetsToString::getText(string filePath) {
-    fstream file;
     gameTools game;
 
-    file.open(filePath, ios::in);
-    if (!file.is_open()) {
-        cout << "ERROR HERE";
-        error e = error("Cannot find file");
-        return allAssetsLists;
-    }
+    File file = File(filePath);
+    file.openFile();
+
     
     string lines = "";
     string tp = "";
-    while (getline(file, tp)) {
+    while (getline(file.file, tp)) {
         stringstream actionDetails(tp);
         string segment2 = "";
         getline(actionDetails, segment2, ',');
@@ -43,7 +39,7 @@ map<string, vector<character>> fileAssetsToString::getText(string filePath) {
         allAssetsLists[segment2] = currAsset;
     }
     
-    file.close();
+    file.closeFile();
     
     return allAssetsLists;
 }

@@ -72,16 +72,15 @@ void loadGame::load(int (*startGame) (loadGame load, gameTools game)) {
 }
 
 string loadGame::retrieveSetting(string settingName) {
-    fstream file;
     string filePath = "settings.info";
-    file.open(filePath, ios::in);
-    if (!file.is_open()) { error er = error("File is missing"); }
+    File file = File(filePath);
+    
 
 
     string lines = "";
     string tp = "";
     int num = 1;
-    while (getline(file, tp)) {
+    while (getline(file.file, tp)) {
         stringstream details(tp);
         string segment1 = "";
 
@@ -99,7 +98,7 @@ string loadGame::retrieveSetting(string settingName) {
     }
 
 
-    file.close();
+    file.closeFile();
 
     return "Nothing";
 

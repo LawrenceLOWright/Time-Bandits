@@ -11,6 +11,7 @@
 #include <map>
 #include "character.h"
 #include "action.h"
+#include "File.h"
 
 using namespace std;
 using namespace std::chrono;

@@ -13,6 +13,7 @@
 #include "action.h"
 #include "error.h"
 #include "gameTools.h"
+#include "File.h"
 
 using namespace std;
 using namespace std::chrono;
