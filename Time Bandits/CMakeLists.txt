@@ -83,6 +83,8 @@ add_executable(
   "loadGame.h"
   "error.cpp"
   "error.h"
+  "color.h"
+  "color.cpp"
   "fileTextToString.cpp" "fileTextToString.h" "fileAssetsToString.cpp" "fileAssetsToString.h" "File.cpp" "FileRetrival.cpp" "FileRetrival.h")
 
 target_link_libraries(
