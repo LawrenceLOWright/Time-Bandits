@@ -79,7 +79,14 @@ public:
             game.loadScene(load.allAssetsLists["shadyPinesPark"], load.allMessageLists["shadyPines"][5], &load.allActionLists["basic"], true);
         }
         if (load.allActionLists["shadyPinesParkActions"][2].checkAction(input)) {
-            loadMainStreet(load);
+            input = game.loadScene(load.allAssetsLists["shadyPinesPark"], "Where do you want to go?", &load.allActionLists["leaveShadyPines"], true);
+            if (load.allActionLists["leaveShadyPines"][0].checkAction(input))
+            {
+                loadMainStreet(load);
+            }
+            if (load.allActionLists["leaveShadyPines"][1].checkAction(input)) {
+                loadMainMenu(load);
+            }
         }
 
         loadShadyPinesPark(load); // Return to main menu after interaction
@@ -98,6 +105,11 @@ public:
 
     void loadMainStreet(loadGame load){
         int input = game.loadScene(load.allAssetsLists["mainStreet"], load.allMessageLists["mainStreet"][0], &load.allActionLists["mainStreetActions"], true);
+
+    }
+
+    void loadcafe(loadGame load) {
+        
     }
 
 private:
