@@ -30,24 +30,12 @@ vector<action> fileActionsToString::getText(string filePath) {
     File file = File(filePath);
     file.openFile();
 
-    //cout << "file action to string";
+    FileRetrival data = FileRetrival(file);
 
-    string lines = "";
-    string tp = "";
-    int keycode = 1;
-
-    while (getline(file.file, tp)) {
-        stringstream actionDetails(tp);
-
-        string actionName = "";
-        string activity = "";
-        getline(actionDetails, actionName, ',');
-        getline(actionDetails, activity, ',');
-        
+    for (int x = 0; x < data.size(); x++) {
         action a;
-        a.setActionDetails(actionName, activity);
+        a.setActionDetails(data.getData(x,0), data.getData(x,1));
         actions.push_back(a);
-        keycode++;
     }
 
     file.closeFile();
@@ -58,26 +46,27 @@ void fileActionsToString::createActionMap(string filePath2) {
     File file = File(filePath2);
     file.openFile();
 
+    FileRetrival data = FileRetrival(file);
+    for (int x = 0; x < data.size(); x++) {
+        // Create a vector of actions
+        vector<action> actionVec;
 
-    string lines = "";
-    string tp = "";
-    while (getline(file.file, tp)) {
-        vector<action> test;
-        stringstream actionDetails(tp);
-        string name = "";
-        string actionInfo = "";
-        getline(actionDetails, name, ',');
-        while (getline(actionDetails, actionInfo, ',')) {
-            for (int x = 0; x < actions.size(); x++) {
-                if (actionInfo == actions[x].getActionName()) {
-                    test.push_back(actions[x]);
+        // For each action in the line
+        for (int y = 1; y < data.getData(x).size(); y++) {
+            
+            // For each action available check if its the action to assign to the map
+            for (int a = 0; a < actions.size(); a++) {
+                if (data.getData(x, y) == actions[a].getActionName()) {
+                    actionVec.push_back(actions[a]);
                     break;
                 }
             }
-            map[name] = test;
         }
 
+        // Create the map
+        map[data.getData(x, 0)] = actionVec;
     }
+
     file.closeFile();
 
 }

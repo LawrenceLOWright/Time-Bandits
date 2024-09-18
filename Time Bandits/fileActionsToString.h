@@ -12,6 +12,7 @@
 #include "character.h"
 #include "action.h"
 #include "File.h"
+#include "FileRetrival.h"
 
 using namespace std;
 using namespace std::chrono;

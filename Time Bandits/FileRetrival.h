@@ -23,6 +23,7 @@ class FileRetrival {
 		FileRetrival(File& file);
 		string getData(int filePos, int linePos);
 		int size();
+		vector<string> getData(int filePos);
 
 	private:
 		map<int, vector<string>> data;

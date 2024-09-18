@@ -20,5 +20,6 @@ FileRetrival::FileRetrival(File& file) {
 }
 
 string FileRetrival::getData(int filePos, int linePos) {return data[filePos][linePos];}
+vector<string> FileRetrival::getData(int filePos) { return data[filePos]; }
 
 int FileRetrival::size() {return data.size();}
