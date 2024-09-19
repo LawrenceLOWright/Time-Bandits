@@ -11,10 +11,20 @@
 #include <map>
 #include <sstream>
 
-
-
+/**
+ * @class loadGame
+ * @brief Class responsible for loading game settings, actions, assets, and running the game loop.
+ */
 loadGame::loadGame() {}
 
+/**
+ * @brief Loads the game settings and starts the game loop.
+ * 
+ * This function reads the game settings, loads the actions, messages, and assets, and then calls the 
+ * function pointer `startGame` to run the game loop.
+ * 
+ * @param startGame A function pointer that runs the game. It takes two arguments: the loadGame instance and a gameTools instance.
+ */
 void loadGame::load(int (*startGame) (loadGame load, gameTools game)) {
     // Set the encoding
     string str = retrieveSetting("Encoding");
@@ -31,7 +41,6 @@ void loadGame::load(int (*startGame) (loadGame load, gameTools game)) {
     game.changeScreenSize(num, num2);
 
     // Get Actions for the game
-
     fileActionsToString actionList = fileActionsToString("actionList", "actionCombos");
     actions = actionList.getActions();
     allActionLists = actionList.getActionMap();
@@ -68,14 +77,19 @@ void loadGame::load(int (*startGame) (loadGame load, gameTools game)) {
     while (exit == 1) {
         exit = startGame(*this, game);
     }
-
 }
 
+/**
+ * @brief Retrieves a specific game setting from the settings file.
+ * 
+ * This function looks for a setting by name in the `settings.info` file and returns its value.
+ * 
+ * @param settingName The name of the setting to retrieve.
+ * @return A string representing the value of the requested setting, or "Nothing" if not found.
+ */
 string loadGame::retrieveSetting(string settingName) {
     string filePath = "settings.info";
     File file = File(filePath);
-    
-
 
     string lines = "";
     string tp = "";
@@ -84,30 +98,22 @@ string loadGame::retrieveSetting(string settingName) {
         stringstream details(tp);
         string segment1 = "";
 
-
         while (getline(details, segment1, ',')) {
-
             if (settingName == segment1) {
                 getline(details, segment1, ',');
-
                 return segment1;
                 break;
             }
         }
-
     }
 
-
     file.closeFile();
-
     return "Nothing";
-
 }
 
-/**
+/* 
 int loadGame::loadScene(string sceneName, int location) {
     gameTools game;
     return game.loadScene(allAssetsLists["shadyPines"], allMessageLists[sceneName][location], allActionLists[sceneName + to_string(location)]);
 }
 */
-

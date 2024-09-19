@@ -32,7 +32,7 @@ public:
 
     /**
      * @brief Retrieves the vector of message objects representing the lines of text from the file.
-     * 
+     *                                              
      * @return A vector of message objects.
      */
     vector<message> getLines();
