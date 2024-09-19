@@ -64,6 +64,14 @@ public:
         c.setDefault(); // Reset colors at end
     }
 
+    void loadMainMenu(loadGame load) {
+        game.changeScreenSize(151, 41); // Set screen size 151/41 legacy 4 windows 11, 150,40 for other machines
+        game.loadScene(load.allAssetsLists["mainMenu"], load.allMessageLists["shadyPines"][0], &load.allActionLists["basic"]);
+        game.loadScene(load.allAssetsLists["mainMenu"], load.allMessageLists["shadyPines"][1], &load.allActionLists["tutorial1"]);
+        game.loadScene(load.allAssetsLists["shadyPinesPark"], load.allMessageLists["shadyPines"][2], &load.allActionLists["basic"], true);
+        loadShadyPinesPark(load);
+    }
+
     /**
      * @brief Loads the Shady Pines Park scene and handles user interactions within the park.
      */
@@ -95,21 +103,120 @@ public:
     /**
      * @brief Loads the Main Menu and the subsequent game tutorial.
      */
-    void loadMainMenu(loadGame load) {
-        game.changeScreenSize(151, 41); // Set screen size 151/41 legacy 4 windows 11, 150,40 for other machines
-        game.loadScene(load.allAssetsLists["mainMenu"], load.allMessageLists["shadyPines"][0], &load.allActionLists["basic"]);
-        game.loadScene(load.allAssetsLists["mainMenu"], load.allMessageLists["shadyPines"][1], &load.allActionLists["tutorial1"]);
-        game.loadScene(load.allAssetsLists["shadyPinesPark"], load.allMessageLists["shadyPines"][2], &load.allActionLists["basic"], true);
-        loadShadyPinesPark(load);
-    }
+    
 
     void loadMainStreet(loadGame load){
         int input = game.loadScene(load.allAssetsLists["mainStreet"], load.allMessageLists["mainStreet"][0], &load.allActionLists["mainStreetActions"], true);
-
+        if (load.allActionLists["mainStreetActions"][0].checkAction(input)) {
+            game.loadScene(load.allAssetsLists["mainStreet"], load.allMessageLists["mainStreet"][1], &load.allActionLists["basic"], true);
+        }
+        if (load.allActionLists["mainStreetActions"][1].checkAction(input)) {
+            game.loadScene(load.allAssetsLists["mainStreet"], load.allMessageLists["mainStreet"][2], &load.allActionLists["basic"], true);
+        }
+        if (load.allActionLists["mainStreetActions"][2].checkAction(input)) {
+            game.loadScene(load.allAssetsLists["mainStreet"], load.allMessageLists["mainStreet"][3], &load.allActionLists["basic"], true);
+            load.allActionLists["mainStreetActions"][2].setActive(false);
+        }
+        if (load.allActionLists["mainStreetActions"][3].checkAction(input)) {
+            input = game.loadScene(load.allAssetsLists["mainStreet"], "Where do you want to go?", &load.allActionLists["leaveMainStreet"], true);
+            if (load.allActionLists["leaveMainStreet"][0].checkAction(input))
+            {
+                loadShadyPinesPark(load);
+            }
+            if (load.allActionLists["leaveMainStreet"][1].checkAction(input)) 
+            {
+                loadCafe(load);
+            }
+            if (load.allActionLists["leaveMainStreet"][2].checkAction(input))
+            {
+                loadLibrary(load);
+            }
+            if (load.allActionLists["leaveMainStreet"][3].checkAction(input))
+            {
+                loadMainMenu(load);
+            }
+        }
+        loadMainStreet(load);
     }
 
-    void loadcafe(loadGame load) {
-        
+    void loadCafe(loadGame load) {
+        int input = game.loadScene(load.allAssetsLists["cafe"], load.allMessageLists["cafe"][0], &load.allActionLists["cafeActions"], true);
+        if (load.allActionLists["cafeActions"][0].checkAction(input)) {
+            game.loadScene(load.allAssetsLists["cafe"], load.allMessageLists["cafe"][1], &load.allActionLists["basic"], true);
+        }
+        if (load.allActionLists["cafeActions"][1].checkAction(input)) {
+            game.loadScene(load.allAssetsLists["cafe"], load.allMessageLists["cafe"][2], &load.allActionLists["basic"], true);
+        }
+        if (load.allActionLists["cafeActions"][2].checkAction(input)) {
+            talkToHolden(load);
+        }
+        if (load.allActionLists["cafeActions"][3].checkAction(input)) {
+            loadMainStreet(load);
+        }
+        loadCafe(load);
+    }
+    void loadLibrary(loadGame load) {
+        int input = game.loadScene(load.allAssetsLists["library"], load.allMessageLists["library"][0], &load.allActionLists["libraryActions"], true);
+        if (load.allActionLists["libraryActions"][0].checkAction(input)) {
+            game.loadScene(load.allAssetsLists["library"], load.allMessageLists["library"][1], &load.allActionLists["basic"], true);
+        }
+        if (load.allActionLists["libraryActions"][1].checkAction(input)) {
+            game.loadScene(load.allAssetsLists["library"], load.allMessageLists["library"][2], &load.allActionLists["basic"], true);
+        }
+        if (load.allActionLists["libraryActions"][2].checkAction(input)) {
+            game.loadScene(load.allAssetsLists["library"], load.allMessageLists["library"][3], &load.allActionLists["basic"], true);
+            //unlock the control room here
+        }
+        if (load.allActionLists["libraryActions"][3].checkAction(input)) {
+            game.loadScene(load.allAssetsLists["library"], load.allMessageLists["library"][4], &load.allActionLists["basic"], true);
+            load.allActionLists["libraryActions"][3].setActive(false);
+        }
+        if (load.allActionLists["libraryActions"][4].checkAction(input)) {
+            talkToSky(load);
+        }
+        if (load.allActionLists["libraryActions"][5].checkAction(input)) {
+
+            loadMainStreet(load);
+        }
+        loadLibrary(load);
+    }
+
+    void talkToHolden(loadGame load) {
+        int input = game.loadScene(load.allAssetsLists["cafe"], load.allMessageLists["holden"][0], &load.allActionLists["talkToHolden"], true);
+        if (load.allActionLists["cafeActions"][0].checkAction(input)) {
+            game.loadScene(load.allAssetsLists["cafe"], load.allMessageLists["holden"][1], &load.allActionLists["basic"], true);
+        }
+        if (load.allActionLists["cafeActions"][1].checkAction(input)) {
+            game.loadScene(load.allAssetsLists["cafe"], load.allMessageLists["holden"][2], &load.allActionLists["basic"], true);
+            load.allActionLists["holden"][2].setActive(false);
+            load.allActionLists["libraryActions"][4].setActive(true);
+        }
+        if (load.allActionLists["cafeActions"][2].checkAction(input)) {
+            game.loadScene(load.allAssetsLists["cafe"], load.allMessageLists["holden"][3], &load.allActionLists["basic"], true);
+        }
+        if (load.allActionLists["cafeActions"][3].checkAction(input)) {
+            loadCafe(load);
+        }
+        talkToHolden(load);
+    }
+
+    void talkToSky(loadGame load) {
+        int input = game.loadScene(load.allAssetsLists["library"], load.allMessageLists["sky"][0], &load.allActionLists["talkToSky"], true);
+        if (load.allActionLists["mainStreetActions"][0].checkAction(input)) {
+            game.loadScene(load.allAssetsLists["library"], load.allMessageLists["sky"][0], &load.allActionLists["talkToSky"], true);
+        }
+        if (load.allActionLists["mainStreetActions"][1].checkAction(input)) {
+            game.loadScene(load.allAssetsLists["library"], load.allMessageLists["sky"][0], &load.allActionLists["talkToSky"], true);
+            load.allActionLists["holden"][2].setActive(false);
+            load.allActionLists["libraryActions"][4].setActive(true);
+        }
+        if (load.allActionLists["mainStreetActions"][2].checkAction(input)) {
+            game.loadScene(load.allAssetsLists["library"], load.allMessageLists["sky"][0], &load.allActionLists["talkToSky"], true);
+        }
+        if (load.allActionLists["mainStreetActions"][3].checkAction(input)) {
+            loadCafe(load);
+        }
+        talkToSky(load);
     }
 
 private:
