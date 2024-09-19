@@ -107,35 +107,27 @@ public:
 
     void loadMainStreet(loadGame load){
         int input = game.loadScene(load.allAssetsLists["mainStreet"], load.allMessageLists["mainStreet"][0], &load.allActionLists["mainStreetActions"], true);
-        if (load.allActionLists["mainStreetActions"][0].checkAction(input)) {
-            game.loadScene(load.allAssetsLists["mainStreet"], load.allMessageLists["mainStreet"][1], &load.allActionLists["basic"], true);
+        
+        if (load.allActionLists["mainStreetActions"][0].checkAction(input)) 
+        {game.loadScene(load.allAssetsLists["mainStreet"], load.allMessageLists["mainStreet"][1], &load.allActionLists["basic"], true);}
+
+        else if (load.allActionLists["mainStreetActions"][1].checkAction(input)) 
+        {game.loadScene(load.allAssetsLists["mainStreet"], load.allMessageLists["mainStreet"][2], &load.allActionLists["basic"], true);}
+
+        else if (load.allActionLists["mainStreetActions"][3].checkAction(input)) {
+            input = game.loadScene(load.allAssetsLists["mainStreet"], "Where do you want to go?", &load.allActionLists["leaveMainStreet"], true);
+            //Shady Pines Park,The Kalefe,MockDonald's,Hourglass Public Library
+            if (load.allActionLists["leaveMainStreet"][0].checkAction(input)) { loadShadyPinesPark(load); }
+            if (load.allActionLists["leaveMainStreet"][1].checkAction(input)) { loadCafe(load); }
+            //if (load.allActionLists["leaveMainStreet"][2].checkAction(input)) {  }
+            if (load.allActionLists["leaveMainStreet"][3].checkAction(input)) { loadLibrary(load); }
         }
-        if (load.allActionLists["mainStreetActions"][1].checkAction(input)) {
-            game.loadScene(load.allAssetsLists["mainStreet"], load.allMessageLists["mainStreet"][2], &load.allActionLists["basic"], true);
-        }
-        if (load.allActionLists["mainStreetActions"][2].checkAction(input)) {
+
+        else if (load.allActionLists["mainStreetActions"][2].checkAction(input)) {
             game.loadScene(load.allAssetsLists["mainStreet"], load.allMessageLists["mainStreet"][3], &load.allActionLists["basic"], true);
             load.allActionLists["mainStreetActions"][2].setActive(false);
         }
-        if (load.allActionLists["mainStreetActions"][3].checkAction(input)) {
-            input = game.loadScene(load.allAssetsLists["mainStreet"], "Where do you want to go?", &load.allActionLists["leaveMainStreet"], true);
-            if (load.allActionLists["leaveMainStreet"][0].checkAction(input))
-            {
-                loadShadyPinesPark(load);
-            }
-            if (load.allActionLists["leaveMainStreet"][1].checkAction(input)) 
-            {
-                loadCafe(load);
-            }
-            if (load.allActionLists["leaveMainStreet"][2].checkAction(input))
-            {
-                loadLibrary(load);
-            }
-            if (load.allActionLists["leaveMainStreet"][3].checkAction(input))
-            {
-                loadMainMenu(load);
-            }
-        }
+        
         loadMainStreet(load);
     }
 
@@ -160,24 +152,20 @@ public:
         if (load.allActionLists["libraryActions"][0].checkAction(input)) {
             game.loadScene(load.allAssetsLists["library"], load.allMessageLists["library"][1], &load.allActionLists["basic"], true);
         }
-        if (load.allActionLists["libraryActions"][1].checkAction(input)) {
-            game.loadScene(load.allAssetsLists["library"], load.allMessageLists["library"][2], &load.allActionLists["basic"], true);
-        }
-        if (load.allActionLists["libraryActions"][2].checkAction(input)) {
-            game.loadScene(load.allAssetsLists["library"], load.allMessageLists["library"][3], &load.allActionLists["basic"], true);
-            //unlock the control room here
-        }
-        if (load.allActionLists["libraryActions"][3].checkAction(input)) {
+        else if (load.allActionLists["libraryActions"][5].checkAction(input)) { loadMainStreet(load); }
+        else if (load.allActionLists["libraryActions"][3].checkAction(input)) {
             game.loadScene(load.allAssetsLists["library"], load.allMessageLists["library"][4], &load.allActionLists["basic"], true);
             load.allActionLists["libraryActions"][3].setActive(false);
         }
-        if (load.allActionLists["libraryActions"][4].checkAction(input)) {
-            talkToSky(load);
+        else if (load.allActionLists["libraryActions"][1].checkAction(input)) {
+            game.loadScene(load.allAssetsLists["library"], load.allMessageLists["library"][2], &load.allActionLists["basic"], true);
         }
-        if (load.allActionLists["libraryActions"][5].checkAction(input)) {
-
-            loadMainStreet(load);
+        else if (load.allActionLists["libraryActions"][2].checkAction(input)) {
+            game.loadScene(load.allAssetsLists["library"], load.allMessageLists["library"][3], &load.allActionLists["basic"], true);
+            //unlock the control room here
         }
+        else if (load.allActionLists["libraryActions"][4].checkAction(input)) {talkToSky(load);}
+        
         loadLibrary(load);
     }
 
