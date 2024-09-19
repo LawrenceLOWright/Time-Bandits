@@ -17,4 +17,4 @@ Hourglass is coded entirely in C++ with no external libraries, save for basic li
 1. 
 
 ## Credits
-This project was written, coded, and designed by Jack Blair, Carinn Gaspar, Celeste Holt, and Lawrence Wright for the class COSC345 (software development) at the University of Otago. Some CI elements were provided by Vaughn Kitchen.
+This project was written, coded, and designed by Jack Blair, Carinn Gaspar, Celeste Holt, and Lawrence Wright for the class COSC345 (software development) at the University of Otago. Some CI elements were provided by Vaughan Kitchen.
