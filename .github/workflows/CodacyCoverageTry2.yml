@@ -38,7 +38,7 @@ jobs:
 
     - name: Generate Coverage Report
       shell: cmd
-      run: OpenCppCoverage --modules Debug --excluded_sources external --sources ${{github.workspace}} --export_type cobertura:cmakeci.xml --cover_children -- ctest -C ${{env.BUILD_TYPE}} --test-dir build
+      run: OpenCppCoverage --modules Debug --sources ${{github.workspace}} --export_type cobertura:cmakeci.xml --cover_children -- ctest -C ${{env.BUILD_TYPE}} --test-dir build
 
     - name: Upload Report to Codacy
       uses: codacy/codacy-coverage-reporter-action@v1.3.0
