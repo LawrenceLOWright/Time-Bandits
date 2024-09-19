@@ -190,19 +190,18 @@ public:
 
     void talkToSky(loadGame load) {
         int input = game.loadScene(load.allAssetsLists["library"], load.allMessageLists["sky"][0], &load.allActionLists["talkToSky"], true);
-        if (load.allActionLists["mainStreetActions"][0].checkAction(input)) {
+        if (load.allActionLists["talkToSky"][0].checkAction(input)) {
+            game.loadScene(load.allAssetsLists["library"], load.allMessageLists["sky"][0], &load.allActionLists["talkToSky"], true);
+            load.allActionLists["libraryActions"][2].setActive(true);
+        }
+        if (load.allActionLists["talkToSky"][1].checkAction(input)) {
             game.loadScene(load.allAssetsLists["library"], load.allMessageLists["sky"][0], &load.allActionLists["talkToSky"], true);
         }
-        if (load.allActionLists["mainStreetActions"][1].checkAction(input)) {
-            game.loadScene(load.allAssetsLists["library"], load.allMessageLists["sky"][0], &load.allActionLists["talkToSky"], true);
-            load.allActionLists["holden"][2].setActive(false);
-            load.allActionLists["libraryActions"][4].setActive(true);
-        }
-        if (load.allActionLists["mainStreetActions"][2].checkAction(input)) {
+        if (load.allActionLists["talkToSky"][2].checkAction(input)) {
             game.loadScene(load.allAssetsLists["library"], load.allMessageLists["sky"][0], &load.allActionLists["talkToSky"], true);
         }
-        if (load.allActionLists["mainStreetActions"][3].checkAction(input)) {
-            loadCafe(load);
+        if (load.allActionLists["talkToSky"][3].checkAction(input)) {
+            loadLibrary(load);
         }
         talkToSky(load);
     }
