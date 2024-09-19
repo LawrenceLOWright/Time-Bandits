@@ -171,20 +171,20 @@ public:
 
     void talkToHolden(loadGame load) {
         int input = game.loadScene(load.allAssetsLists["cafe"], load.allMessageLists["holden"][0], &load.allActionLists["talkToHolden"], true);
-        if (load.allActionLists["cafeActions"][0].checkAction(input)) {
+        if (load.allActionLists["cafeActions"][3].checkAction(input)) { loadCafe(load); }
+        else if (load.allActionLists["cafeActions"][0].checkAction(input)) {
             game.loadScene(load.allAssetsLists["cafe"], load.allMessageLists["holden"][1], &load.allActionLists["basic"], true);
         }
-        if (load.allActionLists["cafeActions"][1].checkAction(input)) {
+        
+        else if (load.allActionLists["cafeActions"][1].checkAction(input)) {
             game.loadScene(load.allAssetsLists["cafe"], load.allMessageLists["holden"][2], &load.allActionLists["basic"], true);
-            load.allActionLists["holden"][2].setActive(false);
+            load.allActionLists["talkToHolden"][2].setActive(false);
             load.allActionLists["libraryActions"][4].setActive(true);
         }
-        if (load.allActionLists["cafeActions"][2].checkAction(input)) {
+        else if (load.allActionLists["cafeActions"][2].checkAction(input)) {
             game.loadScene(load.allAssetsLists["cafe"], load.allMessageLists["holden"][3], &load.allActionLists["basic"], true);
         }
-        if (load.allActionLists["cafeActions"][3].checkAction(input)) {
-            loadCafe(load);
-        }
+        
         talkToHolden(load);
     }
 
