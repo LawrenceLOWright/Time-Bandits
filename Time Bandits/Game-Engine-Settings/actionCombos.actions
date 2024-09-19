@@ -1,4 +1,8 @@
-basic,Continue
-basicArea,Continue,Description
-tutorial1,Description
-shadyPinesParkActions,Continue,Description,Pick Dandelions,Sit on Swings
+shadyPinesParkActions,Pick Dandelions,Sit on Swings,Leave
+leaveShadyPines,Main Street,Road to New Slovakia
+mainStreetActions,Peer in abandoned storefronts,Inspect Lampposts,Write "I WUZ HERE",Leave
+leaveMainStreet,Shady Pines Park,The Kalefe,MockDonald's,Hourglass Public Library
+cafeActions,Examine the art,Eavesdrop on the baristas,Talk to the hipster guy,Leave
+talkToHolden,Make small talk,Ask about the weird book next to him,Look at the guy’s computer screen,Stop talking
+libraryActions,Help clean up,Check out a book,Check out a tool,Talk to the gothy librarian,Sky's secret stash,Leave
+talkToSky,Ask about library resources,Ask for a bookmark,Ask about any “special collections”,Stop talking

@@ -49,17 +49,14 @@ fileToString::fileToString(string file) {
  * @return The contents of the file as a string.
  */
 string fileToString::getText(string filePath) {
-    fstream file;
-    file.open(filePath, ios::in);
-    if (!file.is_open()) { return ""; } // Return an empty string if the file cannot be opened
+    File file = File(filePath);
+    file.openFile();
 
     string lines = "";
     string tp = "";
-    while (getline(file, tp)) {
-        lines += "\n" + tp;
-    }
+    while (getline(file.file, tp)) {lines += "\n" + tp;}
 
-    file.close();
+    file.closeFile();
     return lines;
 }
 

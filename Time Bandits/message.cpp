@@ -36,16 +36,12 @@ void message::addMessage(string msg) { messages.push_back(msg); }
  * Each message is printed on a new line.
  */
 void message::printMessages() {
-    for (int x = 0; x < messages.size(); x++) {
-        cout << messages[x] << endl;
-    }
+    for (int x = 0; x < messages.size(); x++) {cout << messages[x] << endl;}
 }
 
 string message::getMessage() {
     string msg = "";
-    for (int x = 0; x < messages.size(); x++) {
-        msg = msg + messages[x];
-    }
+    for (int x = 0; x < messages.size(); x++) {msg = msg + messages[x];}
 
     return msg;
 }

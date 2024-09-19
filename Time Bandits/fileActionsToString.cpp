@@ -9,6 +9,7 @@
 #include <chrono> // Include the chrono header
 #include <vector>
 #include <sstream>
+#include <string>
 #include "character.h"
 
 using namespace std;
@@ -26,59 +27,46 @@ vector<action> fileActionsToString::getActions() { return actions;}
 map<string, vector<action>> fileActionsToString::getActionMap() { return map; }
 
 vector<action> fileActionsToString::getText(string filePath) {
-    fstream file;
-    file.open(filePath, ios::in);
-    if (!file.is_open()) {
-        cout << "HERE55";
-        return actions;
-    }
+    File file = File(filePath);
+    file.openFile();
 
+    FileRetrival data = FileRetrival(file);
 
-    string lines = "";
-    string tp = "";
-    while (getline(file, tp)) {
-        stringstream actionDetails(tp);
-        string segment2 = "";
-        string segment3 = "";
-        string segment4 = "";
-        getline(actionDetails, segment2, ',');
-        getline(actionDetails, segment3, ',');
-        getline(actionDetails, segment4, ',');
+    for (int x = 0; x < data.size(); x++) {
         action a;
-        a.setActionDetails(segment2, segment3, stoi(segment4));
+        a.setActionDetails(data.getData(x,0), data.getData(x,1));
         actions.push_back(a);
     }
 
-    file.close();
+    file.closeFile();
     return actions;
 };
 
 void fileActionsToString::createActionMap(string filePath2) {
-    fstream file;
-    file.open(filePath2, ios::in);
-    if (!file.is_open()) {
-        cout << "HERE23";
-    }
+    File file = File(filePath2);
+    file.openFile();
 
+    FileRetrival data = FileRetrival(file);
+    for (int x = 0; x < data.size(); x++) {
+        // Create a vector of actions
+        vector<action> actionVec;
 
-    string lines = "";
-    string tp = "";
-    while (getline(file, tp)) {
-        vector<action> test;
-        stringstream actionDetails(tp);
-        string name = "";
-        string actionInfo = "";
-        getline(actionDetails, name, ',');
-        while (getline(actionDetails, actionInfo, ',')) {
-            for (int x = 0; x < actions.size(); x++) {
-                if (actionInfo == actions[x].getActionName()) {
-                    test.push_back(actions[x]);
+        // For each action in the line
+        for (int y = 1; y < data.getData(x).size(); y++) {
+            
+            // For each action available check if its the action to assign to the map
+            for (int a = 0; a < actions.size(); a++) {
+                if (data.getData(x, y) == actions[a].getActionName()) {
+                    actionVec.push_back(actions[a]);
                     break;
                 }
             }
-            map[name] = test;
         }
 
+        // Create the map
+        map[data.getData(x, 0)] = actionVec;
     }
+
+    file.closeFile();
 
 }

@@ -38,17 +38,10 @@ jobs:
 
     - name: Generate Coverage Report
       shell: cmd
-      run: OpenCppCoverage --modules Debug --excluded_sources external --sources src --export_type cobertura:cmakeci.xml --cover_children -- ctest -C ${{env.BUILD_TYPE}} --test-dir build
-
-    - name: Upload Report to Codecov
-      uses: codecov/codecov-action@v4
-      with:
-        fail_ci_if_error: true
-        files: cmakeci.xml
-        token: ${{ secrets.CODECOV_TOKEN }}
+      run: OpenCppCoverage --modules Debug --excluded_sources external --sources ${{github.workspace}} --export_type cobertura:cmakeci.xml --cover_children -- ctest -C ${{env.BUILD_TYPE}} --test-dir build
 
     - name: Upload Report to Codacy
       uses: codacy/codacy-coverage-reporter-action@v1.3.0
       with:
         coverage-reports: cmakeci.xml
-        project-token: ${{ secrets.CODACY_TOKEN }}
+        project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}

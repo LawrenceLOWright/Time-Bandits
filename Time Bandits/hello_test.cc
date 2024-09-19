@@ -44,8 +44,8 @@ TEST(FileOpenTest, CannotOpenNonExistentFile) {
 
 TEST(ActionTest, BasicAssertions) {
     action ac, ac2;
-    ac2.setActionDetails("Here", "R", 32);
-    ac.setActionDetails("This is cool", "E", 34);
+    //ac2.setActionDetails("Here", "R", 32);
+    //ac.setActionDetails("This is cool", "E", 34);
 
     EXPECT_EQ("This is cool", ac.getActionName());
     EXPECT_EQ("E", ac.getKeyCodeName());
