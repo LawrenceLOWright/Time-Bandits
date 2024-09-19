@@ -5,6 +5,7 @@
 
 cmake_minimum_required(VERSION 3.10)
 project("Time Bandits")
+enable_testing()
 
 # Enable Hot Reload for MSVC compilers if supported.
 if (POLICY CMP0141)
