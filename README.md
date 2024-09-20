@@ -10,12 +10,15 @@ Hourglass is a text-based game set in the town of Hourglass, a small town under 
 Hourglass is coded entirely in C++ with no external libraries, save for basic libraries included in the Windows system.  
 
 ## Building (Windows)
-1. mkdir
+You'll need Windows and Visual Studio Code to run Hourglass. 
+
+Once you've cloned the repository, open your powershell. Cd into the folder containing Hourglass and run these commands, in this order:
+1. mkdir build
 2. cmake -B build
 3. cmake --build build
 
 ## Running
-1. 
+Open CMakeLists.txt in Visual Studio Code. Select the startup item - the big green play button on the upper right hand corner of the screen - and Hourglass will play!
 
 ## Credits
-This project was written, coded, and designed by Jack Blair, Carinn Gaspar, Celeste Holt, and Lawrence Wright for the class COSC345 (software development) at the University of Otago. Some CI elements were provided by Vaughan Kitchen.
+This project was written, coded, and designed by Jack Blair, Carinn Gaspar, Celeste Holt, and Lawrence Wright for the class COSC345 (software development) at the University of Otago. Coverage code was provided by Vaughan Kitchen.
