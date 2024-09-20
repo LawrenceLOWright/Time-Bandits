@@ -8,7 +8,7 @@
  * @param message The error message to send.
  */
 
-error::error(string message) {
+error::error(const string message) {
 	std::string tp = message;
 	std::string command = "msg %username% " + tp;
 

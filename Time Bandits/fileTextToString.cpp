@@ -19,7 +19,7 @@ using namespace std::chrono;
  * 
  * @param filePath The path to the file (without extension) containing the message data.
  */
-fileTextToString::fileTextToString(string filePath) {
+fileTextToString::fileTextToString(const string filePath) {
     allMessageLists = getText(filePath + ".actions"); 
 }
 
@@ -29,7 +29,7 @@ fileTextToString::fileTextToString(string filePath) {
  * @param filePath The path to the file to read the message data from.
  * @return A map containing message lists, with the key being the message identifier.
  */
-map<string, vector<message>> fileTextToString::getText(string filePath) {
+map<string, vector<message>> fileTextToString::getText(const string filePath) {
     File file = File(filePath);
     file.openFile();
 

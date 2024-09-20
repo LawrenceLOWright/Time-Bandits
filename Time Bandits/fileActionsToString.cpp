@@ -21,7 +21,7 @@ using namespace std::chrono;
  * @param filename The filename containing actions data.
  * @param filename2 The filename containing action mappings.
  */
-fileActionsToString::fileActionsToString(string filename, string filename2) {
+fileActionsToString::fileActionsToString(const string filename, string filename2) {
     filePath = filename + ".actions";
     filePath2 = filename2 + ".actions";
 
@@ -49,7 +49,7 @@ map<string, vector<action>> fileActionsToString::getActionMap() { return map; }
  * @param filePath The file path containing actions data.
  * @return A vector of action objects.
  */
-vector<action> fileActionsToString::getText(string filePath) {
+vector<action> fileActionsToString::getText(const string filePath) {
     File file = File(filePath);
     file.openFile();
 
@@ -70,7 +70,7 @@ vector<action> fileActionsToString::getText(string filePath) {
  * 
  * @param filePath2 The file path containing action mapping data.
  */
-void fileActionsToString::createActionMap(string filePath2) {
+void fileActionsToString::createActionMap(const string filePath2) {
     File file = File(filePath2);
     file.openFile();
 

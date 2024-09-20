@@ -26,7 +26,7 @@ using namespace std::chrono;
  * 
  * @param file The base name of the files (without extension).
  */
-fileToString::fileToString(string file) {
+fileToString::fileToString(const string file) {
     string filePath = file + ".txt";
     string colorPath = file + ".color";
     string bgColor = file + ".background";
@@ -48,7 +48,7 @@ fileToString::fileToString(string file) {
  * @param filePath The path to the file to be read.
  * @return The contents of the file as a string.
  */
-string fileToString::getText(string filePath) {
+string fileToString::getText(const string filePath) {
     File file = File(filePath);
     file.openFile();
 

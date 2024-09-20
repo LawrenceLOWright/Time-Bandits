@@ -86,7 +86,7 @@ void character::setXYZ(int X, int Y, int Z) {
  * 
  * @param c The string to set as the character representation.
  */
-void character::setChar(string c) { charact = c; }
+void character::setChar(const string c) { charact = c; }
 
 /**
  * @brief Sets whether the character is considered null.

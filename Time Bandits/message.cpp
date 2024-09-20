@@ -21,7 +21,7 @@ using namespace std::chrono;
  * 
  * @param msg A vector of strings representing the messages to be stored.
  */
-void message::setMessages(vector<string> msg) { messages = msg; }
+void message::setMessages(const vector<string> msg) { messages = msg; }
 
 /**
  * @brief Adds a single message to the existing list of messages.
