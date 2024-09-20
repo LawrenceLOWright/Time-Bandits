@@ -1,16 +1,7 @@
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/d9b747ed2a0e443d8db014ae67ad4681)](https://app.codacy.com/gh/LawrenceLOWright/Time-Bandits/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 [![Codacy Badge](https://app.codacy.com/project/badge/Coverage/d9b747ed2a0e443d8db014ae67ad4681)](https://app.codacy.com/gh/LawrenceLOWright/Time-Bandits/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_coverage)
 
-
-  _    _                       _               \
- | |  | |                     | |              \
- | |__| | ___  _   _ _ __ __ _| | __ _ ___ ___ \
- |  __  |/ _ \| | | | '__/ _` | |/ _` / __/ __|\
- | |  | | (_) | |_| | | | (_| | | (_| \__ \__ \\
- |_|  |_|\___/ \__,_|_|  \__, |_|\__,_|___/___/\
-                          __/ |                
-                         |___/                 
-
+# Hourglass
 A text-based, time looping adventure built with C++. 
 
 ## Project Description
