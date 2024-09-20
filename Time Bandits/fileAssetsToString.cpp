@@ -19,7 +19,7 @@ using namespace std::chrono;
  * 
  * @param filePath The base file path from which to load asset data.
  */
-fileAssetsToString::fileAssetsToString(string filePath) {
+fileAssetsToString::fileAssetsToString(const string filePath) {
     allAssetsLists = getText(filePath + ".actions");
     cout << filePath + ".actions";
 }

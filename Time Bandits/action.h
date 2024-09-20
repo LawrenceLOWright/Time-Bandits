@@ -73,6 +73,8 @@ public:
      * @param sets the action to the given string if the string is "1" (true) or "0" (false)
      */
     void setActive(string setTo);
+
+    void setKeycode(int key, boolean flag);
        
 
 private:

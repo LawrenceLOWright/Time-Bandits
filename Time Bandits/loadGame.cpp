@@ -87,7 +87,7 @@ void loadGame::load(int (*startGame) (loadGame load, gameTools game)) {
  * @param settingName The name of the setting to retrieve.
  * @return A string representing the value of the requested setting, or "Nothing" if not found.
  */
-string loadGame::retrieveSetting(string settingName) {
+string loadGame::retrieveSetting(const string settingName) {
     string filePath = "settings.info";
     File file = File(filePath);
 
