@@ -5,6 +5,7 @@ leaveMainStreet,Shady Pines Park,The Kalefe,MockDonalds,Hourglass Public Library
 cafeActions,Examine the art,Eavesdrop on the baristas,Talk to the hipster guy,Leave
 talkToHolden,Make small talk,Ask about the weird book next to him,Look at the guy’s computer screen,Stop talking
 libraryActions,Help clean up,Check out a book,Check out a tool,Talk to the gothy librarian,Sky's secret stash,Leave
-talkToSky,Ask about library resources,Ask for a bookmark,Ask about any “special collections”,Stop talking
 mcdonaldsActions,Order a Sappy Meal,People-watch,Spill soda on the counter,Talk to the tired employee,Check Out the Freezer,Leave
 talkToMax,Ask about the employee,Ask about the freezer,Bribe Max with 50 bucks,Stop talking
+talkToSky,Ask about library resources,Ask for a bookmark,Ask about any “special collections”,Stop talking
+showGameEngineOff,Hello ThereshowGameEngineOff,Hello There

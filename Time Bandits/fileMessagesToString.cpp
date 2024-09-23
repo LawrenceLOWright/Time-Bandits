@@ -26,7 +26,7 @@ using namespace std::chrono;
  * 
  * @param file The base name of the file (without extension).
  */
-fileMessagesToString::fileMessagesToString(string file) {
+fileMessagesToString::fileMessagesToString(const string file) {
     string filePath = file + ".text";
 
     str = getText(filePath);
@@ -49,7 +49,7 @@ vector<message> fileMessagesToString::getLines() { return str; }
  * @param filePath The path to the file to be read.
  * @return A vector of message objects created from the file's text.
  */
-vector<message> fileMessagesToString::getText(string filePath) {
+vector<message> fileMessagesToString::getText(const string filePath) {
     File file = File(filePath);
     file.openFile();
 

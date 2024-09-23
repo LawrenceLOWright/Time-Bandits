@@ -41,7 +41,7 @@ int action::getkeyCode() { return keyCode; }
  * @param keyName The name of the key code.
  * @param key The integer value of the key code.
  */
-void action::setActionDetails(string name, string activity, string keyName, int key) {
+void action::setActionDetails(const string name, string activity, string keyName, int key) {
     cout << "extended action detail set" << endl;
     actionName = name;
     keyCode = key;
@@ -49,7 +49,7 @@ void action::setActionDetails(string name, string activity, string keyName, int 
     setActive(activity);
 }
 
-void action::setActionDetails(string name, string activity) {
+void action::setActionDetails(const string name, string activity) {
     cout << "short action detail set" << endl;
     actionName = name;
     setActive(activity);
@@ -70,6 +70,10 @@ void action::setKeycode(int key) {
             keyCodeName = to_string(key);
     }
     //cout << actionName << "'s keycode is " << keyCode << endl;
+}
+
+void action::setKeycode(int key, boolean flag) {
+    action::keyCode = key;
 }
 
 /**
@@ -96,7 +100,7 @@ void action::setActive(bool setTo) {
     activity = setTo;
 }
 
-void action::setActive(string setTo) {
+void action::setActive(const string setTo) {
     if (setTo == "1") {
         activity = true;
         //cout << actionName << " is active " << endl;

@@ -38,7 +38,7 @@ public:
     /**
      * @brief Initializes the game, loads assets, and starts the game sequence.
      */
-    void LoadGame(loadGame load) {
+    void LoadGame(const loadGame load) {
         //system("chcp 65001"); // Set the encoding to UTF-8 for cmd
         //game.changeScreenSize(150, 40); // Set screen size
 
@@ -65,7 +65,7 @@ public:
     }
 
     void loadMainMenu(loadGame load) {
-        game.changeScreenSize(151, 41); // Set screen size 151/41 legacy 4 windows 11, 150,40 for other machines
+        game.changeScreenSize(150, 40); // Set screen size 151/41 legacy 4 windows 11, 150,40 for other machines
         game.loadScene(load.allAssetsLists["mainMenu"], load.allMessageLists["shadyPines"][0], &load.allActionLists["basic"]);
         game.loadScene(load.allAssetsLists["mainMenu"], load.allMessageLists["shadyPines"][1], &load.allActionLists["tutorial1"]);
         game.loadScene(load.allAssetsLists["shadyPinesPark"], load.allMessageLists["shadyPines"][2], &load.allActionLists["basic"], true);
@@ -270,7 +270,7 @@ public:
      * and calling its `LoadGame()` method. The game loop and all initializations
      * are managed within the `Game` class.
      */
-    void runGame(loadGame load) {
+    void runGame(const loadGame load) {
         Game game;
         game.LoadGame(load);
         

@@ -35,7 +35,7 @@ void gameTools::changeScreenSize(int width, int height) {
     screenHeight = height;
 
     std::string command = "mode con: cols=" + std::to_string(screenWidth) + " lines=" + std::to_string(screenHeight);
-    //system(command.c_str());
+    system(command.c_str());
 }
 
 /**
@@ -44,7 +44,7 @@ void gameTools::changeScreenSize(int width, int height) {
 * @param fileName Name of the file to load.
 * @return A vector of character objects representing the file content.
 */
-vector<character> gameTools::loadAsset(string fileName) {
+vector<character> gameTools::loadAsset(const string fileName) {
     fileToString f = fileToString(fileName);
     std::vector<character> vec = f.textToChar();
     return vec;
@@ -87,7 +87,7 @@ void gameTools::loadScreen(vector<character> vec) {
      * @param actions Vector of action objects representing possible user actions.
      * @return The key code of the action performed.
      */
-int gameTools::loadScene(vector<character> scene, string text, vector<action>* actions) {
+int gameTools::loadScene(const vector<character> scene, string text, vector<action>* actions) {
     
     loadScreen(scene);
     cout << text << endl;
@@ -104,7 +104,7 @@ int gameTools::loadScene(vector<character> scene, string text, vector<action>* a
      * @param actionHeader Boolean flag to indicate whether to show the action header.
      * @return The key code of the action performed.
      */
-int gameTools::loadScene(vector<character> scene, string text, vector<action>* actions, bool actionHeader) {
+int gameTools::loadScene(const vector<character> scene, string text, vector<action>* actions, bool actionHeader) {
     string header = writeActions(actions);
 
     loadScreen(scene);
@@ -114,7 +114,7 @@ int gameTools::loadScene(vector<character> scene, string text, vector<action>* a
     return checkInputs(actions);
 }
 
-int gameTools::loadScene(vector<character> scene, message text, vector<action>* actions, bool actionHeader) {
+int gameTools::loadScene(const vector<character> scene, message text, vector<action>* actions, bool actionHeader) {
     
 
     string header = writeActions(actions);
@@ -129,7 +129,7 @@ int gameTools::loadScene(vector<character> scene, message text, vector<action>* 
     
 }
 
-int gameTools::loadScene(vector<character> scene, message text, vector<action>* actions) {
+int gameTools::loadScene(const vector<character> scene, message text, vector<action>* actions) {
     loadScreen(scene);
     text.printMessages();
 

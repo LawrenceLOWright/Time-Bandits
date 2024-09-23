@@ -5,7 +5,7 @@
  * 
  * @param fileName The name of the file to be opened.
  */
-File::File(string fileName) : fileName(fileName) {}
+File::File(const string fileName) : fileName(fileName) {}
 
 /**
  * @brief Opens the file with the given file name.
