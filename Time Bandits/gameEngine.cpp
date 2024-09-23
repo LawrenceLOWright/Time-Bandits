@@ -119,7 +119,7 @@ public:
             //Shady Pines Park,The Kalefe,MockDonald's,Hourglass Public Library
             if (load.allActionLists["leaveMainStreet"][0].checkAction(input)) { loadShadyPinesPark(load); }
             if (load.allActionLists["leaveMainStreet"][1].checkAction(input)) { loadCafe(load); }
-            //if (load.allActionLists["leaveMainStreet"][2].checkAction(input)) {  }
+            if (load.allActionLists["leaveMainStreet"][2].checkAction(input)) { loadMockdonalds(load); }
             if (load.allActionLists["leaveMainStreet"][3].checkAction(input)) { loadLibrary(load); }
         }
 
@@ -169,6 +169,29 @@ public:
         loadLibrary(load);
     }
 
+    void loadMockdonalds(loadGame load) {
+        int input = game.loadScene(load.allAssetsLists["mcdonalds"], load.allMessageLists["mcdonalds"][0], &load.allActionLists["mcdonaldsActions"], true);
+        if (load.allActionLists["mcdonaldsActions"][0].checkAction(input)) {
+            game.loadScene(load.allAssetsLists["mcdonalds"], load.allMessageLists["mcdonalds"][1], &load.allActionLists["basic"], true);
+        }
+        else if (load.allActionLists["mcdonaldsActions"][1].checkAction(input)) {
+            game.loadScene(load.allAssetsLists["mcdonalds"], load.allMessageLists["mcdonalds"][2], &load.allActionLists["basic"], true);
+        }
+        else if (load.allActionLists["mcdonaldsActions"][2].checkAction(input)) {
+            game.loadScene(load.allAssetsLists["mcdonalds"], load.allMessageLists["mcdonalds"][3], &load.allActionLists["basic"], true);
+        }
+        else if (load.allActionLists["mcdonaldsActions"][3].checkAction(input)) {
+            talkToMax(load);
+        }
+        else if (load.allActionLists["mcdonaldsActions"][4].checkAction(input)) { 
+            game.loadScene(load.allAssetsLists["mcdonalds"], load.allMessageLists["mcdonalds"][4], &load.allActionLists["basic"], true);
+        }
+        else if (load.allActionLists["mcdonaldsActions"][5].checkAction(input)) {
+            loadMainStreet(load);
+        }
+        loadMockdonalds(load);
+    }
+
     void talkToHolden(loadGame load) {
         int input = game.loadScene(load.allAssetsLists["cafe"], load.allMessageLists["holden"][0], &load.allActionLists["talkToHolden"], true);
         if (load.allActionLists["cafeActions"][3].checkAction(input)) { loadCafe(load); }
@@ -191,19 +214,37 @@ public:
     void talkToSky(loadGame load) {
         int input = game.loadScene(load.allAssetsLists["library"], load.allMessageLists["sky"][0], &load.allActionLists["talkToSky"], true);
         if (load.allActionLists["talkToSky"][0].checkAction(input)) {
-            game.loadScene(load.allAssetsLists["library"], load.allMessageLists["sky"][0], &load.allActionLists["talkToSky"], true);
-            load.allActionLists["libraryActions"][2].setActive(true);
+            game.loadScene(load.allAssetsLists["library"], load.allMessageLists["sky"][1], &load.allActionLists["talkToSky"], true);
+            load.allActionLists["mcdonaldsActions"][2].setActive(true);
         }
         if (load.allActionLists["talkToSky"][1].checkAction(input)) {
-            game.loadScene(load.allAssetsLists["library"], load.allMessageLists["sky"][0], &load.allActionLists["talkToSky"], true);
+            game.loadScene(load.allAssetsLists["library"], load.allMessageLists["sky"][2], &load.allActionLists["talkToSky"], true);
         }
         if (load.allActionLists["talkToSky"][2].checkAction(input)) {
-            game.loadScene(load.allAssetsLists["library"], load.allMessageLists["sky"][0], &load.allActionLists["talkToSky"], true);
+            game.loadScene(load.allAssetsLists["library"], load.allMessageLists["sky"][3], &load.allActionLists["talkToSky"], true);
         }
         if (load.allActionLists["talkToSky"][3].checkAction(input)) {
             loadLibrary(load);
         }
         talkToSky(load);
+    }
+
+    void talkToMax(loadGame load) {
+        int input = game.loadScene(load.allAssetsLists["mcdonalds"], load.allMessageLists["max"][0], &load.allActionLists["talkToMax"], true);
+        if (load.allActionLists["talkToMax"][0].checkAction(input)) {
+            game.loadScene(load.allAssetsLists["mcdonalds"], load.allMessageLists["max"][1], &load.allActionLists["talkToMax"], true);
+        }
+        if (load.allActionLists["talkToMax"][1].checkAction(input)) {
+            game.loadScene(load.allAssetsLists["mcdonalds"], load.allMessageLists["max"][2], &load.allActionLists["talkToMax"], true);
+        }
+        if (load.allActionLists["talkToMax"][2].checkAction(input)) {
+            game.loadScene(load.allAssetsLists["mcdonalds"], load.allMessageLists["max"][3], &load.allActionLists["talkToMax"], true);
+            load.allActionLists["mcdonaldsActions"][4].setActive(true);
+        }
+        if (load.allActionLists["talkToMax"][3].checkAction(input)) {
+            loadMockdonalds(load);
+        }
+        talkToMax(load);
     }
 
 private:
