@@ -1,33 +1,5 @@
-# name: Doxygen Documentation
-
-# on:
-#   push:
-#     branches:
-#       - main  
-
-# jobs:
-#   doxygen:
-#     runs-on: macos-latest
-
-#     steps:
-#       - name: Checkout code
-#         uses: actions/checkout@v3
-
-#       - name: Install Doxygen
-#         run: brew install doxygen
-#         # Uses Homebrew to install Doxygen on macOS
-
-#       - name: Generate Doxygen documentation
-#         run: doxygen Doxyfile
-#         # Ensure Doxyfile is in the root of your repository or specify the correct path.
-
-#       - name: Upload documentation as artifact
-#         uses: actions/upload-artifact@v3
-#         with:
-#           name: doxygen-docs
-#           path: ./html  # Adjust this path if your Doxygen output is located elsewhere
-
 # Sample workflow for building and deploying a Doxygen site to GitHub Pages
+# Code adapted from Jam Cumps at https://community.element14.com/technologies/code_exchange/b/blog/posts/github-automate-project-documentation-with-doxygen-and-publish-online-after-pushing-commits
 name: Deploy Doxygen with GitHub Pages dependencies preinstalled
 
 on:
@@ -62,12 +34,11 @@ jobs:
       - name: Run Doxygen
         uses: mattnotmitt/doxygen-action@v1.9.5
         with:
-          # working-directory: '${{github.workspace}}/Kerbal/doxygen'
           doxyfile-path: 'Doxyfile'
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: .
+          path: ./html
 
   # Deployment job
   deploy:
