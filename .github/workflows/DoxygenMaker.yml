@@ -1,28 +1,82 @@
-name: Doxygen Documentation
+# name: Doxygen Documentation
+
+# on:
+#   push:
+#     branches:
+#       - main  
+
+# jobs:
+#   doxygen:
+#     runs-on: macos-latest
+
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v3
+
+#       - name: Install Doxygen
+#         run: brew install doxygen
+#         # Uses Homebrew to install Doxygen on macOS
+
+#       - name: Generate Doxygen documentation
+#         run: doxygen Doxyfile
+#         # Ensure Doxyfile is in the root of your repository or specify the correct path.
+
+#       - name: Upload documentation as artifact
+#         uses: actions/upload-artifact@v3
+#         with:
+#           name: doxygen-docs
+#           path: ./html  # Adjust this path if your Doxygen output is located elsewhere
+
+# Sample workflow for building and deploying a Doxygen site to GitHub Pages
+name: Deploy Doxygen with GitHub Pages dependencies preinstalled
 
 on:
+  # Runs on pushes targeting the default branch
   push:
-    branches:
-      - main  
+    branches: ["main"]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
 
 jobs:
-  doxygen:
-    runs-on: macos-latest
-
+  # Build job
+  build:
+    runs-on: windows-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Install Doxygen
-        run: brew install doxygen
-        # Uses Homebrew to install Doxygen on macOS
-
-      - name: Generate Doxygen documentation
-        run: doxygen Doxyfile
-        # Ensure Doxyfile is in the root of your repository or specify the correct path.
-
-      - name: Upload documentation as artifact
-        uses: actions/upload-artifact@v3
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+      - name: Run Doxygen
+        uses: mattnotmitt/doxygen-action@v1.9.5
         with:
-          name: doxygen-docs
-          path: ./html  # Adjust this path if your Doxygen output is located elsewhere
+          # working-directory: '${{github.workspace}}/Kerbal/doxygen'
+          doxyfile-path: 'Doxyfile'
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: doc_generated/html
+
+  # Deployment job
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: windows-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
