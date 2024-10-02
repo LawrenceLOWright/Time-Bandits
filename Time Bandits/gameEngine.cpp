@@ -19,6 +19,7 @@
 #include "actionListener.h"
 #include "gameTools.h"
 #include "loadGame.h"
+#include "error.h"
 
 #define UNICODE
 
@@ -79,21 +80,24 @@ public:
         cout << "Loading shady pines park" << endl;
         int input = game.loadScene(load.allAssetsLists["shadyPinesPark"], load.allMessageLists["shadyPines"][3], &load.allActionLists["shadyPinesParkActions"], true);
         //cout << input;
-        if (load.allActionLists["shadyPinesParkActions"][0].checkAction(input)) {
-            game.loadScene(load.allAssetsLists["shadyPinesPark"], load.allMessageLists["shadyPines"][4], &load.allActionLists["basic"], true);
-            load.allActionLists["shadyPinesParkActions"][0].setActive(false);
-        }
         if (load.allActionLists["shadyPinesParkActions"][1].checkAction(input)) {
             game.loadScene(load.allAssetsLists["shadyPinesPark"], load.allMessageLists["shadyPines"][5], &load.allActionLists["basic"], true);
         }
-        if (load.allActionLists["shadyPinesParkActions"][2].checkAction(input)) {
+        else if (load.allActionLists["shadyPinesParkActions"][2].checkAction(input)) {
+            game.loadScene(load.allAssetsLists["shadyPinesPark"], load.allMessageLists["shadyPines"][6], &load.allActionLists["basic"], true);
+        }
+        else if (load.allActionLists["shadyPinesParkActions"][0].checkAction(input)) {
+            game.loadScene(load.allAssetsLists["shadyPinesPark"], load.allMessageLists["shadyPines"][4], &load.allActionLists["basic"], true);
+            load.allActionLists["shadyPinesParkActions"][0].setActive(false);
+        }
+        else if (load.allActionLists["shadyPinesParkActions"][3].checkAction(input)) {
             input = game.loadScene(load.allAssetsLists["shadyPinesPark"], "Where do you want to go?", &load.allActionLists["leaveShadyPines"], true);
             if (load.allActionLists["leaveShadyPines"][0].checkAction(input))
             {
                 loadMainStreet(load);
             }
             if (load.allActionLists["leaveShadyPines"][1].checkAction(input)) {
-                loadMainMenu(load);
+                loadSlovokaRoad(load);
             }
         }
 
@@ -103,6 +107,53 @@ public:
     /**
      * @brief Loads the Main Menu and the subsequent game tutorial.
      */
+
+    void loadSlovokaRoad(loadGame load) {
+        //cout << "Slovoka Road";
+        int input = game.loadScene(load.allAssetsLists["roadToNew"], load.allMessageLists["roadToNew"][0], &load.allActionLists["roadToNew"], true);
+        if (load.allActionLists["roadToNew"][0].checkAction(input)) {
+            game.loadScene(load.allAssetsLists["roadToNew"], load.allMessageLists["roadToNew"][1], &load.allActionLists["basic"], true);
+        }
+        else if (load.allActionLists["roadToNew"][1].checkAction(input)) {
+            game.loadScene(load.allAssetsLists["roadToNew"], load.allMessageLists["roadToNew"][2], &load.allActionLists["basic"], true);
+        }
+        else if (load.allActionLists["roadToNew"][3].checkAction(input) || load.allActionLists["roadToNew"][2].checkAction(input) && load.allActionLists["roadToNew"][2].getActionName() == "Leave") {
+            input = game.loadScene(load.allAssetsLists["roadToNew"], "Where do you want to go?", &load.allActionLists["leaveRoadToNew"], true);
+            if (load.allActionLists["leaveRoadToNew"][0].checkAction(input)) { loadShadyPinesPark(load); }
+            else if (load.allActionLists["leaveRoadToNew"][1].checkAction(input)) { load66Motel(load); }
+        }
+        else if (load.allActionLists["roadToNew"][2].checkAction(input)) {
+            game.loadScene(load.allAssetsLists["roadToNew"], load.allMessageLists["roadToNew"][3], &load.allActionLists["basic"], true);
+            load.allActionLists["roadToNew"][2].setActive(false);
+        }
+        
+
+        loadSlovokaRoad(load);
+    }
+
+    void load66Motel(loadGame load) {
+        int input = game.loadScene(load.allAssetsLists["motel"], load.allMessageLists["66Motel"][0], &load.allActionLists["66Motel"], true);
+        if (load.allActionLists["66Motel"][0].checkAction(input)) {
+            game.loadScene(load.allAssetsLists["motel"], load.allMessageLists["66Motel"][1], &load.allActionLists["basic"], true);
+        }
+        else if (load.allActionLists["66Motel"][4].checkAction(input)) {
+            input = game.loadScene(load.allAssetsLists["motel"], "Where do you want to go?", &load.allActionLists["leave66Motel"], true);
+            if (load.allActionLists["leave66Motel"][0].checkAction(input)) { loadSlovokaRoad(load); }
+        }
+        else if (load.allActionLists["66Motel"][3].checkAction(input)) {
+            game.loadScene(load.allAssetsLists["motel"], load.allMessageLists["66Motel"][4], &load.allActionLists["basic"], true);
+        }
+        else if (load.allActionLists["66Motel"][2].checkAction(input)) {
+            game.loadScene(load.allAssetsLists["motel"], load.allMessageLists["66Motel"][3], &load.allActionLists["basic"], true);
+        }
+        else if (load.allActionLists["66Motel"][1].checkAction(input)) {
+            game.loadScene(load.allAssetsLists["motel"], load.allMessageLists["66Motel"][2], &load.allActionLists["basic"], true);
+            load.allActionLists["66Motel"][1].setActive(false);
+        }
+
+
+        load66Motel(load);
+    }
     
 
     void loadMainStreet(loadGame load){

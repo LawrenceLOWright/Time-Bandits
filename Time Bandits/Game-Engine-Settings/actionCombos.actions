@@ -1,4 +1,4 @@
-shadyPinesParkActions,Pick Dandelions,Sit on Swings,Leave
+shadyPinesParkActions,Pick Dandelions,Sit on Swings,Climb the playground,Leave
 leaveShadyPines,Main Street,Road to New Slovakia
 mainStreetActions,Peer in abandoned storefronts,Inspect Lampposts,Write "I WUZ HERE",Leave
 leaveMainStreet,Shady Pines Park,The Kalefe,MockDonalds,Hourglass Public Library
@@ -8,4 +8,7 @@ libraryActions,Help clean up,Check out a book,Check out a tool,Talk to the gothy
 mcdonaldsActions,Order a Sappy Meal,People-watch,Spill soda on the counter,Talk to the tired employee,Check Out the Freezer,Leave
 talkToMax,Ask about the employee,Ask about the freezer,Bribe Max with 50 bucks,Stop talking
 talkToSky,Ask about library resources,Ask for a bookmark,Ask about any “special collections”,Stop talking
-showGameEngineOff,Hello ThereshowGameEngineOff,Hello There
+roadToNew,Roll in the dust,Savor the breeze,Climb a billboard,Leave
+leaveRoadToNew,Shady Pines Park,66 Motel
+66Motel,Get a room,Steal from the old lady,Examine mold stains,Talk to the old lady,Leave
+leave66Motel,Road to new Slovakia
