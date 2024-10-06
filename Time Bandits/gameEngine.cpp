@@ -283,35 +283,32 @@ public:
     /**
      * @brief Loads the Road To New Slovakia and handles user interactions within the park.
      */
-    void loadRoadToNew(loadGame load) {
-        int input = game.loadScene(load.allAssetsLists["roadToNew"], load.allMessageLists["roadToNew"][0], &load.allActionLists["roadToNewActions"], true);
+    void loadmotel(loadGame load) {
+        int input = game.loadScene(load.allAssetsLists["motel"], load.allMessageLists["motel"][0], &load.allActionLists["motelActions"], true);
 
-        if (load.allActionLists["roadToNew"][0].checkAction(input)) {
-            game.loadScene(load.allAssetsLists["roadToNew"], load.allMessageLists["roadToNew"][1], &load.allActionLists["basic"], true);
+        if (load.allActionLists["motelAction"][0].checkAction(input)) {
+            game.loadScene(load.allAssetsLists["motel"], load.allMessageLists["motel"][1], &load.allActionLists["basic"], true);
         }
 
-        else if (load.allActionLists["roadToNewActions"][1].checkAction(input)) {
-            game.loadScene(load.allAssetsLists["roadToNew"], load.allMessageLists["roadToNew"][2], &load.allActionLists["basic"], true);
+        else if (load.allActionLists["motelAction"][1].checkAction(input)) {
+            game.loadScene(load.allAssetsLists["motel"], load.allMessageLists["motel"][2], &load.allActionLists["basic"], true);
         }
 
         else if (load.allActionLists["roadToNew"][2].checkAction(input))
         {
-            game.loadScene(load.allAssetsLists["roadToNew"], load.allMessageLists["roadToNew"][3], &load.allActionLists["basic"], true);
-            game.loadScene(load.allAssetsLists["roadToNew"], load.allMessageLists["roadToNew"][4], &load.allActionLists["basic"], true);
+            game.loadScene(load.allAssetsLists["motel"], load.allMessageLists["motel"][3], &load.allActionLists["basic"], true);
+            game.loadScene(load.allAssetsLists["motel"], load.allMessageLists["motel"][4], &load.allActionLists["basic"], true);
             load.allActionLists["roadToNewActions"][2].setActive(false);
         }
 
-        else if (load.allActionLists["roadToNewActions"][3].checkAction(input)) {
-            input = game.loadScene(load.allAssetsLists["leaveRoadToNew"], "Where do you want to go?", &load.allActionLists["leaveRoadToNew"], true);
-            //Shady Pines Park, 66 Motel, Legion Farms, Grampa’s Mystery Barn
-            if (load.allActionLists["leaveRoadToNew"][0].checkAction(input)) { loadShadyPinesPark(load); }
-            if (load.allActionLists["leaveRoadToNew"][1].checkAction(input)) { loadMainMenu(load); }
-            if (load.allActionLists["leaveRoadToNew"][2].checkAction(input)) { loadMainMenu(load); }
-            if (load.allActionLists["leaveRoadToNew"][3].checkAction(input)) { loadMainMenu(load); }
+        else if (load.allActionLists["motelAction"][3].checkAction(input)) {
+            loadRoadToNew(load);
         }
 
         loadRoadToNew(load);
     }
+
+    
 
 private:
     gameTools game;
