@@ -19,6 +19,7 @@
 #include "actionListener.h"
 #include "gameTools.h"
 #include "loadGame.h"
+#include "error.h"
 
 #define UNICODE
 
@@ -79,14 +80,17 @@ public:
         cout << "Loading shady pines park" << endl;
         int input = game.loadScene(load.allAssetsLists["shadyPinesPark"], load.allMessageLists["shadyPines"][3], &load.allActionLists["shadyPinesParkActions"], true);
         //cout << input;
-        if (load.allActionLists["shadyPinesParkActions"][0].checkAction(input)) {
-            game.loadScene(load.allAssetsLists["shadyPinesPark"], load.allMessageLists["shadyPines"][4], &load.allActionLists["basic"], true);
-            load.allActionLists["shadyPinesParkActions"][0].setActive(false);
-        }
         if (load.allActionLists["shadyPinesParkActions"][1].checkAction(input)) {
             game.loadScene(load.allAssetsLists["shadyPinesPark"], load.allMessageLists["shadyPines"][5], &load.allActionLists["basic"], true);
         }
-        if (load.allActionLists["shadyPinesParkActions"][2].checkAction(input)) {
+        else if (load.allActionLists["shadyPinesParkActions"][2].checkAction(input)) {
+            game.loadScene(load.allAssetsLists["shadyPinesPark"], load.allMessageLists["shadyPines"][6], &load.allActionLists["basic"], true);
+        }
+        else if (load.allActionLists["shadyPinesParkActions"][0].checkAction(input)) {
+            game.loadScene(load.allAssetsLists["shadyPinesPark"], load.allMessageLists["shadyPines"][4], &load.allActionLists["basic"], true);
+            load.allActionLists["shadyPinesParkActions"][0].setActive(false);
+        }
+        else if (load.allActionLists["shadyPinesParkActions"][3].checkAction(input)) {
             input = game.loadScene(load.allAssetsLists["shadyPinesPark"], "Where do you want to go?", &load.allActionLists["leaveShadyPines"], true);
             if (load.allActionLists["leaveShadyPines"][0].checkAction(input))
             {
