@@ -36,9 +36,12 @@ void loadGame::load(int (*startGame) (loadGame load, gameTools game)) {
     std::stringstream ss(retrieveSetting("ScreenWidth"));
     std::stringstream ss2(retrieveSetting("ScreenHeight"));
     int num, num2;
+    //cout << "num1: " << ss.str() << ";" << num << endl;
     ss >> num;
     ss2 >> num2;
-    game.changeScreenSize(num, num2);
+    game.changeScreenSize(160, 40);
+    
+    //return;
 
     // Get Actions for the game
     fileActionsToString actionList = fileActionsToString("actionList", "actionCombos");

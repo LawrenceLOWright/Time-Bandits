@@ -118,7 +118,7 @@ int gameTools::loadScene(const vector<character> scene, message text, vector<act
     
 
     string header = writeActions(actions);
-    int i = 1;
+    //int i = 1;
     
     //Sleep(2000);
     loadScreen(scene);

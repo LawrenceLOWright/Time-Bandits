@@ -108,6 +108,11 @@ vector<character> fileToString::textToChar() {
         char tempColour = txtColor.at(x);
         char tempBG = backgroundColor.at(x);
         
+        // skip new line and carrage return
+        if (tempchar == 13 || tempchar == 10) {
+            continue;
+        }
+        
         string c(1, tempchar);
         string e(1, tempColour);
         string d(1, tempBG);
