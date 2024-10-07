@@ -350,23 +350,23 @@ public:
     }
 
     void loadBarn(loadGame load) {
-        int input = game.loadScene(load.allAssetsLists["mainMenu"], load.allMessageLists["barn"][0], &load.allActionLists["barnActions"], true);
+        int input = game.loadScene(load.allAssetsLists["mysteryBarn"], load.allMessageLists["barn"][0], &load.allActionLists["barnActions"], true);
 
         if (load.allActionLists["barnActions"][0].checkAction(input)) {
-            game.loadScene(load.allAssetsLists["mainMenu"], load.allMessageLists["barn"][1], &load.allActionLists["basic"], true);
-            game.loadScene(load.allAssetsLists["mainMenu"], load.allMessageLists["barn"][2], &load.allActionLists["basic"], true);
+            game.loadScene(load.allAssetsLists["mysteryBarn"], load.allMessageLists["barn"][1], &load.allActionLists["basic"], true);
+            game.loadScene(load.allAssetsLists["mysteryBarn"], load.allMessageLists["barn"][2], &load.allActionLists["basic"], true);
         }
         else if (load.allActionLists["barnActions"][1].checkAction(input)) {
-            game.loadScene(load.allAssetsLists["mainMenu"], load.allMessageLists["barn"][3], &load.allActionLists["basic"], true);
+            game.loadScene(load.allAssetsLists["mysteryBarn"], load.allMessageLists["barn"][3], &load.allActionLists["basic"], true);
         }
         else if (load.allActionLists["barnActions"][2].checkAction(input)) {
-            game.loadScene(load.allAssetsLists["mainMenu"], load.allMessageLists["barn"][4], &load.allActionLists["basic"], true);
+            game.loadScene(load.allAssetsLists["mysteryBarn"], load.allMessageLists["barn"][4], &load.allActionLists["basic"], true);
         }
         else if (load.allActionLists["barnActions"][3].checkAction(input)) {
             talkToEmeliz(load);
         }
         else if (load.allActionLists["barnActions"][4].checkAction(input)) {
-            game.loadScene(load.allAssetsLists["mainMenu"], load.allMessageLists["barn"][5], &load.allActionLists["basic"], true);
+            game.loadScene(load.allAssetsLists["mysteryBarn"], load.allMessageLists["barn"][5], &load.allActionLists["basic"], true);
             load.allActionLists["barnActions"][4].setActive(false);
             numUnlocks++;
         }
@@ -377,15 +377,15 @@ public:
     }
 
     void talkToEmeliz(loadGame load) {
-        int input = game.loadScene(load.allAssetsLists["mainMenu"], load.allMessageLists["emeliz"][0], &load.allActionLists["talkToEmeliz"], true);
+        int input = game.loadScene(load.allAssetsLists["mysteryBarn"], load.allMessageLists["emeliz"][0], &load.allActionLists["talkToEmeliz"], true);
         if (load.allActionLists["talkToEmeliz"][0].checkAction(input)) {
-            game.loadScene(load.allAssetsLists["mainMenu"], load.allMessageLists["emeliz"][1], &load.allActionLists["basic"], true);
+            game.loadScene(load.allAssetsLists["mysteryBarn"], load.allMessageLists["emeliz"][1], &load.allActionLists["basic"], true);
         }
         if (load.allActionLists["talkToEmeliz"][1].checkAction(input)) {
-            game.loadScene(load.allAssetsLists["mainMenu"], load.allMessageLists["emeliz"][3], &load.allActionLists["basic"], true);
+            game.loadScene(load.allAssetsLists["mysteryBarn"], load.allMessageLists["emeliz"][3], &load.allActionLists["basic"], true);
         }
         if (load.allActionLists["talkToEmeliz"][2].checkAction(input)) {
-            game.loadScene(load.allAssetsLists["mainMenu"], load.allMessageLists["emeliz"][4], &load.allActionLists["basic"], true);
+            game.loadScene(load.allAssetsLists["mysteryBarn"], load.allMessageLists["emeliz"][4], &load.allActionLists["basic"], true);
             load.allActionLists["talkToEmeliz"][2].setActive(false);
             load.allActionLists["barnActions"][4].setActive(true);
         }
