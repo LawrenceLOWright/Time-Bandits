@@ -80,6 +80,9 @@ public:
         cout << "Loading shady pines park" << endl;
         int input = game.loadScene(load.allAssetsLists["shadyPinesPark"], load.allMessageLists["shadyPines"][3], &load.allActionLists["shadyPinesParkActions"], true);
         //cout << input;
+        if (numUnlocks == 4) {
+            load.allActionLists["leaveShadyPines"][2].setActive(true);
+        }
         if (load.allActionLists["shadyPinesParkActions"][1].checkAction(input)) {
             game.loadScene(load.allAssetsLists["shadyPinesPark"], load.allMessageLists["shadyPines"][5], &load.allActionLists["basic"], true);
         }
@@ -98,6 +101,10 @@ public:
             }
             if (load.allActionLists["leaveShadyPines"][1].checkAction(input)) {
                 loadRoadToNew(load);
+            }
+            if (load.allActionLists["leaveShadyPines"][2].checkAction(input)) {
+                game.loadScene(load.allAssetsLists["shadyPinesPark"], load.allMessageLists["shadyPines"][7], &load.allActionLists["basic"], true);
+                game.loadScene(load.allAssetsLists["shadyPinesPark"], load.allMessageLists["shadyPines"][8], &load.allActionLists["basic"], true);
             }
         }
 
@@ -157,9 +164,10 @@ public:
             game.loadScene(load.allAssetsLists["library"], load.allMessageLists["library"][1], &load.allActionLists["basic"], true);
         }
         else if (load.allActionLists["libraryActions"][5].checkAction(input)) { loadMainStreet(load); }
-        else if (load.allActionLists["libraryActions"][3].checkAction(input)) {
+        else if (load.allActionLists["libraryActions"][4].checkAction(input)) {
             game.loadScene(load.allAssetsLists["library"], load.allMessageLists["library"][4], &load.allActionLists["basic"], true);
             load.allActionLists["libraryActions"][3].setActive(false);
+            numUnlocks++;
         }
         else if (load.allActionLists["libraryActions"][1].checkAction(input)) {
             game.loadScene(load.allAssetsLists["library"], load.allMessageLists["library"][2], &load.allActionLists["basic"], true);
@@ -170,7 +178,7 @@ public:
             load.allActionLists["libraryActions"][2].setActive(false);
             //unlock the control room here
         }
-        else if (load.allActionLists["libraryActions"][4].checkAction(input)) {talkToSky(load);}
+        else if (load.allActionLists["libraryActions"][3].checkAction(input)) {talkToSky(load);}
         
         loadLibrary(load);
     }
@@ -191,6 +199,8 @@ public:
         }
         else if (load.allActionLists["mcdonaldsActions"][4].checkAction(input)) { 
             game.loadScene(load.allAssetsLists["mcdonalds"], load.allMessageLists["mcdonalds"][4], &load.allActionLists["basic"], true);
+            load.allActionLists["mcdonaldsActions"][4].setActive(false);
+            numUnlocks++;
         }
         else if (load.allActionLists["mcdonaldsActions"][5].checkAction(input)) {
             loadMainStreet(load);
@@ -357,6 +367,8 @@ public:
         }
         else if (load.allActionLists["barnActions"][4].checkAction(input)) {
             game.loadScene(load.allAssetsLists["mainMenu"], load.allMessageLists["barn"][5], &load.allActionLists["basic"], true);
+            load.allActionLists["barnActions"][4].setActive(false);
+            numUnlocks++;
         }
         else if (load.allActionLists["barnActions"][5].checkAction(input)) {
             loadRoadToNew(load);
@@ -423,6 +435,8 @@ public:
         else if (load.allActionLists["powerPlantActions"][2].checkAction(input)) {
             game.loadScene(load.allAssetsLists["powerPlant"], load.allMessageLists["powerPlant"][4], &load.allActionLists["basic"], true);
             game.loadScene(load.allAssetsLists["powerPlant"], load.allMessageLists["powerPlant"][5], &load.allActionLists["basic"], true);
+            load.allActionLists["powerPlantActions"][2].setActive(false);
+            numUnlocks++;
         }
         else if (load.allActionLists["powerPlantActions"][3].checkAction(input)) {
             loadRoadToNew(load);
@@ -438,6 +452,7 @@ private:
     gameTools game;
     timer t; /**< Timer object for time-based operations. */
     color c; /**< Color object for managing text and background colors. */
+    int numUnlocks = 0;
 };
 
 
