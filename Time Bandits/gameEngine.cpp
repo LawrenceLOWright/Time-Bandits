@@ -103,8 +103,10 @@ public:
                 loadRoadToNew(load);
             }
             if (load.allActionLists["leaveShadyPines"][2].checkAction(input)) {
-                game.loadScene(load.allAssetsLists["shadyPinesPark"], load.allMessageLists["shadyPines"][7], &load.allActionLists["basic"], true);
-                game.loadScene(load.allAssetsLists["shadyPinesPark"], load.allMessageLists["shadyPines"][8], &load.allActionLists["basic"], true);
+                game.loadScene(load.allAssetsLists["hourglassEdge"], load.allMessageLists["shadyPines"][7], &load.allActionLists["basic"], true);
+                game.loadScene(load.allAssetsLists["hourglassEdge"], load.allMessageLists["shadyPines"][8], &load.allActionLists["basic"], true);
+                game.loadScene(load.allAssetsLists["hourglassShattered"], load.allMessageLists["shadyPines"][9], &load.allActionLists["basic"], true);
+                game.loadScene(load.allAssetsLists["hourglassShattered"], load.allMessageLists["shadyPines"][10], &load.allActionLists["basic"], true);
             }
         }
 

@@ -76,14 +76,41 @@ string fileToString::getText() { return str; }
  * @return A vector of `character` objects representing the text with applied colors.
  */
 vector<character> fileToString::textToChar() {
-    int length = str.length();
-    vector<character> vec;
-    vec.reserve(length);
+    int strLength = str.length();
+    int txtLength = txtColor.length();
+    int bGLength = backgroundColor.length();
+    
+    int shortestLength;
+    shortestLength = strLength;
+    if (strLength == txtLength == bGLength)
+        ;
+    else
+    {
+        //  bad
+        //cout << "files not same size: " << strLength << " : " << txtLength << " : " << bGLength << endl;
+        //throw("bad files");
+        if (shortestLength > txtLength) {
+            shortestLength = txtLength;
+        }
+        if (shortestLength > bGLength) {
+            shortestLength = bGLength;
+        }
 
-    for (int x = 0; x < length; x++) {
-        string c(1, str.at(x));
-        string e(1, txtColor.at(x));
-        string d(1, backgroundColor.at(x));
+    }
+
+    vector<character> vec;
+    
+    vec.reserve(shortestLength);
+
+
+    for (int x = 0; x < shortestLength; x++) {
+        char tempchar = str.at(x);
+        char tempColour = txtColor.at(x);
+        char tempBG = backgroundColor.at(x);
+        
+        string c(1, tempchar);
+        string e(1, tempColour);
+        string d(1, tempBG);
 
         character character;
         character.setChar(c);
