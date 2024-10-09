@@ -68,7 +68,6 @@ public:
     void loadMainMenu(loadGame load) {
         game.changeScreenSize(150, 40); // Set screen size 151/41 legacy 4 windows 11, 150,40 for other machines
         game.loadScene(load.allAssetsLists["mainMenu"], load.allMessageLists["shadyPines"][0], &load.allActionLists["basic"]);
-        game.loadScene(load.allAssetsLists["mainMenu"], load.allMessageLists["shadyPines"][1], &load.allActionLists["tutorial1"]);
         game.loadScene(load.allAssetsLists["shadyPinesPark"], load.allMessageLists["shadyPines"][2], &load.allActionLists["basic"], true);
         loadShadyPinesPark(load);
     }
@@ -107,10 +106,12 @@ public:
                 game.loadScene(load.allAssetsLists["hourglassEdge"], load.allMessageLists["shadyPines"][8], &load.allActionLists["basic"], true);
                 game.loadScene(load.allAssetsLists["hourglassShattered"], load.allMessageLists["shadyPines"][9], &load.allActionLists["basic"], true);
                 game.loadScene(load.allAssetsLists["hourglassShattered"], load.allMessageLists["shadyPines"][10], &load.allActionLists["basic"], true);
+                game.loadScene(load.allAssetsLists["hourglassShattered"], load.allMessageLists["shadyPines"][11], &load.allActionLists["basic"], true);
+                endgame = 1;
             }
         }
-
-        loadShadyPinesPark(load); // Return to main menu after interaction
+        if (endgame == 0) {loadShadyPinesPark(load);}
+        
     }
 
     /**
@@ -166,9 +167,10 @@ public:
             game.loadScene(load.allAssetsLists["library"], load.allMessageLists["library"][1], &load.allActionLists["basic"], true);
         }
         else if (load.allActionLists["libraryActions"][5].checkAction(input)) { loadMainStreet(load); }
+        else if (load.allActionLists["libraryActions"][3].checkAction(input)) { talkToSky(load); }
         else if (load.allActionLists["libraryActions"][4].checkAction(input)) {
             game.loadScene(load.allAssetsLists["library"], load.allMessageLists["library"][4], &load.allActionLists["basic"], true);
-            load.allActionLists["libraryActions"][3].setActive(false);
+            load.allActionLists["libraryActions"][4].setActive(false);
             numUnlocks++;
         }
         else if (load.allActionLists["libraryActions"][1].checkAction(input)) {
@@ -176,11 +178,11 @@ public:
         }
         else if (load.allActionLists["libraryActions"][2].checkAction(input)) {
             game.loadScene(load.allAssetsLists["library"], load.allMessageLists["library"][3], &load.allActionLists["basic"], true);
-            load.allActionLists["powerPlantActions"][3].setActive(true);
+            load.allActionLists["powerPlantActions"][2].setActive(true);
             load.allActionLists["libraryActions"][2].setActive(false);
             //unlock the control room here
         }
-        else if (load.allActionLists["libraryActions"][3].checkAction(input)) {talkToSky(load);}
+        
         
         loadLibrary(load);
     }
@@ -199,31 +201,31 @@ public:
         else if (load.allActionLists["mcdonaldsActions"][3].checkAction(input)) {
             talkToMax(load);
         }
+        else if (load.allActionLists["mcdonaldsActions"][5].checkAction(input)) {
+            loadMainStreet(load);
+        }
         else if (load.allActionLists["mcdonaldsActions"][4].checkAction(input)) { 
             game.loadScene(load.allAssetsLists["mcdonalds"], load.allMessageLists["mcdonalds"][4], &load.allActionLists["basic"], true);
             load.allActionLists["mcdonaldsActions"][4].setActive(false);
             numUnlocks++;
         }
-        else if (load.allActionLists["mcdonaldsActions"][5].checkAction(input)) {
-            loadMainStreet(load);
-        }
+        
         loadMockdonalds(load);
     }
 
     void talkToHolden(loadGame load) {
         int input = game.loadScene(load.allAssetsLists["cafe"], load.allMessageLists["holden"][0], &load.allActionLists["talkToHolden"], true);
-        if (load.allActionLists["cafeActions"][3].checkAction(input)) { loadCafe(load); }
-        else if (load.allActionLists["cafeActions"][0].checkAction(input)) {
+        if (load.allActionLists["talkToHolden"][3].checkAction(input)) { loadCafe(load); }
+        else if (load.allActionLists["talkToHolden"][0].checkAction(input)) {
             game.loadScene(load.allAssetsLists["cafe"], load.allMessageLists["holden"][1], &load.allActionLists["basic"], true);
         }
-        
-        else if (load.allActionLists["cafeActions"][1].checkAction(input)) {
-            game.loadScene(load.allAssetsLists["cafe"], load.allMessageLists["holden"][2], &load.allActionLists["basic"], true);
-            load.allActionLists["talkToHolden"][2].setActive(false);
-            load.allActionLists["libraryActions"][4].setActive(true);
-        }
-        else if (load.allActionLists["cafeActions"][2].checkAction(input)) {
+        else if (load.allActionLists["talkToHolden"][2].checkAction(input)) {
             game.loadScene(load.allAssetsLists["cafe"], load.allMessageLists["holden"][3], &load.allActionLists["basic"], true);
+        }
+        else if (load.allActionLists["talkToHolden"][1].checkAction(input)) {
+            game.loadScene(load.allAssetsLists["cafe"], load.allMessageLists["holden"][2], &load.allActionLists["basic"], true);
+            load.allActionLists["talkToHolden"][1].setActive(false);
+            load.allActionLists["libraryActions"][4].setActive(true);
         }
         
         talkToHolden(load);
@@ -232,17 +234,17 @@ public:
     void talkToSky(loadGame load) {
         int input = game.loadScene(load.allAssetsLists["library"], load.allMessageLists["sky"][0], &load.allActionLists["talkToSky"], true);
         if (load.allActionLists["talkToSky"][0].checkAction(input)) {
-            game.loadScene(load.allAssetsLists["library"], load.allMessageLists["sky"][1], &load.allActionLists["talkToSky"], true);
+            game.loadScene(load.allAssetsLists["library"], load.allMessageLists["sky"][1], &load.allActionLists["basic"], true);
             load.allActionLists["libraryActions"][2].setActive(true);
         }
-        if (load.allActionLists["talkToSky"][1].checkAction(input)) {
-            game.loadScene(load.allAssetsLists["library"], load.allMessageLists["sky"][2], &load.allActionLists["talkToSky"], true);
-            game.loadScene(load.allAssetsLists["library"], load.allMessageLists["sky"][3], &load.allActionLists["talkToSky"], true);
+        else if (load.allActionLists["talkToSky"][1].checkAction(input)) {
+            game.loadScene(load.allAssetsLists["library"], load.allMessageLists["sky"][2], &load.allActionLists["basic"], true);
+            game.loadScene(load.allAssetsLists["library"], load.allMessageLists["sky"][3], &load.allActionLists["basic"], true);
         }
-        if (load.allActionLists["talkToSky"][2].checkAction(input)) {
-            game.loadScene(load.allAssetsLists["library"], load.allMessageLists["sky"][4], &load.allActionLists["talkToSky"], true);
+        else if (load.allActionLists["talkToSky"][2].checkAction(input)) {
+            game.loadScene(load.allAssetsLists["library"], load.allMessageLists["sky"][4], &load.allActionLists["basic"], true);
         }
-        if (load.allActionLists["talkToSky"][3].checkAction(input)) {
+        else if (load.allActionLists["talkToSky"][3].checkAction(input)) {
             loadLibrary(load);
         }
         talkToSky(load);
@@ -251,19 +253,20 @@ public:
     void talkToMax(loadGame load) {
         int input = game.loadScene(load.allAssetsLists["mcdonalds"], load.allMessageLists["max"][0], &load.allActionLists["talkToMax"], true);
         if (load.allActionLists["talkToMax"][0].checkAction(input)) {
-            game.loadScene(load.allAssetsLists["mcdonalds"], load.allMessageLists["max"][1], &load.allActionLists["talkToMax"], true);
+            game.loadScene(load.allAssetsLists["mcdonalds"], load.allMessageLists["max"][1], &load.allActionLists["basic"], true);
         }
-        if (load.allActionLists["talkToMax"][1].checkAction(input)) {
-            game.loadScene(load.allAssetsLists["mcdonalds"], load.allMessageLists["max"][2], &load.allActionLists["talkToMax"], true);
+        else if (load.allActionLists["talkToMax"][1].checkAction(input)) {
+            game.loadScene(load.allAssetsLists["mcdonalds"], load.allMessageLists["max"][2], &load.allActionLists["basic"], true);
         }
-        if (load.allActionLists["talkToMax"][2].checkAction(input)) {
-            game.loadScene(load.allAssetsLists["mcdonalds"], load.allMessageLists["max"][3], &load.allActionLists["talkToMax"], true);
+        else if (load.allActionLists["talkToMax"][3].checkAction(input)) {
+            loadMockdonalds(load);
+        }
+        else if (load.allActionLists["talkToMax"][2].checkAction(input)) {
+            game.loadScene(load.allAssetsLists["mcdonalds"], load.allMessageLists["max"][3], &load.allActionLists["basic"], true);
             load.allActionLists["talkToMax"][2].setActive(false);
             load.allActionLists["mcdonaldsActions"][4].setActive(true);
         }
-        if (load.allActionLists["talkToMax"][3].checkAction(input)) {
-            loadMockdonalds(load);
-        }
+        
         talkToMax(load);
     }
 
@@ -273,7 +276,7 @@ public:
     void loadRoadToNew(loadGame load) {
         int input = game.loadScene(load.allAssetsLists["roadToNew"], load.allMessageLists["roadToNew"][0], &load.allActionLists["roadToNewActions"], true);
 
-        if (load.allActionLists["roadToNew"][0].checkAction(input)) {
+        if (load.allActionLists["roadToNewActions"][0].checkAction(input)) {
             game.loadScene(load.allAssetsLists["roadToNew"], load.allMessageLists["roadToNew"][1], &load.allActionLists["basic"], true);
         }
 
@@ -281,21 +284,23 @@ public:
             game.loadScene(load.allAssetsLists["roadToNew"], load.allMessageLists["roadToNew"][2], &load.allActionLists["basic"], true);
         }
 
-        else if (load.allActionLists["roadToNew"][2].checkAction(input))
-        {
-            game.loadScene(load.allAssetsLists["roadToNew"], load.allMessageLists["roadToNew"][3], &load.allActionLists["basic"], true);
-            game.loadScene(load.allAssetsLists["roadToNew"], load.allMessageLists["roadToNew"][4], &load.allActionLists["basic"], true);
-            load.allActionLists["roadToNewActions"][2].setActive(false);
-        }
-
         else if (load.allActionLists["roadToNewActions"][3].checkAction(input)) {
-            input = game.loadScene(load.allAssetsLists["leaveRoadToNew"], "Where do you want to go?", &load.allActionLists["leaveRoadToNew"], true);
+            input = game.loadScene(load.allAssetsLists["roadToNew"], "Where do you want to go?", &load.allActionLists["leaveRoadToNew"], true);
             //Shady Pines Park, 66 Motel, Legion Farms, Grampa’s Mystery Barn
             if (load.allActionLists["leaveRoadToNew"][0].checkAction(input)) { loadShadyPinesPark(load); }
             if (load.allActionLists["leaveRoadToNew"][1].checkAction(input)) { loadMotel(load); }
             if (load.allActionLists["leaveRoadToNew"][2].checkAction(input)) { loadFarm(load); }
             if (load.allActionLists["leaveRoadToNew"][3].checkAction(input)) { loadBarn(load); }
         }
+
+        else if (load.allActionLists["roadToNewActions"][2].checkAction(input))
+        {
+            game.loadScene(load.allAssetsLists["roadToNew"], load.allMessageLists["roadToNew"][3], &load.allActionLists["basic"], true);
+            game.loadScene(load.allAssetsLists["roadToNew"], load.allMessageLists["roadToNew"][4], &load.allActionLists["basic"], true);
+            load.allActionLists["roadToNewActions"][2].setActive(false);
+        }
+
+        
 
         loadRoadToNew(load);
     }
@@ -311,15 +316,9 @@ public:
         }
 
         else if (load.allActionLists["motelActions"][1].checkAction(input)) {
+            load.allActionLists["motelActions"][1].setActive(false);
+            load.allActionLists["talkToMax"][2].setActive(true);
             game.loadScene(load.allAssetsLists["motel"], load.allMessageLists["motel"][2], &load.allActionLists["basic"], true);
-        }
-
-        else if (load.allActionLists["motelActions"][2].checkAction(input))
-        {
-            game.loadScene(load.allAssetsLists["motel"], load.allMessageLists["motel"][3], &load.allActionLists["basic"], true);
-
-            load.allActionLists["motelActions"][2].setActive(false);
-            load.allActionLists["talkToMax"][3].setActive(true);
         }
 
         else if (load.allActionLists["motelActions"][3].checkAction(input)) {
@@ -330,6 +329,15 @@ public:
             loadRoadToNew(load);
         }
 
+        else if (load.allActionLists["motelActions"][2].checkAction(input))
+        {
+            game.loadScene(load.allAssetsLists["motel"], load.allMessageLists["motel"][3], &load.allActionLists["basic"], true);
+
+            
+        }
+
+        
+
         loadMotel(load);
     }
 
@@ -339,13 +347,13 @@ public:
             game.loadScene(load.allAssetsLists["motel"], load.allMessageLists["betsy"][1], &load.allActionLists["basic"], true);
             game.loadScene(load.allAssetsLists["motel"], load.allMessageLists["betsy"][2], &load.allActionLists["basic"], true);
         }
-        if (load.allActionLists["talkToBetsy"][1].checkAction(input)) {
+        else if (load.allActionLists["talkToBetsy"][1].checkAction(input)) {
             game.loadScene(load.allAssetsLists["motel"], load.allMessageLists["betsy"][3], &load.allActionLists["basic"], true);
         }
-        if (load.allActionLists["talkToBetsy"][2].checkAction(input)) {
+        else if (load.allActionLists["talkToBetsy"][2].checkAction(input)) {
             game.loadScene(load.allAssetsLists["motel"], load.allMessageLists["betsy"][4], &load.allActionLists["basic"], true);
         }
-        if (load.allActionLists["talkToBetsy"][3].checkAction(input)) {
+        else if (load.allActionLists["talkToBetsy"][3].checkAction(input)) {
             loadMotel(load);
         }
         talkToBetsy(load);
@@ -367,34 +375,41 @@ public:
         else if (load.allActionLists["barnActions"][3].checkAction(input)) {
             talkToEmeliz(load);
         }
+        else if (load.allActionLists["barnActions"][5].checkAction(input)) {
+            loadRoadToNew(load);
+        }
         else if (load.allActionLists["barnActions"][4].checkAction(input)) {
             game.loadScene(load.allAssetsLists["mysteryBarn"], load.allMessageLists["barn"][5], &load.allActionLists["basic"], true);
             load.allActionLists["barnActions"][4].setActive(false);
             numUnlocks++;
         }
-        else if (load.allActionLists["barnActions"][5].checkAction(input)) {
-            loadRoadToNew(load);
-        }
+        
         loadBarn(load);
     }
 
     void talkToEmeliz(loadGame load) {
         int input = game.loadScene(load.allAssetsLists["mysteryBarn"], load.allMessageLists["emeliz"][0], &load.allActionLists["talkToEmeliz"], true);
+        
         if (load.allActionLists["talkToEmeliz"][0].checkAction(input)) {
             game.loadScene(load.allAssetsLists["mysteryBarn"], load.allMessageLists["emeliz"][1], &load.allActionLists["basic"], true);
         }
-        if (load.allActionLists["talkToEmeliz"][1].checkAction(input)) {
-            game.loadScene(load.allAssetsLists["mysteryBarn"], load.allMessageLists["emeliz"][3], &load.allActionLists["basic"], true);
-        }
-        if (load.allActionLists["talkToEmeliz"][2].checkAction(input)) {
-            game.loadScene(load.allAssetsLists["mysteryBarn"], load.allMessageLists["emeliz"][4], &load.allActionLists["basic"], true);
-            load.allActionLists["talkToEmeliz"][2].setActive(false);
-            load.allActionLists["barnActions"][4].setActive(true);
-        }
-        if (load.allActionLists["barnActions"][4].checkAction(input)) {
+        else if (load.allActionLists["talkToEmeliz"][2].checkAction(input)) {
             loadBarn(load);
         }
-        talkToBetsy(load);
+        else if (load.allActionLists["talkToEmeliz"][1].checkAction(input)) {
+            
+            if (hasPoster == true) {
+                game.loadScene(load.allAssetsLists["mysteryBarn"], load.allMessageLists["emeliz"][3], &load.allActionLists["basic"], true);
+                load.allActionLists["talkToEmeliz"][1].setActive(false);
+                load.allActionLists["barnActions"][4].setActive(true);
+            }
+            else {
+                game.loadScene(load.allAssetsLists["mysteryBarn"], load.allMessageLists["emeliz"][4], &load.allActionLists["basic"], true);
+            }
+        }
+        
+
+        talkToEmeliz(load);
     }
 
     void loadFarm(loadGame load) {
@@ -404,11 +419,7 @@ public:
             game.loadScene(load.allAssetsLists["farm"], load.allMessageLists["farm"][1], &load.allActionLists["basic"], true);
             game.loadScene(load.allAssetsLists["farm"], load.allMessageLists["farm"][2], &load.allActionLists["basic"], true);
         }
-        else if (load.allActionLists["farmActions"][1].checkAction(input)) {
-            game.loadScene(load.allAssetsLists["farm"], load.allMessageLists["farm"][3], &load.allActionLists["basic"], true);
-            load.allActionLists["farmActions"][1].setActive(false);
-            load.allActionLists["talkToEmeliz"][2].setActive(true);
-        }
+
         else if (load.allActionLists["farmActions"][2].checkAction(input)) {
             game.loadScene(load.allAssetsLists["farm"], load.allMessageLists["farm"][4], &load.allActionLists["basic"], true);
         }
@@ -417,10 +428,17 @@ public:
             if (load.allActionLists["leaveFarm"][0].checkAction(input)) {
                 loadRoadToNew(load);
             }
-            else if (load.allActionLists["leaveFarm"][0].checkAction(input)) {
+            else if (load.allActionLists["leaveFarm"][1].checkAction(input)) {
                 loadPowerPlant(load);
             }
         }
+        else if (load.allActionLists["farmActions"][1].checkAction(input)) {
+            game.loadScene(load.allAssetsLists["farm"], load.allMessageLists["farm"][3], &load.allActionLists["basic"], true);
+            load.allActionLists["farmActions"][1].setActive(false);
+            //load.allActionLists["talkToEmeliz"][2].setActive(true);
+            hasPoster = true;
+        }
+        
         loadFarm(load);
     }
 
@@ -434,15 +452,16 @@ public:
         else if (load.allActionLists["powerPlantActions"][1].checkAction(input)) {
             game.loadScene(load.allAssetsLists["powerPlant"], load.allMessageLists["powerPlant"][3], &load.allActionLists["basic"], true);
         }
+        else if (load.allActionLists["powerPlantActions"][3].checkAction(input)) {
+            loadRoadToNew(load);
+        }
         else if (load.allActionLists["powerPlantActions"][2].checkAction(input)) {
             game.loadScene(load.allAssetsLists["powerPlant"], load.allMessageLists["powerPlant"][4], &load.allActionLists["basic"], true);
             game.loadScene(load.allAssetsLists["powerPlant"], load.allMessageLists["powerPlant"][5], &load.allActionLists["basic"], true);
             load.allActionLists["powerPlantActions"][2].setActive(false);
             numUnlocks++;
         }
-        else if (load.allActionLists["powerPlantActions"][3].checkAction(input)) {
-            loadRoadToNew(load);
-        }
+        
         loadPowerPlant(load);
     }
 
@@ -455,6 +474,8 @@ private:
     timer t; /**< Timer object for time-based operations. */
     color c; /**< Color object for managing text and background colors. */
     int numUnlocks = 0;
+    boolean hasPoster = false;
+    int endgame = 0;
 };
 
 

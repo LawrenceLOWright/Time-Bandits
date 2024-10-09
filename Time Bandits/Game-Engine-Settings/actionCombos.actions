@@ -3,17 +3,17 @@ leaveShadyPines,Main Street,Road to New Slovakia,The Edge of the Hourglass
 mainStreetActions,Peer in abandoned storefronts,Inspect Lampposts,Write "I WUZ HERE",Leave
 leaveMainStreet,Shady Pines Park,The Kalefe,MockDonalds,Hourglass Public Library
 cafeActions,Examine the art,Eavesdrop on the baristas,Talk to the hipster guy,Leave
-talkToHolden,Make small talk,Ask about the weird book next to him,Look at the guy’s computer screen,Stop talking
+talkToHolden,Make small talk,Ask about the weird book next to him,Look at the guy's computer screen,Stop talking
 libraryActions,Help clean up,Check out a book,Check out a tool,Talk to the gothy librarian,Sky's secret stash,Leave
 mcdonaldsActions,Order a Sappy Meal,People-watch,Spill soda on the counter,Talk to the tired employee,Check Out the Freezer,Leave
 talkToMax,Ask about the employee,Ask about the freezer,Bribe Max with 50 bucks,Stop talking
 talkToSky,Ask about library resources,Ask for a bookmark,Ask about any “special collections”,Stop talking
 roadToNewActions,Roll in the dust like a chinchilla,Savor the breeze on your face,Climb a billboard,Leave
 leaveRoadToNew,Shady Pines Park,66 Motel,Legion Farms,Grampa’s Mystery Barn
-motelActions,Get a room,Steal from the old lady,Examine the mold stain on the ceilings,Talk to the old lady,leave
+motelActions,Get a room,Steal from the old lady,Examine the mold stain on the ceilings,Talk to the old lady,Leave
 talkToBetsy,Ask about any weird slips of paper,Inquire about the motel clerk,Ask about the shotgun under her desk,Stop talking
-barnActions,Play pinball,Inspect the duty taxidermy,Check out the t-shirts,Talk to the phone-bound tour guide,Try on the nearby mothman suit,leave
-talkToEmeliz,Ask about the tour guide,Ask about going in the mothman suit,Give Emeliz the signed MFE:Caring is Sorcery Poster,Stop talking
-farmActions,Dig through a pile of cow manure,Take a nice walk,Pet a cow,leave
+barnActions,Play pinball,Inspect the duty taxidermy,Check out the t-shirts,Talk to the phone-bound tour guide,Try on the nearby mothman suit,Leave
+talkToEmeliz,Ask about the tour guide,Ask about going in the mothman suit,Stop talking
+farmActions,Dig through a pile of cow manure,Take a nice walk,Pet a cow,Leave
 leaveFarm,Road to New Slovakia,Power Plant
-powerPlantActions,Take a lap around the perimeter,Try to climb the fence,Use your wire cutters on the chain link fence,leave
+powerPlantActions,Take a lap around the perimeter,Try to climb the fence,Use your wire cutters on the chain link fence,Leave
